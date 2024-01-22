@@ -26,19 +26,22 @@ class Users extends CI_Controller
 		parent::__construct();
 		//Do your magic here
 		$this->load->model('User_eloquent');
+		$this->load->model('Role_eloquent');
 	}
 
 	public function index()
 	{
-		//$this->load->view('welcome_message');
+		//$this->load->view('admin/templateAdmin');
 		//$this->load->model('User_model');
+		$data['contenido'] = 'admin/users/index';
 		$data['users'] = User_Eloquent::getUsersRoles();
-		//$data['users'] = $this->User_model->get();
+		/*$data['users'] = $this->User_model->get();
 		print_r(json_encode($data));
-		return;
+		return;*/
+		$this->load->view('admin/templateAdmin',$data);
 	}
 
-    public function view($id)
+    public function show($id)
 	{
 		//$this->load->view('welcome_message');
 		//$this->load->model('User_model');
@@ -48,4 +51,49 @@ class Users extends CI_Controller
 		print_r(json_encode($data));
 		return;
 	}
+
+	public function edit($id)
+	{
+		//$this->load->view('welcome_message');
+		//$this->load->model('User_model');
+        //$request = array('id'=>1);
+		$data['user'] = User_Eloquent::getUser($id);
+		//$data['users'] = $this->User_model->get();
+		print_r(json_encode($data));
+		return;
+	}
+
+	public function update($id)
+	{
+		//$this->load->view('welcome_message');
+		//$this->load->model('User_model');
+        //$request = array('id'=>1);
+		$data['user'] = User_Eloquent::getUser($id);
+		//$data['users'] = $this->User_model->get();
+		print_r(json_encode($data));
+		return;
+	}
+
+	public function inactive($id)
+	{
+		//$this->load->view('welcome_message');
+		//$this->load->model('User_model');
+        //$request = array('id'=>1);
+		$data['user'] = User_Eloquent::getUser($id);
+		//$data['users'] = $this->User_model->get();
+		print_r(json_encode($data));
+		return;
+	}
+
+	public function active($id)
+	{
+		//$this->load->view('welcome_message');
+		//$this->load->model('User_model');
+        //$request = array('id'=>1);
+		$data['user'] = User_Eloquent::getUser($id);
+		//$data['users'] = $this->User_model->get();
+		print_r(json_encode($data));
+		return;
+	}
+
 }
