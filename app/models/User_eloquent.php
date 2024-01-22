@@ -1,8 +1,4 @@
 <?php
-namespace Eloquent;
-
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
 
 use Eloquent\BaseModel;
 use \Illuminate\Database\Capsule\Manager as DB;
@@ -13,12 +9,10 @@ class User_Eloquent extends BaseModel
 {
     protected $table = 't_users';
 
-
     protected $fillable = [
         'username',
         'display_name',
         'mobile',
-        'role_id',
         'email',
         'password',
         'salt',
@@ -45,9 +39,9 @@ class User_Eloquent extends BaseModel
         'status' => 'boolean'
     ];
 
-    protected $appends = ['flag'];
+    protected $appends = ['userflag'];
 
-    public function getFlagAttribute()
+    public function getUserflagAttribute()
     {
         //return date_diff(date_create($this->date_vigency), date_create('now'))->d;
         //https://blog.devgenius.io/how-to-find-the-number-of-days-between-two-dates-in-php-1404748b1e84
@@ -57,5 +51,32 @@ class User_Eloquent extends BaseModel
         } else {
             return 'Suspendido';
         }
+    }
+
+    //protected $with = 'getRoles';
+
+    public static function getUsersRoles()
+    {
+        return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
+            ->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
+            ->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename']);
+    }
+
+    public static function getUser($id)
+    {
+        return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
+            ->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
+            ->where('t_users.id','=',$id)
+            ->select('t_users.*', 't_role_user.role_id', 't_roles.rolename')
+            ->first();
+    }
+
+    public static function getUserAccesos($id)
+    {
+        return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
+            ->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
+            ->where('t_users.id','=',$id)
+            ->select('t_users.*', 't_role_user.role_id', 't_roles.rolename')
+            ->first();
     }
 }

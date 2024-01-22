@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller
+class Users extends CI_Controller
 {
 
 	/**
@@ -25,7 +25,6 @@ class Dashboard extends CI_Controller
 	{
 		parent::__construct();
 		//Do your magic here
-		//$this->load->model('User');
 		$this->load->model('User_eloquent');
 	}
 
@@ -33,8 +32,18 @@ class Dashboard extends CI_Controller
 	{
 		//$this->load->view('welcome_message');
 		//$this->load->model('User_model');
-		//$data['users'] = User_Eloquent::all();
 		$data['users'] = User_Eloquent::getUsersRoles();
+		//$data['users'] = $this->User_model->get();
+		print_r(json_encode($data));
+		return;
+	}
+
+    public function view($id)
+	{
+		//$this->load->view('welcome_message');
+		//$this->load->model('User_model');
+        //$request = array('id'=>1);
+		$data['user'] = User_Eloquent::getUser($id);
 		//$data['users'] = $this->User_model->get();
 		print_r(json_encode($data));
 		return;

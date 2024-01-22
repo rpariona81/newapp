@@ -143,7 +143,8 @@ $config['subclass_prefix'] = 'MY_';
 //$config['composer_autoload'] = FALSE;
 //$config['composer_autoload'] = TRUE;
 //$config['composer_autoload'] = realpath(APPPATH . '../vendor/autoload.php');
-$config['composer_autoload'] = '../vendor/autoload.php';
+//$config['composer_autoload'] = '../vendor/autoload.php';
+$config['composer_autoload'] = FCPATH.'/vendor/autoload.php';
 /*
 |--------------------------------------------------------------------------
 | Allowed URL Characters
