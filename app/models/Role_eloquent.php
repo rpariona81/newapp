@@ -52,6 +52,7 @@ class Role_Eloquent extends BaseModel
     public static function getRoleOpciones()
     {
         $opciones = array();
+        $opciones[0] = 'Seleccione rol';
         $lista = Role_Eloquent::select('id', 'rolename')->get();
         foreach ($lista as $registro) {
             $opciones[$registro->id] = $registro->rolename;

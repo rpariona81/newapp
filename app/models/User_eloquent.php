@@ -32,6 +32,7 @@ class User_Eloquent extends BaseModel
     protected $hidden = [
         'password',
         'remember_token',
+        'salt'
     ];
 
     protected $casts = [
@@ -66,7 +67,7 @@ class User_Eloquent extends BaseModel
     {
         return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
             ->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
-            ->where('t_users.id','=',$id)
+            ->where('t_users.id', '=', $id)
             ->select('t_users.*', 't_role_user.role_id', 't_roles.rolename')
             ->first();
     }
@@ -75,8 +76,41 @@ class User_Eloquent extends BaseModel
     {
         return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
             ->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
-            ->where('t_users.id','=',$id)
+            ->where('t_users.id', '=', $id)
             ->select('t_users.*', 't_role_user.role_id', 't_roles.rolename')
             ->first();
+    }
+
+    public static function updateUser($request)
+    {
+        $data = array(
+            'display_name' => $request['display_name'],
+            'mobile' => $request['mobile'],
+            'email' => $request['email']
+        );
+        
+        $role_user = array(
+            'user_id' => $request['id'],
+            'role_id' => $request['role_id']
+        );
+
+        $model = User_Eloquent::findOrFail($request['id']);
+        $model->fill($data);
+        $model->save($data);
+
+        $role = Role_Eloquent::findOrFail($request['role_id']);
+        
+        /*if($role){
+            $model = new RoleUser_Eloquent::updateOrCreate();
+            $model->fill($role_user);
+            $model->save($role_user);
+        }*/
+
+        if($role){
+            $model = RoleUser_Eloquent::updateOrCreate($role_user);
+        }
+        
+        return;
+
     }
 }

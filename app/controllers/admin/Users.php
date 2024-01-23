@@ -27,6 +27,7 @@ class Users extends CI_Controller
 		//Do your magic here
 		$this->load->model('User_eloquent');
 		$this->load->model('Role_eloquent');
+		$this->load->model('Roleuser_eloquent');
 	}
 
 	public function index()
@@ -38,51 +39,74 @@ class Users extends CI_Controller
 		/*$data['users'] = $this->User_model->get();
 		print_r(json_encode($data));
 		return;*/
-		$this->load->view('admin/templateAdmin',$data);
+		$this->load->view('admin/templateAdmin', $data);
 	}
 
-    public function show($id)
+	public function show($id)
 	{
 		//$this->load->view('welcome_message');
 		//$this->load->model('User_model');
-        $data['contenido'] = 'admin/users/edit';
+		$data['contenido'] = 'admin/users/edit';
 		$data['user'] = User_Eloquent::getUser($id);
 		/*$opciones = array();
 		$lista = Role_Eloquent::select('id','rolename')->get();
 		foreach ($lista as $registro) {
             $opciones[$registro->id] = $registro->rolename;
         }*/
-        $data['roles'] = Role_Eloquent::getRoleOpciones();
-		$this->load->view('admin/templateAdmin',$data);
+		$data['roles'] = Role_Eloquent::getRoleOpciones();
+		$this->load->view('admin/templateAdmin', $data);
 	}
 
 	public function edit($id)
 	{
 		//$this->load->view('welcome_message');
 		//$this->load->model('User_model');
-        //$request = array('id'=>1);
+		//$request = array('id'=>1);
 		$data['user'] = User_Eloquent::getUser($id);
 		//$data['users'] = $this->User_model->get();
 		print_r(json_encode($data));
 		return;
 	}
 
-	public function update($id)
+	public function update()
 	{
-		//$this->load->view('welcome_message');
-		//$this->load->model('User_model');
-        //$request = array('id'=>1);
-		$data['user'] = User_Eloquent::getUser($id);
-		//$data['users'] = $this->User_model->get();
-		print_r(json_encode($data));
-		return;
+		$request = $this->security->xss_clean($this->input->post()); //$request = array('id'=>1);
+		/*$data = array(
+			'display_name' => $request['display_name'],
+			'mobile' => $request['mobile'],
+			'email' => $request['email']
+		);
+
+		$role_user = array(
+			'user_id' => $request['id'],
+			'role_id' => $request['role_id']
+		);
+
+		$model = User_Eloquent::findOrFail($request['id']);
+		$model->fill($data);
+		$model->save($data);
+
+		$role = Role_Eloquent::findOrFail($request['role_id']);
+
+		if ($role) {
+			$model = new RoleUser_Eloquent();
+			$model->fill($role_user);
+			$model->save($role_user);
+		}*/
+
+		/*return;
+		$model = User_Eloquent::findOrFail($request['id']);
+		/*$model->fill($data);
+            $model->save($data);*/
+		$result = User_Eloquent::updateUser($request);
+		redirect('/admin/users');
 	}
 
 	public function inactive($id)
 	{
 		//$this->load->view('welcome_message');
 		//$this->load->model('User_model');
-        //$request = array('id'=>1);
+		//$request = array('id'=>1);
 		$data['user'] = User_Eloquent::getUser($id);
 		//$data['users'] = $this->User_model->get();
 		print_r(json_encode($data));
@@ -93,11 +117,10 @@ class Users extends CI_Controller
 	{
 		//$this->load->view('welcome_message');
 		//$this->load->model('User_model');
-        //$request = array('id'=>1);
+		//$request = array('id'=>1);
 		$data['user'] = User_Eloquent::getUser($id);
 		//$data['users'] = $this->User_model->get();
 		print_r(json_encode($data));
 		return;
 	}
-
 }
