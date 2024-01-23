@@ -23,6 +23,18 @@ class Role_Eloquent extends BaseModel
         'level' //optional, set to 1 by default
     ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'description',
+        'guard_name',
+        'level',
+        'roleflag'
+    ];
+
     protected $appends = ['roleflag'];
 
     public function getRoleflagAttribute()
@@ -35,5 +47,15 @@ class Role_Eloquent extends BaseModel
         } else {
             return 'Suspendido';
         }
+    }
+
+    public static function getRoleOpciones()
+    {
+        $opciones = array();
+        $lista = Role_Eloquent::select('id', 'rolename')->get();
+        foreach ($lista as $registro) {
+            $opciones[$registro->id] = $registro->rolename;
+        }
+        return $opciones;
     }
 }

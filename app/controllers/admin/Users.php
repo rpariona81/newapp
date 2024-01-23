@@ -45,11 +45,15 @@ class Users extends CI_Controller
 	{
 		//$this->load->view('welcome_message');
 		//$this->load->model('User_model');
-        //$request = array('id'=>1);
+        $data['contenido'] = 'admin/users/edit';
 		$data['user'] = User_Eloquent::getUser($id);
-		//$data['users'] = $this->User_model->get();
-		print_r(json_encode($data));
-		return;
+		/*$opciones = array();
+		$lista = Role_Eloquent::select('id','rolename')->get();
+		foreach ($lista as $registro) {
+            $opciones[$registro->id] = $registro->rolename;
+        }*/
+        $data['roles'] = Role_Eloquent::getRoleOpciones();
+		$this->load->view('admin/templateAdmin',$data);
 	}
 
 	public function edit($id)
