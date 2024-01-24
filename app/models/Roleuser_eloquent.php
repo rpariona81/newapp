@@ -10,6 +10,8 @@ class RoleUser_Eloquent extends BaseModel{
     protected $table = 't_role_user';
     //protected $dateFormat = 'Ymd H:i:s';
 
+    protected $primaryKey = 'user_id';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,5 +22,6 @@ class RoleUser_Eloquent extends BaseModel{
         'role_id', 
     ];
 
+    public $timestamps = false;
 
 }

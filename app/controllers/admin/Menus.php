@@ -1,7 +1,5 @@
 <?php
 
-use Eloquent\Menu_Eloquent;
-
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Menus extends CI_Controller
@@ -33,10 +31,12 @@ class Menus extends CI_Controller
 	public function index()
 	{
 		//$this->load->view('welcome_message');
-		//$this->load->model('User_model');
-		$data['users'] = Menu_Eloquent::all();
+		$data['contenido'] = 'admin/menus/index';
+		$data['menus'] = Menu_Eloquent::all();
+		$data['opciones'] = Menu_Eloquent::getMenuOpciones();
 		//$data['users'] = $this->User_model->get();
-		print_r(json_encode($data));
-		return;
+		/*print_r(json_encode($data));
+		return;*/
+		$this->load->view('admin/templateAdmin', $data);
 	}
 }

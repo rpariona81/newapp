@@ -32,7 +32,8 @@ class User_Eloquent extends BaseModel
     protected $hidden = [
         'password',
         'remember_token',
-        'salt'
+        'salt',
+        'user_type'
     ];
 
     protected $casts = [
@@ -40,7 +41,7 @@ class User_Eloquent extends BaseModel
         'status' => 'boolean'
     ];
 
-    protected $appends = ['userflag'];
+    protected $appends = ['userflag','lock'];
 
     public function getUserflagAttribute()
     {
@@ -51,6 +52,18 @@ class User_Eloquent extends BaseModel
             return 'Activo';
         } else {
             return 'Suspendido';
+        }
+    }
+
+    public function getLockAttribute()
+    {
+        //return date_diff(date_create($this->date_vigency), date_create('now'))->d;
+        //https://blog.devgenius.io/how-to-find-the-number-of-days-between-two-dates-in-php-1404748b1e84
+        //return date_diff(date_create('now'),date_create($this->date_vigency))->format('%R%a days');return date_diff(date_create('now'),date_create($this->date_vigency))->format('%R%a days');
+        if ($this->user_type == 1) {
+            return 1;
+        } else {
+            return 0;
         }
     }
 
@@ -88,29 +101,37 @@ class User_Eloquent extends BaseModel
             'mobile' => $request['mobile'],
             'email' => $request['email']
         );
-        
+
+        /*$role_user = new RoleUser_Eloquent();
         $role_user = array(
             'user_id' => $request['id'],
             'role_id' => $request['role_id']
-        );
+        );*/
 
         $model = User_Eloquent::findOrFail($request['id']);
         $model->fill($data);
         $model->save($data);
 
         $role = Role_Eloquent::findOrFail($request['role_id']);
-        
-        /*if($role){
-            $model = new RoleUser_Eloquent::updateOrCreate();
-            $model->fill($role_user);
-            $model->save($role_user);
+
+        if ($role) {
+            $role_user = RoleUser_Eloquent::where('user_id',  $request['id'])->first();
+
+            if ($role_user !== null) {
+                $role_user->update(['role_id' => $request['role_id']]);
+            } else {
+                $user = RoleUser_Eloquent::create([
+                    'user_id' => $request['id'],
+                    'role_id' => $request['role_id']
+                ]);
+            }
+        }
+
+        /*if ($role) {
+            print_r($role_user);
+            $model = RoleUser_Eloquent::updateOrCreate($role_user);
         }*/
 
-        if($role){
-            $model = RoleUser_Eloquent::updateOrCreate($role_user);
-        }
-        
         return;
-
     }
 }

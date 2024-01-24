@@ -48,11 +48,6 @@ class Users extends CI_Controller
 		//$this->load->model('User_model');
 		$data['contenido'] = 'admin/users/edit';
 		$data['user'] = User_Eloquent::getUser($id);
-		/*$opciones = array();
-		$lista = Role_Eloquent::select('id','rolename')->get();
-		foreach ($lista as $registro) {
-            $opciones[$registro->id] = $registro->rolename;
-        }*/
 		$data['roles'] = Role_Eloquent::getRoleOpciones();
 		$this->load->view('admin/templateAdmin', $data);
 	}
@@ -70,34 +65,7 @@ class Users extends CI_Controller
 
 	public function update()
 	{
-		$request = $this->security->xss_clean($this->input->post()); //$request = array('id'=>1);
-		/*$data = array(
-			'display_name' => $request['display_name'],
-			'mobile' => $request['mobile'],
-			'email' => $request['email']
-		);
-
-		$role_user = array(
-			'user_id' => $request['id'],
-			'role_id' => $request['role_id']
-		);
-
-		$model = User_Eloquent::findOrFail($request['id']);
-		$model->fill($data);
-		$model->save($data);
-
-		$role = Role_Eloquent::findOrFail($request['role_id']);
-
-		if ($role) {
-			$model = new RoleUser_Eloquent();
-			$model->fill($role_user);
-			$model->save($role_user);
-		}*/
-
-		/*return;
-		$model = User_Eloquent::findOrFail($request['id']);
-		/*$model->fill($data);
-            $model->save($data);*/
+		$request = $this->security->xss_clean($this->input->post());
 		$result = User_Eloquent::updateUser($request);
 		redirect('/admin/users');
 	}

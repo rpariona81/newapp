@@ -25,5 +25,14 @@ class Menu_Eloquent extends BaseModel{
         'icono' //optional, set to 1 by default
     ];
 
-
+    public static function getMenuOpciones()
+    {
+        $opcionesMenu = array();
+        $opcionesMenu[0] = 'Seleccione menu';
+        $lista = Menu_Eloquent::select('id', 'menu')->get();
+        foreach ($lista as $registro) {
+            $opcionesMenu[$registro->id] = $registro->menu;
+        }
+        return $opcionesMenu;
+    }
 }

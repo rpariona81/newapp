@@ -60,27 +60,30 @@
                                     ?>
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <?php
-                                        if ($item->status) {
-                                            echo form_open('admincontroller/enviaPassword');
-                                            echo '<input type="hidden" id="id" name="id" value="' . $item->id . '">';
-                                            echo '<button type="submit" name="submit" class="btn btn-outline-info btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Enviar contraseña"><i class="fa fa-envelope" style="color:red"></i></button>';
-                                            echo form_close();
-                                            echo "&nbsp;";
-
-                                            echo form_open('admincontroller/desactivaDocente');
-                                            echo '<input type="hidden" id="id" name="id" value="' . $item->id . '">';
-                                            echo '<button type="submit" name="submit" class="btn btn-outline-danger btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Desactivar"><i class="fa fa-eye-slash"></i></button>';
-                                            echo form_close();
+                                        if ($item->lock == 1) {
                                         } else {
-                                            //echo '<a class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Activar" href="<?= $item->id>"><i class="fa fa fa-eye"></i></a>';
-                                            echo form_open('admincontroller/activaDocente');
-                                            echo '<input type="hidden" id="id" name="id" value="' . $item->id . '">';
-                                            echo '<button type="submit" name="submit" class="btn btn-outline-primary btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Activar"><i class="fa fa-eye"></i></button>';
-                                            echo form_close();
+                                            if ($item->status) {
+                                                echo form_open('admincontroller/enviaPassword');
+                                                echo '<input type="hidden" id="id" name="id" value="' . $item->id . '">';
+                                                echo '<button type="submit" name="submit" class="btn btn-outline-info btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Enviar contraseña"><i class="fa fa-envelope" style="color:red"></i></button>';
+                                                echo form_close();
+                                                echo "&nbsp;";
+
+                                                echo form_open('admincontroller/desactivaDocente');
+                                                echo '<input type="hidden" id="id" name="id" value="' . $item->id . '">';
+                                                echo '<button type="submit" name="submit" class="btn btn-outline-danger btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Desactivar"><i class="fa fa-eye-slash"></i></button>';
+                                                echo form_close();
+                                            } else {
+                                                //echo '<a class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Activar" href="<?= $item->id>"><i class="fa fa fa-eye"></i></a>';
+                                                echo form_open('admincontroller/activaDocente');
+                                                echo '<input type="hidden" id="id" name="id" value="' . $item->id . '">';
+                                                echo '<button type="submit" name="submit" class="btn btn-outline-primary btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Activar"><i class="fa fa-eye"></i></button>';
+                                                echo form_close();
+                                            }
+                                            echo '&nbsp;&nbsp;';
+                                            echo '<a class="btn btn-outline-warning btn-sm" data-toggle="tooltip" data-placement="bottom" title="Editar" href="' . base_url('/admin/users/show/' . $item->id) . '"><i class="fa fa-edit"></i></a>';
                                         }
                                         ?>
-                                        &nbsp;&nbsp;
-                                        <a class="btn btn-outline-warning btn-sm" data-toggle="tooltip" data-placement="bottom" title="Editar" href="<?= base_url('/admin/users/show/' . $item->id) ?>"><i class="fa fa-edit"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -95,4 +98,3 @@
 
 
 </div> <!-- end container-fluid -->
-
