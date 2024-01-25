@@ -25,6 +25,7 @@ class Users extends CI_Controller
 	{
 		parent::__construct();
 		//Do your magic here
+		//$this->load->helper('security');
 		$this->load->model('User_eloquent');
 		$this->load->model('Role_eloquent');
 		$this->load->model('Roleuser_eloquent');

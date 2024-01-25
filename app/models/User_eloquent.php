@@ -41,7 +41,7 @@ class User_Eloquent extends BaseModel
         'status' => 'boolean'
     ];
 
-    protected $appends = ['userflag','lock'];
+    protected $appends = ['userflag', 'lock'];
 
     public function getUserflagAttribute()
     {
@@ -102,12 +102,6 @@ class User_Eloquent extends BaseModel
             'email' => $request['email']
         );
 
-        /*$role_user = new RoleUser_Eloquent();
-        $role_user = array(
-            'user_id' => $request['id'],
-            'role_id' => $request['role_id']
-        );*/
-
         $model = User_Eloquent::findOrFail($request['id']);
         $model->fill($data);
         $model->save($data);
@@ -127,11 +121,59 @@ class User_Eloquent extends BaseModel
             }
         }
 
-        /*if ($role) {
-            print_r($role_user);
-            $model = RoleUser_Eloquent::updateOrCreate($role_user);
-        }*/
+        return;
+    }
 
+    public static function getUserBy($column, $value)
+    {
+        return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
+            ->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
+            ->select('t_users.*', 't_role_user.role_id', 't_roles.rolename')
+            ->where($column, '=', $value)->first();
+    }
+
+    public static function getLogin($user, $pass)
+    {
+        $userValidate = User_Eloquent::where('username', '=', $user)->first();
+        if ($userValidate->status) {
+            if (password_verify($pass, $userValidate['password'])) {
+                $role_user = RoleUser_Eloquent::where('user_id',  $userValidate['id'])->first();
+                //print_r($role_user);
+                $role = Role_Eloquent::findOrFail($role_user['role_id']);
+                if ($role) {
+                    $arrayLogin = array(
+                        'user_login' => $userValidate['username'],
+                        'user_nickname' => $userValidate['display_name'],
+                        'user_email' => $userValidate['email'],
+                        'user_id' => $userValidate['id'],
+                        'user_rol' => $role['rolename'],
+                        'user_rol_id' => $role['id'],
+                        'user_level' => $userValidate['user_type'],
+                        'isLogged' => TRUE,
+                    );
+                    //print_r($arrayLogin);
+                    return $arrayLogin;
+                } else {
+                    $arrayLogin = array(
+                        'error' => 'No tiene rol asignado',
+                        'isLogged' => FALSE,
+                    );
+                    return $arrayLogin;
+                }
+            } else {
+                $arrayLogin = array(
+                    'error' => 'Error de contraseña',
+                    'isLogged' => FALSE,
+                );
+                return $arrayLogin;
+            }
+        } else {
+            $arrayLogin = array(
+                'error' => 'No existe usuario o usuario no autorizado.',
+                'isLogged' => FALSE,
+            );
+            return $arrayLogin;
+        }
         return;
     }
 }

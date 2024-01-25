@@ -12,7 +12,7 @@
                         <li class="breadcrumb-item active">Data Tables</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Data Tables</h4>
+                <h4 class="page-title">Data Tables &nbsp; <?= $this->session->userdata('user_nickname') . ' ' . $this->session->userdata('user_rol'); ?></h4>
             </div>
         </div>
     </div>

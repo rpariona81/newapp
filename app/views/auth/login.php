@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Datatables | Uplon - Responsive Bootstrap 4 Admin Dashboard</title>
+    <title><?= (getenv('APP_NAME') !== null) ? getenv('APP_NAME') : 'Modo prueba'?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Responsive bootstrap 4 admin template" name="description" />
     <meta content="Coderthemes" name="author" />
@@ -13,17 +13,6 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="<?= base_url('assets/images/favicon.ico') ?>">
 
-    <title>
-        <?php
-        if (isset($titulo)) {
-            echo $titulo;
-        } else {
-            echo "JM-Systems";
-        }
-        ?>
-    </title>
-    <!--<title><? //$titulo; 
-                ?></title>-->
     <!-- App css -->
     <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
     <link href="<?= base_url('assets/css/icons.min.css') ?>" rel="stylesheet" type="text/css" />
@@ -33,7 +22,7 @@
     <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/flatly/bootstrap.min.css" integrity="sha384-qF/QmIAj5ZaYFAeQcrQ6bfVMAh4zZlrGwTPY7T/M+iTTLJqJBJjwwnsE5Y0mV7QK" crossorigin="anonymous">-->
     <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cosmo/bootstrap.min.css" integrity="sha384-5QFXyVb+lrCzdN228VS3HmzpiE7ZVwLQtkt+0d9W43LQMzz4HBnnqvVxKg6O+04d" crossorigin="anonymous">-->
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>-->
 
     <style>
         body {
@@ -48,9 +37,10 @@
 
         .sidenav {
             height: 100%;
-            background-color: #000; /** #1199EF */
+            background-color: #1199EF; /** #1199EF */
             overflow-x: hidden;
             padding-top: 20px;
+            text-align: right;
         }
 
 
@@ -76,11 +66,11 @@
 
         @media screen and (min-width: 768px) {
             .main {
-                margin-left: 40%;
+                margin-left: 50%;
             }
 
             .sidenav {
-                width: 40%;
+                width: 50%;
                 position: fixed;
                 z-index: 1;
                 top: 0;
@@ -92,12 +82,12 @@
             }
 
             .register-form {
-                margin-top: 20%;
+                margin-top: 10%;
             }
         }
 
         .login-main-text {
-            margin-top: 15%;
+            margin-top: 4%;
             padding: 60px;
             color: #fff;
         }
@@ -122,27 +112,28 @@
 </head>
 
 <body>
-    <div class="sidenav mb-3">
+    <div class="sidenav mb-5 mt-0">
         <div class="login-main-text">
-            <h1 class="text-white">Application<br> Login Page</h1>
-            <p>Login or register from here to access.</p>
+            <h1 class="text-white"><?= (getenv('APP_NAME') !== null) ? getenv('APP_NAME') : 'Modo prueba'?><h1><hr><h2>PANEL DE ACCESO</h2>
+            <p>Ingrese o registrese desde aquí.</p>
         </div>
     </div>
     <div class="main mt-3">
         <div class="col-md-6 col-sm-12">
             <div class="login-form">
-                <form>
+            <?= form_open('home/auth', array('id' => 'auth', 'name' => 'auth')) ?>
                     <div class="form-group">
-                        <label>User Name</label>
-                        <input type="text" class="form-control" placeholder="User Name">
+                        <!--<label>Usuario</label>-->
+                        <?= form_label('Usuario', 'username', array('class' => 'control-label')); ?>
+                        <input type="text" name="username" id="username" class="form-control" placeholder="Usuario">
                     </div>
                     <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" class="form-control" placeholder="Password">
+                        <label>Contraseña</label>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña">
                     </div>
                     <button type="submit" class="btn btn-black">Login</button>
-                    <button type="submit" class="btn btn-secondary">Register</button>
-                </form>
+                    <button type="submit" class="btn btn-warning">Register</button>
+                <?=form_close()?>
             </div>
         </div>
     </div>
