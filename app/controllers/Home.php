@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Home extends CI_Controller
+{
 
 	/**
 	 * Index Page for this controller.
@@ -48,46 +49,52 @@ class Home extends CI_Controller {
 		$data['users'] = User_model::all();
 		print_r(json_encode($data));*/
 		$login = $this->input->post('username');
-        $password = $this->input->post('password');
+		$password = $this->input->post('password');
 		//print_r($login);
 		//print_r($password);
-//si existe la clave token oculta en el formulario y es igual
-// que la generada con el método token dejamos pasar
-//if ($this->input->post('token') && $this->input->post('token') === $this->session->userdata('token')) {
-        if ($login != NULL && $password != NULL) {
-            $this->form_validation->set_rules('username', 'Usuario', 'required|callback_loginok');
-            $this->form_validation->set_rules('password', 'Clave', 'required');
-//si el proceso falla mostramos errores
-            if ($this->form_validation->run() == FALSE) {
-                $this->index();
-//en otro caso procesamos los datos
-            } else {
-                //redirect('encuestacsc/index');
+		//si existe la clave token oculta en el formulario y es igual
+		// que la generada con el método token dejamos pasar
+		//if ($this->input->post('token') && $this->input->post('token') === $this->session->userdata('token')) {
+		if ($login != NULL && $password != NULL) {
+			$this->form_validation->set_rules('username', 'Usuario', 'required|callback_loginok');
+			$this->form_validation->set_rules('password', 'Clave', 'required');
+			//si el proceso falla mostramos errores
+			if ($this->form_validation->run() == FALSE) {
+				$this->index();
+				//en otro caso procesamos los datos
+			} else {
+				//redirect('encuestacsc/index');
 				//$this->session->set_userdata($query);
-                redirect('admin/users');
-            }
-        } else {
-            //redirect('home/acceso_denegado');
+				redirect('admin/users');
+			}
+		} else {
+			//redirect('home/acceso_denegado');
 			$this->index();
-        }
+		}
 	}
 
-	public function loginok() {
-        $login = $this->input->post('username');
-        $password = $this->input->post('password');
-        //return $this->Usuariolib->login($login, $password);
+	public function loginok()
+	{
+		$login = $this->input->post('username');
+		$password = $this->input->post('password');
+		//return $this->Usuariolib->login($login, $password);
 		$this->load->library('UserLib');
-        $util = new UserLib();
-        $checkUser = $util->login($login, $password);
+		$util = new UserLib();
+		$checkUser = $util->login($login, $password);
 		//print_r('checkUser'.$checkUser);
 		return $checkUser['isLogged'];
-        /*if($checkUser->isLogged){
+		/*if($checkUser->isLogged){
             redirect('/admin/users');
         }else{
             // Display error message
             $this->session->set_flashdata('flashError', 'Error de usuario y/o contraseña o usuario desactivado.');
             redirect('/home');
         }*/
-    }
+	}
 
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		redirect('/');
+	}
 }
