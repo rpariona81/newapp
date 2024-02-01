@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title><?= (getenv('APP_NAME') !== null) ? getenv('APP_NAME') : 'Modo prueba'?></title>
+    <title><?= (getenv('APP_NAME') !== null) ? getenv('APP_NAME') : 'Modo prueba' ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Responsive bootstrap 4 admin template" name="description" />
     <meta content="Coderthemes" name="author" />
@@ -37,7 +37,8 @@
 
         .sidenav {
             height: 100%;
-            background-color: #1199EF; /** #1199EF */
+            background-color: #1199EF;
+            /** #1199EF */
             overflow-x: hidden;
             padding-top: 20px;
             text-align: right;
@@ -114,26 +115,38 @@
 <body>
     <div class="sidenav mb-5 mt-0">
         <div class="login-main-text">
-            <h1 class="text-white"><?= (getenv('APP_NAME') !== null) ? getenv('APP_NAME') : 'Modo prueba'?><h1><hr><h2>PANEL DE ACCESO</h2>
-            <p>Ingrese o registrese desde aquí.</p>
+            <h1 class="text-white"><?= (getenv('APP_NAME') !== null) ? getenv('APP_NAME') : 'Modo prueba' ?><h1>
+                    <hr>
+                    <h2>PANEL DE ACCESO</h2>
+                    <p>Ingrese o registrese desde aquí.</p>
         </div>
     </div>
     <div class="main mt-3">
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-8 col-sm-12">
             <div class="login-form">
-            <?= form_open('home/auth', array('id' => 'auth', 'name' => 'auth')) ?>
-                    <div class="form-group">
-                        <!--<label>Usuario</label>-->
-                        <?= form_label('Usuario', 'username', array('class' => 'control-label')); ?>
-                        <input type="text" name="username" id="username" class="form-control" placeholder="Usuario">
-                    </div>
-                    <div class="form-group">
-                        <label>Contraseña</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña">
-                    </div>
-                    <button type="submit" class="btn btn-black">Login</button>
-                    <button type="submit" class="btn btn-warning">Register</button>
-                <?=form_close()?>
+                <!--< ?= my_validation_errors(validation_errors()); ?>-->
+                
+                <?= form_open('home/auth', array('id' => 'auth', 'name' => 'auth')) ?>
+                <div class="form-group">
+                    <!--<label>Usuario</label>-->
+                    <?= form_label('Usuario', 'username', array('class' => 'control-label')); ?>
+
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Usuario" required>
+                    <!--< ?= form_error('username',"<div style='color:red'>","</div>");?>       	-->
+
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <!--<input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" required>-->
+                    <?= form_input(array('type' => 'password', 'name' => 'password', 'id' => 'password', 'class' => 'form-control', 'placeholder' => 'Contraseña', 'required')) ?>
+                    <?= form_error('password', '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button><strong>','</strong></div>'); ?>
+                    
+
+                </div>
+                <p><?= my_error($this->session->flashdata('error')) ?></p> 
+                <button type="submit" class="btn btn-black">Login</button>
+                <button type="submit" class="btn btn-warning">Register</button>
+                <?= form_close() ?>
             </div>
         </div>
     </div>

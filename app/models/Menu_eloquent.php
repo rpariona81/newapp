@@ -29,7 +29,7 @@ class Menu_Eloquent extends BaseModel{
     {
         $opcionesMenu = array();
         $opcionesMenu[0] = 'Seleccione menu';
-        $lista = Menu_Eloquent::select('id', 'menu')->get();
+        $lista = Menu_Eloquent::select('id', 'menu')->where('status','=',1)->get();
         foreach ($lista as $registro) {
             $opcionesMenu[$registro->id] = $registro->menu;
         }

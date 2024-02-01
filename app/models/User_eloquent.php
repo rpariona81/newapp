@@ -135,45 +135,62 @@ class User_Eloquent extends BaseModel
     public static function getLogin($user, $pass)
     {
         $userValidate = User_Eloquent::where('username', '=', $user)->first();
-        if ($userValidate->status) {
-            if (password_verify($pass, $userValidate['password'])) {
-                $role_user = RoleUser_Eloquent::where('user_id',  $userValidate['id'])->first();
-                //print_r($role_user);
-                $role = Role_Eloquent::findOrFail($role_user['role_id']);
-                if ($role) {
-                    $arrayLogin = array(
-                        'user_login' => $userValidate['username'],
-                        'user_nickname' => $userValidate['display_name'],
-                        'user_email' => $userValidate['email'],
-                        'user_id' => $userValidate['id'],
-                        'user_rol' => $role['rolename'],
-                        'user_rol_id' => $role['id'],
-                        'user_level' => $userValidate['user_type'],
-                        'isLogged' => TRUE,
-                    );
-                    //print_r($arrayLogin);
-                    return $arrayLogin;
+        if (is_null($userValidate)) {
+            $arrayLogin = array(
+                'error' => 'Usuario no registrado.',
+                'isLogged' => FALSE,
+            );
+            return $arrayLogin;
+        } else {
+            if ($userValidate->status) {
+                if (password_verify($pass, $userValidate['password'])) {
+                    $role_user = RoleUser_Eloquent::where('user_id',  $userValidate['id'])->first();
+                    //print_r($role_user);
+                    $role = Role_Eloquent::findOrFail($role_user['role_id']);
+                    if ($role) {
+                        if ($role->status) {
+                            $arrayLogin = array(
+                                'user_login' => $userValidate['username'],
+                                'user_nickname' => $userValidate['display_name'],
+                                'user_email' => $userValidate['email'],
+                                'user_id' => $userValidate['id'],
+                                'user_role' => $role['rolename'],
+                                'user_guard' => $role['guard_name'],
+                                'user_role_id' => $role['id'],
+                                'user_level' => $userValidate['user_type'],
+                                'isLogged' => TRUE,
+                            );
+                            //print_r($arrayLogin);
+                            return $arrayLogin;
+                        } else {
+                            $arrayLogin = array(
+                                'error' => 'Usuario no tiene rol autorizado',
+                                'isLogged' => FALSE,
+                            );
+                            return $arrayLogin;
+                        }
+                    } else {
+                        $arrayLogin = array(
+                            'error' => 'No tiene rol asignado',
+                            'isLogged' => FALSE,
+                        );
+                        return $arrayLogin;
+                    }
                 } else {
                     $arrayLogin = array(
-                        'error' => 'No tiene rol asignado',
+                        'error' => 'Error de contraseña',
                         'isLogged' => FALSE,
                     );
                     return $arrayLogin;
                 }
             } else {
                 $arrayLogin = array(
-                    'error' => 'Error de contraseña',
+                    'error' => 'Usuario no autorizado.',
                     'isLogged' => FALSE,
                 );
                 return $arrayLogin;
             }
-        } else {
-            $arrayLogin = array(
-                'error' => 'No existe usuario o usuario no autorizado.',
-                'isLogged' => FALSE,
-            );
-            return $arrayLogin;
+            return;
         }
-        return;
     }
 }

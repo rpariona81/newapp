@@ -26,6 +26,7 @@ class Menus extends CI_Controller
 		parent::__construct();
 		//Do your magic here
 		$this->load->model('Menu_eloquent');
+		$this->load->model('Menurole_eloquent');
 	}
 
 	public function index()
@@ -38,5 +39,27 @@ class Menus extends CI_Controller
 		/*print_r(json_encode($data));
 		return;*/
 		$this->load->view('admin/templateAdmin', $data);
+	}
+
+	public function permisos()
+	{
+		//$this->load->view('welcome_message');
+		//$data['contenido'] = 'admin/menus/index';
+		//$data['menus'] = Menu_Eloquent::all();
+		$role_id = $this->session->userdata('user_rol_id');
+		//$data['sess_role_id'] = $role_id;
+		$data['opciones'] = MenuRole_eloquent::getMenusRoles($role_id);
+		//$data['users'] = $this->User_model->get();
+		//print_r(json_encode($data));
+
+		//https://stackoverflow.com/questions/67888061/codeigniter-convert-array-to-json
+		header('Content-Type: Application/json');
+		print_r(json_encode($data));
+		/*$this->output
+         ->set_content_type('application/json', 'utf8')
+         ->set_output( json_encode($data) );
+		 */
+		return;
+		//$this->load->view('admin/templateAdmin', $data);
 	}
 }

@@ -30,32 +30,25 @@ class Home extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('session');
 		$this->form_validation->set_message('loginok', 'Usuario o clave incorrectos');
+		$this->form_validation->set_message('Clave', 'Ingrese contraseña');
 	}
 
 	public function index()
 	{
+		if($this->session->user_login){
+			redirect(site_url($this->session->user_guard).'/index');
+		}
 		$this->load->view('auth/login');
 	}
 
 	public function auth()
 	{
-		/*$request = $this->security->xss_clean($this->input->post());
-		$this->form_validation->set_rules('username', 'Usuario', 'required|callback_loginok');
-        $this->form_validation->set_rules('password', 'Contraseña', 'required');*/
-		//$this->load->view('auth/login');
-		/*$this->load->model('User_model');
-		$data['users'] = User_model::all();
-		print_r(json_encode($data));*/
 		$login = $this->input->post('username');
 		$password = $this->input->post('password');
-		//print_r($login);
-		//print_r($password);
-		//si existe la clave token oculta en el formulario y es igual
-		// que la generada con el método token dejamos pasar
-		//if ($this->input->post('token') && $this->input->post('token') === $this->session->userdata('token')) {
+
 		if ($login != NULL && $password != NULL) {
+
 			$this->form_validation->set_rules('username', 'Usuario', 'required|callback_loginok');
 			$this->form_validation->set_rules('password', 'Clave', 'required');
 			//si el proceso falla mostramos errores
@@ -64,11 +57,12 @@ class Home extends CI_Controller
 				//en otro caso procesamos los datos
 			} else {
 				//redirect('encuestacsc/index');
-				//$this->session->set_userdata($query);
-				redirect('admin/users');
+				redirect(site_url($this->session->user_guard).'/index');
+				//redirect('admin/users');
 			}
 		} else {
 			//redirect('home/acceso_denegado');
+			$this->session->set_flashdata('error', 'Ingrese su usuario y contraseña.');
 			$this->index();
 		}
 	}
@@ -82,6 +76,7 @@ class Home extends CI_Controller
 		$util = new UserLib();
 		$checkUser = $util->login($login, $password);
 		//print_r('checkUser'.$checkUser);
+		$this->session->set_flashdata('error', $checkUser['error']);
 		return $checkUser['isLogged'];
 		/*if($checkUser->isLogged){
             redirect('/admin/users');
