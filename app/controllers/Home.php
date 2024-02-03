@@ -72,8 +72,8 @@ class Home extends CI_Controller
 		$login = $this->input->post('username');
 		$password = $this->input->post('password');
 		//return $this->Usuariolib->login($login, $password);
-		$this->load->library('UserLib');
-		$util = new UserLib();
+		$this->load->library('LoginLib');
+		$util = new LoginLib();
 		$checkUser = $util->login($login, $password);
 		//print_r('checkUser'.$checkUser);
 		$this->session->set_flashdata('error', $checkUser['error']);

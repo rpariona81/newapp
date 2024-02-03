@@ -11,29 +11,61 @@ class Auth_hooks
     public function __construct()
     {
         $this->ci = &get_instance();
+        if (is_object($this->ci)) {
+            $this->ci->load->library('MenuLib');
+            $this->ci->load->library('Menu_PerfilLib');
+        }
     }
 
 
     public function autentificar()
     {
-        
-        if ($this->ci->session->has_userdata("user_login")) {
-            /*$this->ci->load->model('User_model');
-            $data['users'] = User_model::all();
-            print_r(json_encode($data));*/
-            //print_r(json_encode($this->ci->session->userdata("username")));
+        //$this->ci = & get_instance();
+        $controlador = $this->ci->uri->segment(1);
+        $accion = $this->ci->uri->segment(2);
+        $url = $controlador . "/" . $accion;
+
+        $libres = array('/', 'home/index', 'home/acceso_denegado', 'home/ingreso', 'home/acerca_de', 'home/ingresar', 'home/salir');
+
+        if (in_array($url, $libres)) {
             echo $this->ci->output->get_output();
-            //return redirect('admincontroller');
-            /*if($this->session->user_login){
-                redirect(site_url($this->session->user_guard).'/index');
-            }
-            $this->load->view('auth/login');*/
-            exit;
         } else {
-            //redirect(site_url($this->ci->session->user_guard).'/index');
-            $this->load->view('auth/login');
-            return;
+            if ($this->ci->session->userdata('usuario')) {
+                if ($this->autorizar()) {
+                    echo $this->ci->output->get_output();
+                } else {
+                    redirect('home/acceso_denegado');
+                }
+            } else {
+                redirect('home/acceso_denegado');
+            }
         }
-        
+    }
+
+    public function autorizar()
+    {
+        //$this->ci = & get_instance();
+
+        // El perfil del usuario logueado
+        $role_id = $this->ci->session->userdata('user_role_id');
+
+        // Con el controlador, buscar la opcion en la tabla de menus
+        //$this->ci->load->library('MenuLib');
+        $controller = $this->ci->uri->segment(2);
+        $menu_id = $this->ci->menulib->findByController($controller);
+
+        if (!$menu_id) {
+            return FALSE;
+        }
+
+        // 
+        //$this->ci->load->library('Menu_PerfilLib');
+        $controller = $this->ci->uri->segment(2);
+        $acceso = $this->ci->menu_perfillib->findByMenuAndPerfil($perfil_id, $menu_id)->id;
+        if (!$acceso) {
+            return FALSE;
+        }
+
+        return TRUE;
     }
 }

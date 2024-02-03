@@ -59,4 +59,40 @@ class Role_Eloquent extends BaseModel
         }
         return $opcionesRole;
     }
+
+    public static function all_by_name($rolename)
+    {
+        $model = Role_Eloquent::where('rolename', '=', $rolename)->first();
+        return $model;
+    }
+
+    public static function all_filter($field, $value)
+    {
+        $model = Role_Eloquent::where($field, '=', $value)->get();
+        return $model;
+    }
+
+    public static function findRecord($id)
+    {
+        $model = Role_Eloquent::findOrFail('id', $id);
+        return $model;
+    }
+
+    public static function insertRecord($registro)
+    {
+
+        $model = new Role_Eloquent();
+        $model->fill($registro);
+        $model->save($registro);
+
+        return $model;
+    }
+
+    public static function updateRecord($registro)
+    {
+        $model = Role_Eloquent::findOrFail('id', $registro['id']);
+        $model->fill($registro);
+        $model->save($registro);
+        return $model;
+    }
 }

@@ -24,4 +24,6 @@ class RoleUser_Eloquent extends BaseModel{
 
     public $timestamps = false;
 
+    
+
 }

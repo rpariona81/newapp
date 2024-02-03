@@ -4,7 +4,7 @@ if (!defined('BASEPATH'))
     exit('No permitir el acceso directo al script');
 
 // Validaciones para el modelo de usuarios (login, cambio clave, CRUD Usuario)
-class UserLib
+class LoginLib
 {
 
     private $ci;
