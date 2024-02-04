@@ -34,11 +34,26 @@ class Home extends CI_Controller
 		$this->form_validation->set_message('Clave', 'Ingrese contraseña');
 	}
 
-	public function index()
+	public function index($req1 = NULL, $req2 = NULL)
 	{
-		if($this->session->user_login){
-			redirect(site_url($this->session->user_guard).'/index');
-		}
+		//if($this->session->user_login){
+		//	redirect(site_url($this->session->user_guard).'/index');
+		//}
+		/*$guard_name = $this->uri->segment(2);
+        $controller = $this->uri->segment(3);
+        $action = $this->uri->segment(4);
+		if(is_null($guard_name)){
+			$url = $this->uri->segment(1);
+		}elseif (is_null($controller)) {
+			$url = $guard_name;
+		}elseif (is_null($action)) {
+			$url = $guard_name . "/" . $controller;
+		}else{
+			$url = $guard_name . "/" . $controller . "/" . $action;	# code...
+		}*/
+        
+        //header('Content-Type: Application/json');
+        //print_r($url);
 		$this->load->view('auth/login');
 	}
 

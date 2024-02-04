@@ -32,29 +32,52 @@ class Menus extends CI_Controller
 	public function index()
 	{
 		//$this->load->view('welcome_message');
-		$data['contenido'] = 'admin/menus/index';
+		/*$data['contenido'] = 'admin/menus/index';
 		$data['menus'] = Menu_Eloquent::all();
 		$data['opciones'] = Menu_Eloquent::getMenuOpciones();
 		//$data['users'] = $this->User_model->get();
 		/*print_r(json_encode($data));
 		return;*/
-		$this->load->view('admin/templateAdmin', $data);
+		/*$this->load->view('admin/templateAdmin', $data);*/
+
+		$guard_name = $this->uri->segment(1);
+        $controller = $this->uri->segment(2);
+        $action = $this->uri->segment(3);
+        $url = $guard_name . "/" . $controller . "/" . $action;
+        header('Content-Type: Application/json');
+        echo $guard_name.'<br>';
+        echo $controller.'<br>';
+        echo $action.'<br>';
+        echo $url.'<br>';
+		echo json_encode($this->session->all_userdata());
+
 	}
 
 	public function permisos()
 	{
+		$guard_name = $this->uri->segment(1);
+        $controller = $this->uri->segment(2);
+        $action = $this->uri->segment(3);
+        $url = $guard_name . "/" . $controller . "/" . $action;
+        header('Content-Type: Application/json');
+        echo $guard_name.'<br>';
+        echo $controller.'<br>';
+        echo $action.'<br>';
+        echo $url.'<br>';
+		echo json_encode($this->session->all_userdata());
+
 		//$this->load->view('welcome_message');
 		//$data['contenido'] = 'admin/menus/index';
 		//$data['menus'] = Menu_Eloquent::all();
-		$role_id = $this->session->userdata('user_rol_id');
+		//$role_id = $this->session->userdata('user_rol_id');
 		//$data['sess_role_id'] = $role_id;
-		$data['opciones'] = MenuRole_eloquent::getMenusRoles($role_id);
+		//$data['opciones'] = MenuRole_eloquent::getMenusRoles($role_id);
 		//$data['users'] = $this->User_model->get();
 		//print_r(json_encode($data));
 
 		//https://stackoverflow.com/questions/67888061/codeigniter-convert-array-to-json
-		header('Content-Type: Application/json');
-		print_r(json_encode($data));
+		//header('Content-Type: Application/json');
+		//print_r(json_encode($data));
 		/*$this->output
          ->set_content_type('application/json', 'utf8')
          ->set_output( json_encode($data) );

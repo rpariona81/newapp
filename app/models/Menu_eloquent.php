@@ -99,6 +99,6 @@ class Menu_Eloquent extends BaseModel
 
         return $data;*/
 
-        $model = Menu_Eloquent::leftjoin('t_menu_role', ('id', $registro['id']);
+        //$model = Menu_Eloquent::leftjoin('t_menu_role', ('id', $registro['id']);
     }
 }

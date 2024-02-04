@@ -33,24 +33,47 @@ class Users extends CI_Controller
 
 	public function index()
 	{
+		$guard_name = $this->uri->segment(1);
+        $controller = $this->uri->segment(2);
+        $action = $this->uri->segment(3);
+        $url = $guard_name . "/" . $controller . "/" . $action;
+        header('Content-Type: Application/json');
+        echo $guard_name.'<br>';
+        echo $controller.'<br>';
+        echo $action.'<br>';
+        echo $url.'<br>';
+		echo json_encode($this->session->all_userdata());
+
+
 		//$this->load->view('admin/templateAdmin');
 		//$this->load->model('User_model');
-		$data['contenido'] = 'admin/users/index';
-		$data['users'] = User_Eloquent::getUsersRoles();
+		//$data['contenido'] = 'admin/users/index';
+		//$data['users'] = User_Eloquent::getUsersRoles();
 		/*$data['users'] = $this->User_model->get();
 		print_r(json_encode($data));
 		return;*/
-		$this->load->view('admin/templateAdmin', $data);
+		//$this->load->view('admin/templateAdmin', $data);
 	}
 
 	public function show($id)
 	{
 		//$this->load->view('welcome_message');
 		//$this->load->model('User_model');
-		$data['contenido'] = 'admin/users/edit';
+		/*$data['contenido'] = 'admin/users/edit';
 		$data['user'] = User_Eloquent::getUser($id);
 		$data['roles'] = Role_Eloquent::getRoleOpciones();
-		$this->load->view('admin/templateAdmin', $data);
+		$this->load->view('admin/templateAdmin', $data);*/
+
+		$guard_name = $this->uri->segment(1);
+        $controller = $this->uri->segment(2);
+        $action = $this->uri->segment(3);
+        $url = $guard_name . "/" . $controller . "/" . $action;
+        header('Content-Type: Application/json');
+        echo $guard_name.'<br>';
+        echo $controller.'<br>';
+        echo $action.'<br>';
+        echo $url.'<br>';
+		echo json_encode($this->session->all_userdata());
 	}
 
 	public function edit($id)
@@ -58,17 +81,39 @@ class Users extends CI_Controller
 		//$this->load->view('welcome_message');
 		//$this->load->model('User_model');
 		//$request = array('id'=>1);
-		$data['user'] = User_Eloquent::getUser($id);
 		//$data['users'] = $this->User_model->get();
+		/*$data['user'] = User_Eloquent::getUser($id);
 		print_r(json_encode($data));
-		return;
+		return;*/
+
+		$guard_name = $this->uri->segment(1);
+        $controller = $this->uri->segment(2);
+        $action = $this->uri->segment(3);
+        $url = $guard_name . "/" . $controller . "/" . $action;
+        header('Content-Type: Application/json');
+        echo $guard_name.'<br>';
+        echo $controller.'<br>';
+        echo $action.'<br>';
+        echo $url.'<br>';
+		echo json_encode($this->session->all_userdata());
 	}
 
 	public function update()
 	{
+		$guard_name = $this->uri->segment(1);
+        $controller = $this->uri->segment(2);
+        $action = $this->uri->segment(3);
+        $url = $guard_name . "/" . $controller . "/" . $action;
+        header('Content-Type: Application/json');
+        echo $guard_name.'<br>';
+        echo $controller.'<br>';
+        echo $action.'<br>';
+        echo $url.'<br>';
+		echo json_encode($this->session->all_userdata());
+		/*
 		$request = $this->security->xss_clean($this->input->post());
 		$result = User_Eloquent::updateUser($request);
-		redirect('/admin/users');
+		redirect('/admin/users');*/
 	}
 
 	public function inactive($id)
@@ -76,10 +121,21 @@ class Users extends CI_Controller
 		//$this->load->view('welcome_message');
 		//$this->load->model('User_model');
 		//$request = array('id'=>1);
-		$data['user'] = User_Eloquent::getUser($id);
 		//$data['users'] = $this->User_model->get();
+		/*$data['user'] = User_Eloquent::getUser($id);
 		print_r(json_encode($data));
-		return;
+		return;*/
+
+		$guard_name = $this->uri->segment(1);
+        $controller = $this->uri->segment(2);
+        $action = $this->uri->segment(3);
+        $url = $guard_name . "/" . $controller . "/" . $action;
+        header('Content-Type: Application/json');
+        echo $guard_name.'<br>';
+        echo $controller.'<br>';
+        echo $action.'<br>';
+        echo $url.'<br>';
+		echo json_encode($this->session->all_userdata());
 	}
 
 	public function active($id)
@@ -87,9 +143,20 @@ class Users extends CI_Controller
 		//$this->load->view('welcome_message');
 		//$this->load->model('User_model');
 		//$request = array('id'=>1);
-		$data['user'] = User_Eloquent::getUser($id);
 		//$data['users'] = $this->User_model->get();
+		/*$data['user'] = User_Eloquent::getUser($id);
 		print_r(json_encode($data));
-		return;
+		return;*/
+
+		$guard_name = $this->uri->segment(1);
+        $controller = $this->uri->segment(2);
+        $action = $this->uri->segment(3);
+        $url = $guard_name . "/" . $controller . "/" . $action;
+        header('Content-Type: Application/json');
+        echo $guard_name.'<br>';
+        echo $controller.'<br>';
+        echo $action.'<br>';
+        echo $url.'<br>';
+		echo json_encode($this->session->all_userdata());
 	}
 }

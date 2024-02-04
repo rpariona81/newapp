@@ -36,7 +36,40 @@ class Control extends CI_Controller
 		exit;*/
 		//$this->session->set_userdata("username","Jhon Doe");
 		//print_r(json_encode($this->session->userdata("user_login")));
-        print_r(json_encode($this->session->userdata()));
+		$guard_name = $this->uri->segment(1);
+        $controller = $this->uri->segment(2);
+        $action = $this->uri->segment(3);
+        $url = $guard_name . "/" . $controller . "/" . $action;
+        header('Content-Type: Application/json');
+        echo $guard_name.'<br>';
+        echo $controller.'<br>';
+        echo $action.'<br>';
+        echo $url.'<br>';
+		echo json_encode($this->session->all_userdata());
+        //echo json_encode($this->session->userdata());
+		return;
+	}
+
+	public function prueba()
+	{
+		//$this->load->view('welcome_message');
+		
+		/*$data['users'] = User_model::all();
+		print_r(json_encode($data));
+		exit;*/
+		//$this->session->set_userdata("username","Jhon Doe");
+		//print_r(json_encode($this->session->userdata("user_login")));
+		$guard_name = $this->uri->segment(1);
+        $controller = $this->uri->segment(2);
+        $action = $this->uri->segment(3);
+        $url = $guard_name . "/" . $controller . "/" . $action;
+        header('Content-Type: Application/json');
+        echo $guard_name.'<br>';
+        echo $controller.'<br>';
+        echo $action.'<br>';
+        echo $url.'<br>';
+		echo json_encode($this->session->all_userdata());
+        //echo json_encode($this->session->userdata());
 		return;
 	}
 }
