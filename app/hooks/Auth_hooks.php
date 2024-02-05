@@ -29,7 +29,7 @@ class Auth_hooks
         $controller = $this->ci->uri->segment(2);
         $action = $this->ci->uri->segment(3);
         if (is_null($guard_name)) {
-            $url = $this->ci->uri->segment(1);
+            $url = "/";
         } elseif (is_null($controller)) {
             $url = $guard_name;
         } elseif (is_null($action)) {
@@ -40,45 +40,45 @@ class Auth_hooks
 
         $libres = array('/', 'home', 'home/index', 'home/acceso_denegado', 'home/ingreso', 'home/acerca_de', 'home/ingresar', 'home/salir', 'home/auth', 'home/logout');
 
-        $nolibres = (array)Menu_eloquent::select('controller')->get();
-        
         var_dump($url);
-        if (in_array($url, $libres)) {
+        //exit;
+        /*if (in_array($url, $libres)) {
             //print_r($url);
             echo $this->ci->output->get_output();
-        } elseif(in_array($controller, $nolibres)) {
+        } else {
             if (is_null($this->ci->session->userdata('user_guard'))) {
                 redirect('/home');
                 exit;
             } else {
                 /*var_dump($this->ci->session->userdata('user_guard'));
                 die();*/
-                if ($this->ci->session->userdata('user_guard') == $guard_name) {
-                    var_dump($this->autorizar());
-                    if ($this->autorizar()) {
-                        echo $this->ci->output->get_output();
-                    } else {
-                        //redirect('home/acceso_denegado');
-                        redirect(site_url($guard_name) . '/index');
-                        exit;
-                    }
+/*
+                if ($this->ci->session->userdata('user_guard') != $guard_name) {
+                    //var_dump($this->autorizar());
+                    redirect(base_url() . $this->ci->session->userdata('user_guard') . '/index');
                     /*var_dump($this->ci->session->userdata('user_guard') == $guard_name);
                 die();*/
-                } else {
+               /* } else {
                     /*var_dump($this->ci->session->userdata('user_guard') == $guard_name);
                 die();
                     /*print_r($guard_name);
                     //redirect('home/acceso_denegado');*/
-                    redirect(base_url().$this->ci->session->userdata('user_guard') .'/index');
+                    
                     //exit;
                     /*var_dump(base_url().$this->ci->session->userdata('user_guard') .'/index');*/
-                    exit;
+                    //exit;
+                    /*if ($this->autorizar()) {
+                        echo $this->ci->output->get_output();
+                        //exit;
+                    } else {
+                        redirect('home/acceso_denegado');
+                        //redirect($this->ci->session->userdata('user_guard') . '/index');
+                        //exit;
+                    }
                 }
-            }
-        }else{
-            redirect('/home');
+            }*/
         }
-    }
+    
 
     public function autorizar()
     {
@@ -90,6 +90,7 @@ class Auth_hooks
         $controller = $this->ci->uri->segment(2);
         //$menu_id = $this->ci->menulib->findByController($controller);
         $guard_name = $this->ci->session->userdata('user_guard');
+        //var_dump($guard_name);
 
         $menu_id = Menu_eloquent::where('controller', '=', $controller)->where('guard_name', '=', $guard_name)->select('id')->get();
 
