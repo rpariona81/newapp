@@ -1,1 +1,3 @@
-<h1>Hola TEST</h1>
+<h1>Hola TEST
+    <?=$query?>
+</h1>

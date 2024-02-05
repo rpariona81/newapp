@@ -11,10 +11,10 @@ class MY_Controller extends CI_Controller
     $this->data['title'] = getenv('APP_NAME');
   }
 
-  protected function render($the_view = NULL, $template = NULL)
+  protected function render($the_view = NULL, $template = 'admin')
   {
     $test = 'templates/' . $template . '/index';
-    var_dump($test);
+    //var_dump($test);
     if ($template == 'json' || $this->input->is_ajax_request()) {
       header('Content-Type: application/json');
       echo json_encode($this->data);
@@ -33,6 +33,7 @@ class Admin_Controller extends MY_Controller
   {
     parent::__construct();
   }
+
 }
 
 class Public_Controller extends MY_Controller

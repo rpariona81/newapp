@@ -40,34 +40,48 @@ class Auth_hooks
 
         $libres = array('/', 'home', 'home/index', 'home/acceso_denegado', 'home/ingreso', 'home/acerca_de', 'home/ingresar', 'home/salir', 'home/auth', 'home/logout');
 
-        var_dump($url);
+        //var_dump($url);
         //exit;
-        /*if (in_array($url, $libres)) {
+        if (in_array($url, $libres)) {
             //print_r($url);
             echo $this->ci->output->get_output();
         } else {
             if (is_null($this->ci->session->userdata('user_guard'))) {
-                redirect('/home');
+                redirect('/');
                 exit;
             } else {
-                /*var_dump($this->ci->session->userdata('user_guard'));
+                if ($this->ci->session->userdata('user_guard') != $guard_name) {
+                    redirect(base_url() . $this->ci->session->userdata('user_guard') . '/index');
+                    //exit;
+                } else {
+                    if ($this->autorizar()) {
+                        echo $this->ci->output->get_output();
+                    } else {
+                        redirect(base_url() . $this->ci->session->userdata('user_guard') . '/index');
+                    }
+                    return;
+                }
+            }
+        }
+    }
+    /*var_dump($this->ci->session->userdata('user_guard'));
                 die();*/
-/*
+    /*
                 if ($this->ci->session->userdata('user_guard') != $guard_name) {
                     //var_dump($this->autorizar());
                     redirect(base_url() . $this->ci->session->userdata('user_guard') . '/index');
                     /*var_dump($this->ci->session->userdata('user_guard') == $guard_name);
                 die();*/
-               /* } else {
+    /* } else {
                     /*var_dump($this->ci->session->userdata('user_guard') == $guard_name);
                 die();
                     /*print_r($guard_name);
                     //redirect('home/acceso_denegado');*/
-                    
-                    //exit;
-                    /*var_dump(base_url().$this->ci->session->userdata('user_guard') .'/index');*/
-                    //exit;
-                    /*if ($this->autorizar()) {
+
+    //exit;
+    /*var_dump(base_url().$this->ci->session->userdata('user_guard') .'/index');*/
+    //exit;
+    /*if ($this->autorizar()) {
                         echo $this->ci->output->get_output();
                         //exit;
                     } else {
@@ -77,8 +91,8 @@ class Auth_hooks
                     }
                 }
             }*/
-        }
-    
+
+
 
     public function autorizar()
     {

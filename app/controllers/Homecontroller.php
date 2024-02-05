@@ -31,20 +31,23 @@ class HomeController extends MY_Controller
         
         //header('Content-Type: Application/json');
         //print_r($url);
-		//$this->data['content'] = 'test';
+		//$this->session->set_userdata(['Usuario'=>'guess']);
+		//$this->data['query'] = json_encode($this->session->all_userdata());
 		//$this->render(NULL,'admin');
-		$this->render('test','user');
-		//$this->load->view('auth/login');
+		//$this->render(NULL,'json');
+
+		//$this->render('test','user');
+		$this->render('auth/login');
 	}
 
     
 
-	public function login(){
+	/*public function login(){
         $this->load->view('auth/login');
-    }
+    }*/
 
 	public function error404(){
-        echo json_encode($this->session->all_userdata());
+        $this->render('auth/login');
     }
 
 
