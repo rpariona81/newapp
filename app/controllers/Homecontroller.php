@@ -37,7 +37,7 @@ class HomeController extends MY_Controller
 		//$this->render(NULL,'json');
 
 		//$this->render('test','user');
-		$this->render('auth/login');
+		$this->render('auth/login',NULL);
 	}
 
     

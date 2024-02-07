@@ -1,81 +1,40 @@
 <!-- Footer Start -->
 <footer class="footer">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        2016 - 2019 &copy; Uplon theme by <a href="#">Coderthemes</a>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                2016 - 2019 &copy; Uplon theme by <a href="#">Coderthemes</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </footer>
-        <!-- end Footer -->
+                </footer>
+                <!-- end Footer -->
 
-        <!-- Right Sidebar -->
-        <div class="right-bar">
-            <div class="rightbar-title">
-                <a href="javascript:void(0);" class="right-bar-toggle float-right">
-                    <i class="mdi mdi-close"></i>
-                </a>
-                <h4 class="font-18 m-0 text-white">Theme Customizer</h4>
             </div>
-            <div class="slimscroll-menu">
-        
-                <div class="p-4">
-                    <div class="alert alert-warning" role="alert">
-                        <strong>Customize </strong> the overall color scheme, layout, etc.
-                    </div>
-                    <div class="mb-2">
-                        <img src="../../assets/images/layouts/light.png" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked />
-                        <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
-                    </div>
-            
-                    <div class="mb-2">
-                        <img src="../../assets/images/layouts/dark.png" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsStyle="../../assets/css/bootstrap-dark.min.css" 
-                            data-appStyle="../../assets/css/app-dark.min.css" />
-                        <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
-                    </div>
-            
-                    <div class="mb-2">
-                        <img src="../../assets/images/layouts/rtl.png" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-5">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appStyle="../../assets/css/app-rtl.min.css" />
-                        <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
-                    </div>
 
-                    <a href="../../../../themeforest.net/item/uplon-responsive-bootstrap-4-web-app-kit/1660765651cc.html" class="btn btn-danger btn-block mt-3" target="_blank"><i class="mdi mdi-download mr-1"></i> Download Now</a>
-                </div>
-            </div> <!-- end slimscroll-menu-->
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
         </div>
-        <!-- /Right-bar -->
+        <!-- END wrapper -->
 
-        <!-- Right bar overlay-->
-        <div class="rightbar-overlay"></div>
-
-        <a href="javascript:void(0);" class="right-bar-toggle demos-show-btn">
-            <i class="mdi mdi-settings-outline mdi-spin"></i> &nbsp;Choose Demos
-        </a>
+        
 
         <!-- Vendor js -->
-        <script src="../../assets/js/vendor.min.js"></script>
+        <script src="<?=base_url('assets/js/vendor.min.js')?>"></script>
 
         <!--Morris Chart-->
-        <script src="../../assets/libs/morris-js/morris.min.js"></script>
-        <script src="../../assets/libs/raphael/raphael.min.js"></script>
+        <script src="<?=base_url('assets/libs/morris-js/morris.min.js')?>"></script>
+        <script src="<?=base_url('assets/libs/raphael/raphael.min.js')?>"></script>
 
         <!-- Dashboard init js-->
-        <script src="../../assets/js/pages/dashboard.init.js"></script>
+        <script src="<?=base_url('assets/js/pages/dashboard.init.js')?>"></script>
 
         <!-- App js -->
-        <script src="../../assets/js/app.min.js"></script>
+        <script src="<?=base_url('assets/js/app.min.js')?>"></script>
         
     </body>
 
-<!-- Mirrored from coderthemes.com/uplon/layouts/horizontal/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 19 Dec 2023 03:26:55 GMT -->
+<!-- Mirrored from coderthemes.com/uplon/layouts/vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Dec 2023 05:38:47 GMT -->
 </html>
