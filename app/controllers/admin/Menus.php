@@ -1,13 +1,12 @@
 <?php
 
-class Index extends MY_Controller{
+class Menus extends MY_Controller{
 
     public function index(){
         //$this->render(NULL,'json');
-        /*$this->data['info'] = 'Bienvenido(a) '.$this->session->userdata('user_login');
+        $this->data['info'] = 'Bienvenido(a) '.$this->session->userdata('user_login');
         //$this->render('admin/dashboard','admin');
-        $this->render('admin/dashboard');*/
-
+        $this->render('admin/dashboard');
         $guard_name = $this->uri->segment(1);
         $controller = $this->uri->segment(2);
         $action = $this->uri->segment(3);
@@ -18,8 +17,7 @@ class Index extends MY_Controller{
         echo $action.'<br>';
         echo $url.'<br>';
 		echo json_encode($this->session->all_userdata());
+    
     }
 
 }
-
-?>

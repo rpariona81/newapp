@@ -113,6 +113,7 @@
 </head>
 
 <body>
+
     <div class="sidenav mb-5 mt-0">
         <div class="login-main-text">
             <h1 class="text-white"><?= (getenv('APP_NAME') !== null) ? getenv('APP_NAME') : 'Modo prueba' ?><h1>
@@ -125,7 +126,7 @@
         <div class="col-md-8 col-sm-12">
             <div class="login-form">
                 <!--< ?= my_validation_errors(validation_errors()); ?>-->
-                
+
                 <?= form_open('home/auth', array('id' => 'auth', 'name' => 'auth')) ?>
                 <div class="form-group">
                     <!--<label>Usuario</label>-->
@@ -139,18 +140,18 @@
                     <label>Contraseña</label>
                     <!--<input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" required>-->
                     <?= form_input(array('type' => 'password', 'name' => 'password', 'id' => 'password', 'class' => 'form-control', 'placeholder' => 'Contraseña', 'required')) ?>
-                    <?= form_error('password', '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button><strong>','</strong></div>'); ?>
-                    
+                    <?= form_error('password', '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button><strong>', '</strong></div>'); ?>
+
 
                 </div>
-                <p><?= my_error($this->session->flashdata('error')) ?></p> 
+                <p><?= my_error($this->session->flashdata('error')) ?></p>
                 <button type="submit" class="btn btn-black">Login</button>
                 <button type="submit" class="btn btn-warning">Register</button>
                 <?= form_close() ?>
             </div>
         </div>
+        
     </div>
-
     <!-- JQuery Validate js -->
     <script src="<?= base_url('assets/libs/jquery-validation/jquery.validate.min.js') ?>"></script>
 

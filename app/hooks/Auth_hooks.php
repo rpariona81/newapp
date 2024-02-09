@@ -44,7 +44,12 @@ class Auth_hooks
         //exit;
         if (in_array($url, $libres)) {
             //print_r($url);
-            echo $this->ci->output->get_output();
+            /*if ($this->ci->session->userdata('user_guard') != NULL) {
+                redirect(base_url() . $this->ci->session->userdata('user_guard') . '/index');
+            } else {*/
+                echo $this->ci->output->get_output();
+            /*}*/
+            return;
         } else {
             if (is_null($this->ci->session->userdata('user_guard'))) {
                 redirect('/');

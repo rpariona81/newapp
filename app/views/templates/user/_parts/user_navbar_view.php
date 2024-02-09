@@ -71,25 +71,62 @@
             </div>
 
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                </ul>
-                <span class="navbar-text">
-                    Navbar text with an inline element
-                </span>
-            </div>
         </div>
+    </div>
+    <div class="topbar-menu">
+        <div class="container-fluid">
+            <div id="navigation">
+                <!-- Navigation Menu-->
+                <ul class="navigation-menu">
+
+                    <li class="menu">
+                        <a href="index.html">
+                            <i class="mdi mdi-view-dashboard"></i>Dashboard
+                        </a>
+                    </li>
+
+                    <li class="menu">
+                        <a href="#">
+                            <i class="mdi mdi-format-underline"></i>User Interface
+                        </a>
+                    </li>
+
+                    <li class="menu">
+                        <a href="#">
+                            <i class="mdi mdi-black-mesa"></i>Admin UI
+                        </a>
+                    </li>
+
+                    <li class="menu">
+                        <a href="#">
+                            <i class="mdi mdi-package-variant-closed"></i>Components
+                        </a>
+                    </li>
+
+                    <li class="menu">
+                        <a href="#">
+                            <i class="mdi mdi-flip-horizontal"></i>Layouts
+                        </a>
+                    </li>
+
+                    <li class="menu">
+                        <a href="#"> <i class="mdi mdi-google-pages"></i>Pages
+                        </a>
+                    </li>
+
+                    <li class="menu">
+                        <a href="#">
+                            <i class="mdi mdi-content-copy"></i>Extra Pages
+                        </a>
+                    </li>
+
+                </ul>
+                <!-- End navigation menu -->
+
+                <div class="clearfix"></div>
+            </div>
+            <!-- end #navigation -->
+        </div>
+        <!-- end container -->
     </div>
 </header>

@@ -53,6 +53,10 @@ $route['default_controller'] = 'homecontroller';
 $route['404_override'] = 'homecontroller/error404';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['home'] = 'homecontroller/index';
 $route['home/auth'] = 'homecontroller/auth';
 
+$route['home/acceso_denegado'] = 'homecontroller/acceso_denegado';
+$route['home/ingreso'] = 'homecontroller/ingreso';
+$route['home/acerca_de'] = 'homecontroller/acerca_de';
 $route['home/logout'] = 'homecontroller/logout';

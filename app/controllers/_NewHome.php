@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Home extends CI_Controller
+class NewHome extends CI_Controller
 {
 
 	/**
@@ -54,7 +54,7 @@ class Home extends CI_Controller
         
         //header('Content-Type: Application/json');
         //print_r($url);
-		$this->load->view('auth/login');
+		//$this->load->view('auth/login');
 	}
 
 	public function auth()

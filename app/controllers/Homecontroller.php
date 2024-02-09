@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class HomeController extends MY_Controller
+class HomeController extends CI_Controller
 {
 
 	public function __construct()
@@ -11,11 +11,26 @@ class HomeController extends MY_Controller
 		$this->form_validation->set_message('Clave', 'Ingrese contraseña');
 	}
 
-	public function index($req1 = NULL, $req2 = NULL)
+	public function index()
 	{
-		//if($this->session->user_login){
-		//	redirect(site_url($this->session->user_guard).'/index');
-		//}
+		$datos[0]=$this->session->userdata('user_guard');
+		//$this->login();
+		//print_r($datos);
+		if(is_null($this->session->user_guard)){
+			//print_r($datos);
+			$this->login();
+			return;
+		}else{
+			//echo "no hay sesion";
+			redirect(base_url() . $this->session->userdata('user_guard') . '/index');
+		}
+			//redirect(site_url($this->session->user_guard).'/index');
+			//redirect(base_url() . $this->session->userdata('user_guard') . '/index');*/
+			/*$this->login();
+		}else{
+			redirect(base_url() . $this->session->userdata('user_guard') . '/index');
+		}
+		return;*/
 		/*$guard_name = $this->uri->segment(2);
         $controller = $this->uri->segment(3);
         $action = $this->uri->segment(4);
@@ -37,17 +52,17 @@ class HomeController extends MY_Controller
 		//$this->render(NULL,'json');
 
 		//$this->render('test','user');
-		$this->render('auth/login',NULL);
+		
 	}
 
     
 
-	/*public function login(){
+	public function login(){
         $this->load->view('auth/login');
-    }*/
+    }
 
 	public function error404(){
-        $this->render('auth/login');
+        $this->load->view('auth/login');
     }
 
 
