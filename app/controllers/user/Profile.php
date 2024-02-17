@@ -1,6 +1,6 @@
 <?php
 
-class User extends MY_Controller{
+class Profile extends MY_Controller{
 
     public function index(){
         //$this->render(NULL,'json');

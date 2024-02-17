@@ -43,6 +43,9 @@ class User_Eloquent extends BaseModel
 
     protected $appends = ['userflag', 'lock'];
 
+	// Carbon instance fields
+	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
     public function getUserflagAttribute()
     {
         //return date_diff(date_create($this->date_vigency), date_create('now'))->d;

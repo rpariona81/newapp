@@ -49,7 +49,7 @@
                                 <td class="text-center"><?= $item->mobile ?></td>
                                 <td><?= $item->userflag ?></td>
                                 <td class="text-center"><?= $item->email ?></td>
-                                <td><?= $item->updated_at ?></td>
+                                <td><?= (($item->updated_at) ? $item->updated_at->diffForHumans() : NULL) ?></td>
                                 <td>
                                     <?php
                                     if ($item->status) {

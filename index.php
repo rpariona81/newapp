@@ -314,4 +314,7 @@ switch (ENVIRONMENT)
  *
  * And away we go...
  */
+
+setlocale(LC_ALL, 'es_MX', 'es', 'ES', 'es_MX.utf8');
+
 require_once BASEPATH.'core/CodeIgniter.php';

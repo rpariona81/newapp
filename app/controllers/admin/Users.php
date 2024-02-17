@@ -2,28 +2,37 @@
 
 class Users extends MY_Controller{
 
-    /*public function index(){
-        $this->data['saludo'] = 'Bienvenido(a) '.$this->session->userdata('user_login');
-        $this->render(NULL,'json');
-    }*/
+    public function __construct()
+	{
+		parent::__construct();
+		//Do your magic here
+		//$this->load->helper('security');
+		$this->load->model('User_eloquent');
+		$this->load->model('Role_eloquent');
+		$this->load->model('Roleuser_eloquent');
+	}
+
 
     public function index(){
-        /*$this->data['info'] = 'Bienvenido(a) '.$this->session->userdata('user_login');
-        //$this->render('admin/dashboard','admin');
-        $this->render('admin/dashboard');*/
+        $this->data['info'] = 'Bienvenido(a) '.$this->session->userdata('user_login');
+        $this->data['users'] = User_Eloquent::getUsersRoles();
+        $this->render('admin/users/index');
 
-        $guard_name = $this->uri->segment(1);
-        $controller = $this->uri->segment(2);
-        $action = $this->uri->segment(3);
-        $url = $guard_name . "/" . $controller . "/" . $action;
-        header('Content-Type: Application/json');
-        echo $guard_name.'<br>';
-        echo $controller.'<br>';
-        echo $action.'<br>';
-        echo $url.'<br>';
-		echo json_encode($this->session->all_userdata());
     }
 
-}
+	public function show($id)
+	{
+		$this->data['user'] = User_Eloquent::getUser($id);
+		$this->data['roles'] = Role_Eloquent::getRoleOpciones();
+		$this->render('admin/users/edit');
 
-?>
+	}
+
+	public function update()
+	{
+		$request = $this->security->xss_clean($this->input->post());
+		$result = User_Eloquent::updateUser($request);
+		redirect('/admin/users');
+	}
+
+}

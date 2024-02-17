@@ -13,58 +13,31 @@ class HomeController extends CI_Controller
 
 	public function index()
 	{
-		$datos[0]=$this->session->userdata('user_guard');
+		$this->load->view('test');
+		//$datos[0]=$this->session->userdata('user_guard');
 		//$this->login();
 		//print_r($datos);
-		if(is_null($this->session->user_guard)){
-			//print_r($datos);
-			$this->login();
-			return;
-		}else{
-			//echo "no hay sesion";
-			redirect(base_url() . $this->session->userdata('user_guard') . '/index');
-		}
-			//redirect(site_url($this->session->user_guard).'/index');
-			//redirect(base_url() . $this->session->userdata('user_guard') . '/index');*/
-			/*$this->login();
-		}else{
-			redirect(base_url() . $this->session->userdata('user_guard') . '/index');
-		}
-		return;*/
-		/*$guard_name = $this->uri->segment(2);
-        $controller = $this->uri->segment(3);
-        $action = $this->uri->segment(4);
-		if(is_null($guard_name)){
-			$url = $this->uri->segment(1);
-		}elseif (is_null($controller)) {
-			$url = $guard_name;
-		}elseif (is_null($action)) {
-			$url = $guard_name . "/" . $controller;
-		}else{
-			$url = $guard_name . "/" . $controller . "/" . $action;	# code...
-		}*/
-        
-        //header('Content-Type: Application/json');
-        //print_r($url);
-		//$this->session->set_userdata(['Usuario'=>'guess']);
-		//$this->data['query'] = json_encode($this->session->all_userdata());
-		//$this->render(NULL,'admin');
-		//$this->render(NULL,'json');
-
-		//$this->render('test','user');
 		
 	}
 
-    
+	public function login()
+	{
+		if ($this->session->userdata('user_guard')) {
+			//print_r($datos);
+			//echo "si hay sesion";
+			redirect(base_url() . $this->session->userdata('user_guard') . '/index');
+		} else {
+			//echo "no hay sesion";
+			//$this->login();
+			$this->load->view('auth/login');
+		}
+		//$this->load->view('auth/login');
+	}
 
-	public function login(){
-        $this->load->view('auth/login');
-    }
-
-	public function error404(){
-        $this->load->view('auth/login');
-    }
-
+	public function error404()
+	{
+		$this->load->view('auth/login');
+	}
 
 	public function auth()
 	{
@@ -81,7 +54,7 @@ class HomeController extends CI_Controller
 				//en otro caso procesamos los datos
 			} else {
 				//redirect('encuestacsc/index');
-				redirect(site_url($this->session->user_guard).'/index');
+				redirect(site_url($this->session->user_guard) . '/index');
 				//redirect('admin/users');
 			}
 		} else {
@@ -117,17 +90,17 @@ class HomeController extends CI_Controller
 		redirect('/');
 	}
 
-	public function acceso_denegado()
+	/*public function acceso_denegado()
 	{
 		$guard_name = $this->uri->segment(1);
-        $controller = $this->uri->segment(2);
-        $action = $this->uri->segment(3);
-        $url = $guard_name . "/" . $controller . "/" . $action;
-        header('Content-Type: Application/json');
-        echo $guard_name.'<br>';
-        echo $controller.'<br>';
-        echo $action.'<br>';
-        echo $url.'<br>';
+		$controller = $this->uri->segment(2);
+		$action = $this->uri->segment(3);
+		$url = $guard_name . "/" . $controller . "/" . $action;
+		header('Content-Type: Application/json');
+		echo $guard_name . '<br>';
+		echo $controller . '<br>';
+		echo $action . '<br>';
+		echo $url . '<br>';
 		echo json_encode($this->session->all_userdata());
-	}
+	}*/
 }
