@@ -2,7 +2,23 @@
 
 class Menus extends MY_Controller{
 
+	public function __construct()
+	{
+		parent::__construct();
+		//Do your magic here
+		//$this->load->helper('security');
+		$this->load->model('Menu_eloquent');
+	}
+
+
     public function index(){
+        $this->data['info'] = 'Bienvenido(a) '.$this->session->userdata('user_login');
+        $this->data['menus'] = Menu_Eloquent::all();
+        $this->render('admin/menus/index');
+
+    }
+
+    /*public function index(){
         //$this->render(NULL,'json');
         $this->data['info'] = 'Bienvenido(a) '.$this->session->userdata('user_login');
         //$this->render('admin/dashboard','admin');
@@ -18,6 +34,6 @@ class Menus extends MY_Controller{
         echo $url.'<br>';
 		echo json_encode($this->session->all_userdata());
     
-    }
+    }*/
 
 }

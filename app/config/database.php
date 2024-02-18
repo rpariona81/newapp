@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -70,6 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
+
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Container\Container;
@@ -78,7 +79,7 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> '',
+	'dsn'	=> getenv('DB_DSN') ? getenv('DB_DSN') : '',
 	'hostname' => getenv('DB_HOST'),
 	'username' => getenv('DB_USERNAME'),
 	'password' => getenv('DB_PASSWORD'),
@@ -101,24 +102,24 @@ $db['default'] = array(
 
 $capsule = new Capsule;
 $capsule->addConnection([
-    //'driver'    => 'sqlite',
-    //'driver'    => 'sqlsrv',
-    //'driver'    => 'mysql',
-    'driver' => getenv('DB_CONNECTION'),
-    'host' => getenv('DB_HOST'),
-    'database' => getenv('DB_DATABASE'),
-    'username' => getenv('DB_USERNAME'),
-    'password' => getenv('DB_PASSWORD'),
-    'charset' => $db['default']['char_set'],
-    'collation' => $db['default']['dbcollat'],
-    'prefix' => $db['default']['dbprefix'],
-    //https://laracasts.com/discuss/channels/laravel/sql-server-self-signed-certificate-after-valet-restart
-    'trust_server_certificate' => true
+	//'driver'    => 'sqlite',
+	//'driver'    => 'sqlsrv',
+	//'driver'    => 'mysql',
+	'driver' => getenv('DB_CONNECTION'),
+	'host' => getenv('DB_HOST'),
+	'database' => getenv('DB_DATABASE'),
+	'username' => getenv('DB_USERNAME'),
+	'password' => getenv('DB_PASSWORD'),
+	'charset' => $db['default']['char_set'],
+	'collation' => $db['default']['dbcollat'],
+	'prefix' => $db['default']['dbprefix'],
+	//https://laracasts.com/discuss/channels/laravel/sql-server-self-signed-certificate-after-valet-restart
+	'trust_server_certificate' => true
 ]);
 
 //https://notes.enovision.net/codeigniter/eloquent-in-codeigniter/install-eloquent-with-composer
 // Event dispatcher, not required, but very handy
-$capsule->setEventDispatcher(new Dispatcher(new Container())); 
+$capsule->setEventDispatcher(new Dispatcher(new Container()));
 
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
