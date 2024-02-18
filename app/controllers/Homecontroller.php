@@ -7,17 +7,20 @@ class HomeController extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Entidad_eloquent');
 		$this->form_validation->set_message('loginok', 'Usuario o clave incorrectos');
 		$this->form_validation->set_message('Clave', 'Ingrese contraseña');
 	}
 
 	public function index()
 	{
-		$this->load->view('test');
+		//$this->load->view('test');
+		$data['contenido'] = 'welcome';
+		$this->load->view('homeTemplate', $data);
 		//$datos[0]=$this->session->userdata('user_guard');
 		//$this->login();
 		//print_r($datos);
-		
+
 	}
 
 	public function login()
@@ -88,6 +91,37 @@ class HomeController extends CI_Controller
 	{
 		$this->session->sess_destroy();
 		redirect('/');
+	}
+
+	public function registroATR()
+	{
+		$data['contenido'] = 'registra_atr';
+		$this->load->view('homeTemplate', $data);
+	}
+
+	public function loadentidades()
+	{
+
+		//echo "test<br>";
+		$region = $this->input->post('cod_region');
+		$tipo = $this->input->post('cod_tipo_entidad');
+		/*$datos=[$region,$tipo];*/
+
+		/*$region = '0300';
+		$tipo = 3;*/
+		$data['entidad'] = Entidad_eloquent::getEntidades($region, $tipo);
+		//print_r(json_encode($data));
+		/*
+		$data['entidad'] = Entidad_eloquent::getEntidades($region, $tipo);
+		dd($data);
+		exit;*/
+		$output = null;
+		foreach ($data['entidad'] as $row => $value) {
+			//here we build a dropdown item line for each query result  
+			$output .= "<option value='" . $row . "'>" . $value . "</option>";
+		}
+		echo $output;
+		//return $output;
 	}
 
 	/*public function acceso_denegado()

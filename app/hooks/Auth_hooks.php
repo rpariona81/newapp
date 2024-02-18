@@ -38,7 +38,7 @@ class Auth_hooks
             $url = $guard_name . "/" . $controller . "/" . $action;    # code...
         }
 
-        $libres = array('/', '/home', 'home/index', 'login', 'home/login', 'home/acerca_de', 'home/auth', 'home/logout');
+        $libres = array('/', '/home', 'home/index', 'login', 'home/login', 'home/acerca_de', 'home/auth', 'home/logout','registroatr','/registroatr','/home/loadentidades','home/loadentidades');
 
         //var_dump($url);
         //exit;

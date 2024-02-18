@@ -55,9 +55,15 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['home'] = 'homecontroller/index';
 $route['login'] = 'homecontroller/login';
+
+$route['registroatr'] = 'homecontroller/registroATR';
+
 $route['home/auth'] = 'homecontroller/auth';
 
 $route['home/acceso_denegado'] = 'homecontroller/acceso_denegado';
 
 $route['home/acerca_de'] = 'homecontroller/acerca_de';
 $route['home/logout'] = 'homecontroller/logout';
+
+
+$route['home/loadentidades'] = 'homecontroller/loadentidades';
