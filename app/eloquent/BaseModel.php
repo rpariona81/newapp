@@ -8,7 +8,8 @@ use Illuminate\Database\Capsule\Manager as DB;
 
 //https://stackoverflow.com/questions/41331137/how-to-set-language-for-carbon
 setlocale(LC_TIME, 'es_ES');
- Carbon::setLocale('es');
+Carbon::setLocale('es');
+
 class BaseModel extends Model
 {
 	//
