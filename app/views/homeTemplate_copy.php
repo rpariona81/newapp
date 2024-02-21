@@ -24,46 +24,27 @@
 
 <body>
 	<!-- Responsive navbar-->
-	<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">-->
-	<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary mb-5" role="navigation">
-		<div class="container">
-			<a class="navbar-brand" href="/">Asistencia Técnica</a>
-			<button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
-				&#9776;
-			</button>
-			<div class="collapse navbar-collapse" id="exCollapsingNavbar">
-				<ul class="nav navbar-nav">
-					<li class="nav-item"><a class="nav-link" aria-current="page" href="<?= base_url('registroatr') ?>">Registro de asistentes</a></li>
-					<li class="nav-item"><a class="nav-link" href="#!">Portales web</a></li>
-				</ul>
-				<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-					<li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
-					<li class="dropdown order-1">
-						<button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Login <span class="caret"></span></button>
-						<ul class="dropdown-menu dropdown-menu-right mt-1">
-							<li class="px-3 pt-2">
-								<?= form_open('home/auth', array('id' => 'auth', 'name' => 'auth', 'role' => 'form')) ?>
-								<div class="form-group">
-									<input name="username" id="username" placeholder="Usuario" class="form-control form-control-sm" type="text" required="">
-								</div>
-								<div class="form-group">
-									<input id="password" name="password" placeholder="Contraseña" class="form-control form-control-sm" type="password" required="">
-								</div>
-								<div class="form-group">
-									<input type="submit" class="btn btn-info btn-block"></input>
-								</div>
-								<!-- <div class="form-group text-xs-center">
-									<small><a href="#">Forgot password?</a></small>
-								</div> -->
-								<?= form_close() ?>
-							</li>
-						</ul>
-					</li>
+	<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary mb-5">
+		<div class="container px-lg-5">
+			<a class="navbar-brand" href="/">Proceso de optimización y fortalecimiento</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<!--<ul class="navbar-nav ms-auto mb-2 mb-lg-0">-->
+				<ul class="navbar-nav ml-md-auto">
+					<li class="nav-item"><a class="nav-link" aria-current="page" href="<?=base_url('registroatr')?>">Registro de asistentes &nbsp;|</a></li>
+					<li class="nav-item"><a class="nav-link" href="#!">Institutos &nbsp;|</a></li>
+					<li class="nav-item"><a class="nav-link" href="<?= base_url('/login') ?>">Seguimiento de portales web&nbsp;|</a></li>
 				</ul>
 			</div>
 		</div>
+		<div class="login-container">
+    <form action="/action_page.php">
+      <input type="text" placeholder="Username" name="username">
+      <input type="text" placeholder="Password" name="psw">
+      <button type="submit">Login</button>
+    </form>
+  </div>
 	</nav>
-
 	<!-- Header-->
 	<!-- <header class="py-5 mt-5">
 		<div class="container px-lg-5">

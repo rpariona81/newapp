@@ -1,6 +1,7 @@
 <script>
 	function preventFormSubmit() {
-		var forms = document.querySelectorAll('form');
+		//var forms = document.querySelectorAll('form');
+		var forms = document.querySelectorAll('#FRM_DATOS');
 		for (var i = 0; i < forms.length; i++) {
 			forms[i].addEventListener('submit', function(event) {
 				event.preventDefault();
@@ -8,6 +9,9 @@
 		}
 	}
 	window.addEventListener('load', preventFormSubmit);
+	/* $("#FRM_DATOS").submit(function(e) {
+		e.preventDefault();
+	}); */
 </script>
 
 <script>
@@ -107,7 +111,7 @@
 	});
 </script>
 
-<script>
+<!-- <script>
 	function listaInstitutos(data) {
 		console.log("lista" + data.length);
 		/*console.log("lista" + data);
@@ -120,7 +124,7 @@
 		$('#ENTIDAD').append($('<option>').val('GOBNAMINEDU').text('MINEDU'));
 		$('#ENTIDAD').append($('<option>').val('OTROS').text('OTRA INSTITUCIÓN'));
 	}
-</script>
+</script> -->
 
 <script>
 	$(function() {
@@ -376,3 +380,4 @@
 	</div>
 
 </div>
+

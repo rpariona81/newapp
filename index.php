@@ -318,3 +318,5 @@ switch (ENVIRONMENT)
 setlocale(LC_ALL, 'es_MX', 'es', 'ES', 'es_MX.utf8');
 
 require_once BASEPATH.'core/CodeIgniter.php';
+
+//https://stackoverflow.com/questions/25436312/gitignore-not-working
