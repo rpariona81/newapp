@@ -36,13 +36,20 @@
 					<li class="nav-item"><a class="nav-link" aria-current="page" href="<?= base_url('registroatr') ?>">Registro de asistentes</a></li>
 					<li class="nav-item"><a class="nav-link" href="#!">Portales web</a></li>
 				</ul>
-				<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+				<?php
+                if ($this->session->userdata('user_role')) {
+                    
+                } else {
+					$this->load->view('auth/login_view');
+                }
+                ?>
+				<!-- <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
 					<li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
 					<li class="dropdown order-1">
 						<button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Login <span class="caret"></span></button>
 						<ul class="dropdown-menu dropdown-menu-right mt-1">
 							<li class="px-3 pt-2">
-								<?= form_open('home/auth', array('id' => 'auth', 'name' => 'auth', 'role' => 'form')) ?>
+								< ?= form_open('home/auth', array('id' => 'auth', 'name' => 'auth', 'role' => 'form')) ?>
 								<div class="form-group">
 									<input name="username" id="username" placeholder="Usuario" class="form-control form-control-sm" type="text" required="">
 								</div>
@@ -52,14 +59,12 @@
 								<div class="form-group">
 									<input type="submit" class="btn btn-info btn-block"></input>
 								</div>
-								<!-- <div class="form-group text-xs-center">
-									<small><a href="#">Forgot password?</a></small>
-								</div> -->
-								<?= form_close() ?>
+								< ?= form_close() ?>
 							</li>
 						</ul>
 					</li>
-				</ul>
+				</ul> -->
+				
 			</div>
 		</div>
 	</nav>
@@ -93,11 +98,11 @@
 	<script src="<?= base_url('assets/js/vendor.min.js') ?>"></script>
 
 	<!--Morris Chart-->
-	<script src="<?= base_url('assets/libs/morris-js/morris.min.js') ?>"></script>
+	<!-- <script src="<?= base_url('assets/libs/morris-js/morris.min.js') ?>"></script> -->
 	<script src="<?= base_url('assets/libs/raphael/raphael.min.js') ?>"></script>
 
 	<!-- Dashboard init js-->
-	<script src="<?= base_url('assets/js/pages/dashboard.init.js') ?>"></script>
+	<!-- <script src="<?= base_url('assets/js/pages/dashboard.init.js') ?>"></script> -->
 
 	<!-- App js -->
 	<script src="<?= base_url('assets/js/app.min.js') ?>"></script>

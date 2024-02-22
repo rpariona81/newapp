@@ -94,19 +94,6 @@
 				//listaInstitutos(data)
 				console.log(jqXHR);
 			});
-			/*$.ajax({
-				url: "< ? = base_url(); ?>homecontroller/loadEntidades",
-				method: "POST",
-				data: {
-					cod_region: verRegion,
-					cod_tipo_entidad: verTipo
-				},
-				success: function(data) {
-					$("#ENTIDAD").html(data);
-					//listaInstitutos(data)
-					console.log("data" + $output);
-				}
-			});*/
 		});
 	});
 </script>

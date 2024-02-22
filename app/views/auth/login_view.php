@@ -1,95 +1,141 @@
-<!DOCTYPE html>
-<html lang="en">
-    
-<!-- Mirrored from coderthemes.com/uplon/layouts/vertical/pages-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Dec 2023 05:39:15 GMT -->
-<head>
-        <meta charset="utf-8" />
-        <title>Log In | Uplon - Responsive Bootstrap 4 Admin Dashboard</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Responsive bootstrap 4 admin template" name="description" />
-        <meta content="Coderthemes" name="author" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
+<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+	<li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
+	<li class="dropdown order-1">
+		<button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Login <span class="caret"></span></button>
+		<ul class="dropdown-menu dropdown-menu-right mt-1" style="min-width:230px;">
+			<li class="px-3 pt-2">
+				<!--< ?= form_open('home/auth', array('id' => 'auth', 'name' => 'auth', 'role' => 'form')) ?>-->
+				<!--< ?= form_open('', array('id' => 'auth', 'name' => 'auth', 'role' => 'form', 'onsubmit' => 'window.location.reload()')) ?>-->
+				<?= form_open('', array('id' => 'auth', 'name' => 'auth', 'role' => 'form')) ?>
+				<div class="form-group">
+					<input name="username" id="username" placeholder="Usuario" class="form-control form-control-sm" type="text" required="">
+				</div>
+				<div class="form-group">
+					<input id="password" name="password" placeholder="Contraseña" class="form-control form-control-sm" type="password" required="">
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Ingresar" class="btn btn-info btn-block"></input>
+				</div>
+				<div id="error_msg" hidden>
+				</div>
+				<?= form_close() ?>
+			</li>
+		</ul>
+	</li>
+</ul>
+<!-- <script type="text/javascript">
+	$(document).ready(function() {
+		$('#auth').on('submit', e => {
+			e.preventDefault();
+			var data = {
+				'username': $('#username').val(),
+				'password': $('#password').val(),
+			};
+			alert(data['username']);
+			console.log(data);
+			//exit();
+			$.post("< ?php echo base_url('home/auth') ?>", data, 
+				function(data, statusText, jqXHR) {
+					console.log(statusText);
+				});
+			//window.addEventListener('load', preventFormSubmit);
 
-        <!-- App css -->
-        <link href=<?=base_url('assets/css/bootstrap.min.css')?> rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
-        <link href=<?=base_url('assets/css/icons.min.css')?> rel="stylesheet" type="text/css" />
-        <link href=<?=base_url('assets/css/app.min.css')?> rel="stylesheet" type="text/css"  id="app-stylesheet" />
+		});
+	});
+</script> -->
 
-    </head>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#auth').on('submit', e => {
+			e.preventDefault();
+			var error_msg = '<div class="alert alert-danger alert-dismissible fade show px-2 py-1" role="alert" style="font-size: 0.8em; padding: 0px 10px; margin-bottom: 1px; height: 30px; line-height:30px;">' +
+				'<strong>Error de usuario y/o contraseña</strong>' +
+				'<button type="button" class="close px-2 py-1" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+			var data_form = {
+				'username': $('#username').val(),
+				'password': $('#password').val(),
+			};
+			//alert(data_form['username']);
+			//console.log(data_form);
+			$.ajax({
+				url: "<?= base_url('home/auth') ?>",
+				type: "POST",
+				data: data_form,
+				dataType: 'json',
+				async: true,
+				success: function(userData) {
+					//console.log("Received user data:", userData);
+					setTimeout(function() {
+						console.log("Redirecting to Example Webpage...");
+						window.location.href = "<?= base_url('home/') ?>"
+					}, 100); // redirecting after 7 seconds
+				},
+				error: function(error) {
+					$('#error_msg').html(error_msg);
+					$('#error_msg').attr('hidden', false);
+					console.error("Error:", error);
+				}
+			});
+		});
+	});
+</script>
+<!-- <script type="text/javascript">
+	function login(){
+		$(document).ready(function() {
+		/*$('#auth').on('submit', e => {
+			e.preventDefault();*/
+			var data = {
+				'username': $('#username').val(),
+				'password': $('#password').val(),
+			};
+			alert(data['username']);
+			console.log(data);
+			//exit();
+			$.post("< ?php echo base_url('home/auth') ?>", data,
+				function(data, statusText, jqXHR) {
+					console.log(jqXHR);
+				});
+				window.addEventListener('load', preventFormSubmit);
 
-    <body class="authentication-bg">
-
-        <div class="account-pages pt-5 my-5">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-8 col-lg-6 col-xl-5">
-                        <div class="account-card-box">
-                            <div class="card mb-0">
-                                <div class="card-body p-4">
-                                    
-                                    <div class="text-center">
-                                        <div class="my-3">
-                                            <a href="index.html">
-                                                <span><img src="<?=base_url('assets/images/logo.png')?>" alt="" height="56"></span>
-                                            </a>
-                                        </div>
-                                        <h5 class="text-muted text-uppercase py-3 font-16">Sign In</h5>
-                                    </div>
-    
-                                    <form action="#" class="mt-2">
-    
-                                        <div class="form-group mb-3">
-                                            <input class="form-control" type="text" required="" placeholder="Enter your username">
-                                        </div>
-    
-                                        <div class="form-group mb-3">
-                                            <input class="form-control" type="password" required="" id="password" placeholder="Enter your password">
-                                        </div>
-    
-                                        <div class="form-group mb-3">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="checkbox-signin" checked>
-                                                <label class="custom-control-label" for="checkbox-signin">Remember me</label>
-                                            </div>
-                                        </div>
-    
-                                        <div class="form-group text-center">
-                                            <button class="btn btn-success btn-block waves-effect waves-light" type="submit"> Log In </button>
-                                        </div>
-
-                                        <a href="pages-recoverpw.html" class="text-muted"><i class="mdi mdi-lock mr-1"></i> Forgot your password?</a>
-    
-                                    </form>
-    
-                                </div> <!-- end card-body -->
-                            </div>
-                            <!-- end card -->
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-12 text-center">
-                                <p class="text-white-50">Don't have an account? <a href="pages-register.html" class="text-white ml-1"><b>Sign Up</b></a></p>
-                            </div> <!-- end col -->
-                        </div>
-                        <!-- end row -->
-
-                    </div> <!-- end col -->
-                </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
-        </div>
-        <!-- end page -->
-
-        <!-- Vendor js -->
-        <script src=<?=base_url('assets/js/vendor.min.js')?>></script>
-
-        <!-- App js -->
-        <script src=<?=base_url('assets/js/app.min.js')?>></script>
-        
-    </body>
-
-<!-- Mirrored from coderthemes.com/uplon/layouts/vertical/pages-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Dec 2023 05:39:15 GMT -->
-</html>
+		//});
+	});
+	}
+	
+</script> -->
+<!-- <script>
+	$('#auth').on('submit', e => {
+		e.preventDefault();
+		var data_form = {
+			'username': $('#username').val(),
+			'password': $('#password').val(),
+		};
+		alert(data_form);
+		console.log(data_form);
+		//return false;
+		$.ajax({
+			type: 'POST',
+			url: "< ?= base_url('home/auth') ?>",
+			data: data_form,
+			dataType: 'json',
+			async: true
+		}).done(function ajaxDone(res) {
+			console.log('res'+jQuery.parseJSON(res.isLogged));
+			//location.href('/')
+		}).fail(function ajaxError(e) {
+			console.log('e'+e);
+		}).always(function ajaxAlways() {
+			console.log('Final');
+		})
+		//return false;
+		//window.addEventListener('load', preventFormSubmit);
+		/*success: function(response) {
+        if (response.status) {
+          e.target.submit(); // rule met, allow form submission
+        } else {
+          console.log('Denied...');
+          // show message to user here...
+        }
+      }
+    });*/
+	});
+</script> -->

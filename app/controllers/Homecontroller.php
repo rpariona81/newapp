@@ -101,27 +101,28 @@ class HomeController extends CI_Controller
 
 	public function loadentidades()
 	{
+		if ($this->input->is_ajax_request()) {
+			//echo "test<br>";
+			$region = $this->input->post('cod_region');
+			$tipo = $this->input->post('cod_tipo_entidad');
+			/*$datos=[$region,$tipo];*/
 
-		//echo "test<br>";
-		$region = $this->input->post('cod_region');
-		$tipo = $this->input->post('cod_tipo_entidad');
-		/*$datos=[$region,$tipo];*/
-
-		/*$region = '0300';
-		$tipo = 3;*/
-		$data['entidad'] = Entidad_eloquent::getEntidades($region, $tipo);
-		//print_r(json_encode($data));
-		/*
-		$data['entidad'] = Entidad_eloquent::getEntidades($region, $tipo);
-		dd($data);
-		exit;*/
-		$output = null;
-		foreach ($data['entidad'] as $row => $value) {
-			//here we build a dropdown item line for each query result  
-			$output .= "<option value='" . $row . "'>" . $value . "</option>";
+			/*$region = '0300';
+	$tipo = 3;*/
+			$data['entidad'] = Entidad_eloquent::getEntidades($region, $tipo);
+			//print_r(json_encode($data));
+			/*
+	$data['entidad'] = Entidad_eloquent::getEntidades($region, $tipo);
+	dd($data);
+	exit;*/
+			$output = null;
+			foreach ($data['entidad'] as $row => $value) {
+				//here we build a dropdown item line for each query result  
+				$output .= "<option value='" . $row . "'>" . $value . "</option>";
+			}
+			echo $output;
+			//return $output;
 		}
-		echo $output;
-		//return $output;
 	}
 
 	/*public function acceso_denegado()
