@@ -116,15 +116,24 @@ class User_Eloquent extends BaseModel
 
             if ($role_user !== null) {
                 $role_user->update(['role_id' => $request['role_id']]);
+				return $role_user;
             } else {
                 $user = RoleUser_Eloquent::create([
                     'user_id' => $request['id'],
                     'role_id' => $request['role_id']
                 ]);
+				return $user;
             }
-        }
+        }else{
+			return FALSE;
+		}
 
-        return;
+		// if($role_user->save()){
+		// 	return TRUE;
+		// }else{
+		// 	return FALSE;
+		// }
+        
     }
 
     public static function getUserBy($column, $value)

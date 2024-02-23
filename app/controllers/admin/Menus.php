@@ -13,7 +13,7 @@ class Menus extends MY_Controller{
 
     public function index(){
         $this->data['info'] = 'Bienvenido(a) '.$this->session->userdata('user_login');
-        $this->data['menus'] = Menu_Eloquent::all();
+        $this->data['records'] = Menu_Eloquent::all();
         $this->render('admin/menus/index');
 
     }

@@ -22,7 +22,7 @@ class RoleUser_Eloquent extends BaseModel{
         'role_id', 
     ];
 
-    public $timestamps = false;
+    //public $timestamps = false;
 
     
 

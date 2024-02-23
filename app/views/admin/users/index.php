@@ -41,7 +41,7 @@
 						</thead>
 
 						<tbody>
-							<?php foreach ($users as $item) : ?>
+							<?php foreach ($records as $item) : ?>
 								<tr class="align-middle">
 									<td><?= str_pad($item->id, 5, '0', STR_PAD_LEFT); ?></td>
 									<td><?= $item->username ?></td>
