@@ -1,6 +1,6 @@
 <?php
 
-class Marco_Institutos extends MY_Controller{
+class Marco_institutos extends MY_Controller{
 
     public function __construct()
 	{
@@ -9,15 +9,16 @@ class Marco_Institutos extends MY_Controller{
 		//$this->load->helper('security');
 		$this->load->model('User_eloquent');
 		$this->load->model('Role_eloquent');
-		$this->load->model('Roleuser_eloquent');
+		$this->load->model('Instituto_eloquent');
+		$this->load->model('Marcoinstituto_eloquent');
+				
 	}
 
 
     public function index(){
         $this->data['info'] = 'Bienvenido(a) '.$this->session->userdata('user_login');
-        $this->data['users'] = User_Eloquent::getUsersRoles();
-        $this->render('admin/users/index');
-
+        $this->data['records'] = Instituto_Eloquent::getMarcoInstitutos();
+        $this->render('admin/marco_institutos/index');
     }
 
 }

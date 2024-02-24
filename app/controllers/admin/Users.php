@@ -33,12 +33,13 @@ class Users extends MY_Controller{
 		$request = $this->security->xss_clean($this->input->post());
 		$result = User_Eloquent::updateUser($request);
 		//redirect('/admin/users');
-		if ($result->save()){
+		if ($result){
 			$this->session->set_flashdata('message', 'Actualización exitosa.');
 			//return redirect()->back()->with('message', 'User status updated successfully!');
 			return redirect_back();
 		}else{
 			$this->session->set_flashdata('error', 'Error en actualización.');
+			return redirect_back();
 		}
 		//return redirect()->back()->with('error', 'User status update fail!');
 	}

@@ -1,6 +1,6 @@
 <?php
 
-class PortalesWeb extends MY_Controller{
+class Portalesweb extends MY_Controller{
 
     public function __construct()
 	{
@@ -15,7 +15,7 @@ class PortalesWeb extends MY_Controller{
 
     public function index(){
         $this->data['info'] = 'Bienvenido(a) '.$this->session->userdata('user_login');
-        $this->data['users'] = User_Eloquent::getUsersRoles();
+        $this->data['records'] = User_Eloquent::getUsersRoles();
         $this->render('admin/users/index');
 
     }
