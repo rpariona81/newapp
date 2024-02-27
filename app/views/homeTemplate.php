@@ -25,10 +25,10 @@
 <body>
 	<!-- Responsive navbar-->
 	<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">-->
-	<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary mb-5" role="navigation">
+	<nav class="mb-5 navbar navbar-expand-lg fixed-top navbar-dark bg-primary" role="navigation">
 		<div class="container">
 			<a class="navbar-brand" href="/">Asistencia Técnica</a>
-			<button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+			<button class="border-0 navbar-toggler" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
 				&#9776;
 			</button>
 			<div class="collapse navbar-collapse" id="exCollapsingNavbar">
@@ -38,16 +38,22 @@
 				</ul>
 				<?php
                 if ($this->session->userdata('user_role')) {
-                    
+					/*echo '<ul class="list-unstyled float-right mb-0">';
+					echo '<li class="dropdown notification-list">';
+					echo '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">';
+                    echo '<span class="d-none d-sm-inline-block ml-1 font-weight-medium">'.$this->session->userdata('user_nickname').' ('.$this->session->userdata('user_role') . ')</span>';
+					echo '</a>';
+					echo '</li>';
+					echo '</>';*/
                 } else {
 					$this->load->view('auth/login_view');
                 }
                 ?>
-				<!-- <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-					<li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
-					<li class="dropdown order-1">
+				<!-- <ul class="flex-row ml-auto nav navbar-nav justify-content-between">
+					<li class="order-2 nav-item order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
+					<li class="order-1 dropdown">
 						<button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Login <span class="caret"></span></button>
-						<ul class="dropdown-menu dropdown-menu-right mt-1">
+						<ul class="mt-1 dropdown-menu dropdown-menu-right">
 							<li class="px-3 pt-2">
 								< ?= form_open('home/auth', array('id' => 'auth', 'name' => 'auth', 'role' => 'form')) ?>
 								<div class="form-group">
@@ -72,7 +78,7 @@
 	<!-- Header-->
 	<!-- <header class="py-5 mt-5">
 		<div class="container px-lg-5">
-			<div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+			<div class="p-4 text-center p-lg-5 bg-light rounded-3">
 				<div class="m-4 m-lg-5">
 					<h1 class="display-5 fw-bold">A warm welcome!</h1>
 					<p class="fs-4">Bootstrap utility classes are used to create this jumbotron since the old component has been removed from the framework. Why create custom CSS when you can use utilities?</p>

@@ -5,7 +5,7 @@
 		<div class="col-12">
 			<div class="page-title-box">
 				<div class="page-title-right">
-					<ol class="breadcrumb m-0">
+					<ol class="m-0 breadcrumb">
 						<li class="breadcrumb-item"><a href="javascript: void(0);">Uplon</a></li>
 						<li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
 						<li class="breadcrumb-item active">General Elements</li>
@@ -21,7 +21,7 @@
 		<div class="col-12">
 			<div class="card-box">
 
-				<h4 class="header-title mb-4">Input Types</h4>
+				<h4 class="mb-4 header-title">Input Types</h4>
 
 				<div class="row">
 					<div class="col-xl-6">
@@ -61,7 +61,7 @@
 								<p class='alert alert-success'> <?= $this->session->flashdata('message') ?> </p>
 							<?php endif ?>
 						</div>
-						<div class="col-12 text-center mx-auto">
+						<div class="mx-auto text-center col-12">
 							<button type="submit" class="btn btn-primary">Actualizar</button>
 							<a type="button" class="btn btn-warning" href="<?=base_url('admin/users')?>"><i class="fa fa-undo" aria-hidden="true"></i>
 								Volver</a>

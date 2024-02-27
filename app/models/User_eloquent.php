@@ -45,7 +45,7 @@ class User_Eloquent extends BaseModel
 	protected $appends = ['userflag', 'lock'];
 
 	// Carbon instance fields
-	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+	protected $dates = ['created_at', 'updated_at', 'deleted_at', 'updated_at_role'];
 
 	public function getUserflagAttribute()
 	{
@@ -77,7 +77,9 @@ class User_Eloquent extends BaseModel
 	{
 		return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
 			->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
-			->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename']);
+			->orderBy('t_role_user.updated_at', 'desc')
+			->orderBy('t_users.updated_at', 'desc')
+			->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);
 	}
 
 	public static function getUser($id)

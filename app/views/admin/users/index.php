@@ -6,7 +6,7 @@
 		<div class="col-12">
 			<div class="page-title-box">
 				<div class="page-title-right">
-					<ol class="breadcrumb m-0">
+					<ol class="m-0 breadcrumb">
 						<li class="breadcrumb-item"><a href="javascript: void(0);">Uplon</a></li>
 						<li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
 						<li class="breadcrumb-item active">Data Tables</li>
@@ -25,7 +25,7 @@
 				<p class="sub-header">
 					The Buttons extension for DataTables provides a common set of options, API methods and styling to display buttons on a page that will interact with a DataTable. The core library provides the based framework upon which plug-ins can built.
 				</p>
-				<div class="table-responsive p-0">
+				<div class="p-0 table-responsive">
 					<table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 						<thead>
 							<tr>
@@ -49,13 +49,13 @@
 									<td class="text-center"><?= $item->mobile ?></td>
 									<td><?= $item->userflag ?></td>
 									<td class="text-center"><?= $item->email ?></td>
-									<td><?= (($item->updated_at) ? $item->updated_at->diffForHumans() : NULL) ?></td>
+									<td><?= (($item->updated_at) ? $item->updated_at->diffForHumans() : (($item->updated_at_role) ? $item->updated_at_role->diffForHumans() : NULL)) ?></td>
 									<td>
 										<?php
 										if ($item->status) {
-											echo '<span class="badge bg-info border text-white">' . $item->flag . '</span>';
+											echo '<span class="text-white border badge bg-info">' . $item->flag . '</span>';
 										} else {
-											echo '<span class="badge bg-danger border text-white">' . $item->flag . '</span>';
+											echo '<span class="text-white border badge bg-danger">' . $item->flag . '</span>';
 										}
 										?>
 										<div class="btn-group" role="group" aria-label="Basic example">
@@ -74,7 +74,7 @@
 													echo '<button type="submit" name="submit" class="btn btn-outline-danger btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Desactivar"><i class="fa fa-eye-slash"></i></button>';
 													echo form_close();
 												} else {
-													//echo '<a class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Activar" href="<?= $item->id>"><i class="fa fa fa-eye"></i></a>';
+													//echo '<a class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Activar" href="<?= $item->id>"><i class="fa fa-eye"></i></a>';
 													echo form_open('admincontroller/activaDocente');
 													echo '<input type="hidden" id="id" name="id" value="' . $item->id . '">';
 													echo '<button type="submit" name="submit" class="btn btn-outline-primary btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Activar"><i class="fa fa-eye"></i></button>';
@@ -104,19 +104,28 @@
 <script>
 	$(document).ready(function() {
 		//$.noConflict();
-		$.fn.dataTable.Buttons.defaults.dom.button.className = 'btn btn-outline-primary';
+		
+		/**https://datatables.net/forums/discussion/43723/how-can-i-remove-default-button-class-of-datatable-btn-default */
+		$.fn.dataTable.Buttons.defaults.dom.button.className = 'btn btn-md btn-dark border-0';
+		
+		/**https://datatables.net/forums/discussion/61263/how-to-add-class-to-paginate-button*/
+		/*$.fn.dataTable.ext.classes.sLengthSelect = 'btn btn-flat btn-sm btn-dark border-0';
+		$.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, {
+			className: 'btn btn-md btn-dark border-0'
+		})*/
+
 		$('#datatable-buttons').DataTable({
-			pageLength: 7,
+			pageLength: 10,
 			order: [],
 			//responsive: true,
 			//scrollX: true,
 			language: {
-				"url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-				"paginate": {
-					"previous": "<<",
-					"next": ">>",
-					"first": "<",
-					"last": ">"
+				url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
+				paginate: {
+					previous: '<i class="fa fa-chevron-right"></i>', // "<<",
+					next: '<i class="fa fa-chevron-right"></i>', // ">>",
+					first: "<",
+					last: ">"
 				},
 			},
 			dom: 'Bfrtip',

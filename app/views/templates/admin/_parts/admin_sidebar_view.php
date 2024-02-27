@@ -191,7 +191,7 @@
                     <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <img src="<?=base_url('assets/images/users/avatar-1.jpg')?>" alt="user-image" class="rounded-circle">
-                            <span class="d-none d-sm-inline-block ml-1 font-weight-medium">Alex M.</span>
+                            <span class="d-none d-sm-inline-block ml-1 font-weight-medium"><?=(($this->session->userdata('user_nickname')) ? $this->session->userdata('user_nickname').' ('.$this->session->userdata('user_role').')' : 'User') ?></span>
                             <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
