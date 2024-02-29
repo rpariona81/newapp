@@ -31,19 +31,19 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<!--<ul class="navbar-nav ms-auto mb-2 mb-lg-0">-->
 				<ul class="navbar-nav ml-md-auto">
-					<li class="nav-item"><a class="nav-link" aria-current="page" href="<?=base_url('registroatr')?>">Registro de asistentes &nbsp;|</a></li>
+					<li class="nav-item"><a class="nav-link" aria-current="page" href="<?= base_url('registroatr') ?>">Registro de asistentes &nbsp;|</a></li>
 					<li class="nav-item"><a class="nav-link" href="#!">Institutos &nbsp;|</a></li>
 					<li class="nav-item"><a class="nav-link" href="<?= base_url('/login') ?>">Seguimiento de portales web&nbsp;|</a></li>
 				</ul>
 			</div>
 		</div>
 		<div class="login-container">
-    <form action="/action_page.php">
-      <input type="text" placeholder="Username" name="username">
-      <input type="text" placeholder="Password" name="psw">
-      <button type="submit">Login</button>
-    </form>
-  </div>
+			<form action="/action_page.php">
+				<input type="text" placeholder="Username" name="username">
+				<input type="text" placeholder="Password" name="psw">
+				<button type="submit">Login</button>
+			</form>
+		</div>
 	</nav>
 	<!-- Header-->
 	<!-- <header class="py-5 mt-5">

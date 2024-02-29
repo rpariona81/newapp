@@ -1,8 +1,9 @@
 <?php
 
-class Users extends MY_Controller{
+class Users extends MY_Controller
+{
 
-    public function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 		//Do your magic here
@@ -13,19 +14,37 @@ class Users extends MY_Controller{
 	}
 
 
-    public function index(){
-        $this->data['info'] = 'Bienvenido(a) '.$this->session->userdata('user_login');
-        $this->data['records'] = User_Eloquent::getUsersRoles();
-        $this->render('admin/users/index');
+	public function index()
+	{
+		$role_select = $this->input->post('role_select', true);
+		$this->data['role_Value'] = isset($role_select) ? $role_select : null;
 
-    }
+		$status_select = $this->input->post('status_select', true);
+		$this->data['status_Value'] = isset($status_select) ? $status_select : null;
+
+		$this->data['records'] = User_Eloquent::getUsersRoles($this->session->userdata('user_id'), $role_select, $status_select);
+
+		//$this->data['info'] = 'Bienvenido(a) ' . $this->session->userdata('user_login');
+		//$this->data['records'] = User_Eloquent::getUsersRoles($this->session->userdata('user_id'));
+		$this->data['roles'] = Role_Eloquent::getRoleOpciones();
+		$this->data['condiciones'] = User_Eloquent::getListStatusUsers();
+		$this->render('admin/users/index');
+	}
 
 	public function show($id)
 	{
-		$this->data['user'] = User_Eloquent::getUser($id);
-		$this->data['roles'] = Role_Eloquent::getRoleOpciones();
-		$this->render('admin/users/edit');
-
+		$model = User_Eloquent::getUser($id);
+		if ($model) {
+			try {
+				$this->data['user'] = User_Eloquent::getUser($id);
+				$this->data['roles'] = Role_Eloquent::getRoleOpciones();
+				$this->render('admin/users/edit');
+			} catch (\Throwable $th) {
+				redirect('admin/users/index');
+			}
+		} else {
+			redirect('admin/users/index');
+		}
 	}
 
 	public function update()
@@ -33,15 +52,45 @@ class Users extends MY_Controller{
 		$request = $this->security->xss_clean($this->input->post());
 		$result = User_Eloquent::updateUser($request);
 		//redirect('/admin/users');
-		if ($result){
+		if ($result) {
 			$this->session->set_flashdata('message', 'Actualización exitosa.');
 			//return redirect()->back()->with('message', 'User status updated successfully!');
 			return redirect_back();
-		}else{
+		} else {
 			$this->session->set_flashdata('error', 'Error en actualización.');
 			return redirect_back();
 		}
 		//return redirect()->back()->with('error', 'User status update fail!');
 	}
 
+	public function activeUser()
+	{
+		$request = $this->security->xss_clean($this->input->post());
+		$result = User_Eloquent::enableUser($request);
+		//redirect('/admin/users');
+		if ($result) {
+			$this->session->set_flashdata('success', 'Usuario activado.');
+			//return redirect()->back()->with('message', 'User status updated successfully!');
+			return redirect_back();
+		} else {
+			$this->session->set_flashdata('error', 'Error en activación.');
+			return redirect_back();
+		}
+	}
+
+	public function inactiveUser()
+	{
+		$request = $this->security->xss_clean($this->input->post());
+		$result = User_Eloquent::disableUser($request);
+		//redirect('/admin/users');
+		if ($result) {
+			$this->session->set_flashdata('success', 'Usuario desactivado.');
+			//return redirect()->back()->with('message', 'User status updated successfully!');
+			return redirect_back();
+		} else {
+			$this->session->set_flashdata('error', 'Error en desactivación.');
+			return redirect_back();
+		}
+		//return redirect()->back()->with('error', 'User status update fail!');
+	}
 }

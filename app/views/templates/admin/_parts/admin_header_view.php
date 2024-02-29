@@ -13,6 +13,8 @@
 	<!-- App favicon -->
 	<link rel="shortcut icon" href="<?= base_url('assets/images/favicon.ico') ?>">
 
+	<!-- Notification css (Toastr) -->
+	<link href="<?= base_url('assets/libs/toastr/toastr.min.css')?>" rel="stylesheet" type="text/css" />
 	<!-- App css -->
 	<link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
 	<link href="<?= base_url('assets/css/icons.min.css') ?>" rel="stylesheet" type="text/css" />

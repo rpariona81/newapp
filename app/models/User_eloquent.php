@@ -3,6 +3,7 @@
 use Eloquent\BaseModel;
 use \Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Carbon;
 
 //https://notes.enovision.net/codeigniter/eloquent-in-codeigniter/how-to-use-the-models
 
@@ -59,6 +60,16 @@ class User_Eloquent extends BaseModel
 		}
 	}
 
+	public static function getListStatusUsers()
+	{
+		$opcionesStatus = array();
+		$opcionesStatus[NULL] = 'Seleccione condición';
+		$opcionesStatus[1] = 'Activo';
+		$opcionesStatus[0] = 'Suspendido';
+		
+		return $opcionesStatus;
+	}
+
 	public function getLockAttribute()
 	{
 		//return date_diff(date_create($this->date_vigency), date_create('now'))->d;
@@ -73,13 +84,62 @@ class User_Eloquent extends BaseModel
 
 	//protected $with = 'getRoles';
 
-	public static function getUsersRoles()
+	public static function getUsersRoles($except_id = NULL, $role_select = NULL, $status_select = NULL)
 	{
-		return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
+		if ($role_select != NULL && $status_select != NULL) {
+			try {
+				return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
+					->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
+					->where('t_users.id', '!=', $except_id)
+					->where('t_role_user.role_id', '=', $role_select)
+					->where('t_users.status', '=', $status_select)
+					->orderBy('t_users.updated_at', 'desc')
+					//->orderBy('t_role_user.updated_at', 'desc')			
+					->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);
+			} catch (\Throwable $th) {
+				return FALSE;
+			}
+		} else if ($role_select != NULL && $status_select == NULL) {
+			try {
+				return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
+					->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
+					->where('t_users.id', '!=', $except_id)
+					->where('t_role_user.role_id', '=', $role_select)
+					->orderBy('t_users.updated_at', 'desc')
+					//->orderBy('t_role_user.updated_at', 'desc')			
+					->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);
+			} catch (\Throwable $th) {
+				return FALSE;
+			}
+		} else if ($role_select == NULL && $status_select != NULL) {
+			try {
+				return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
+					->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
+					->where('t_users.id', '!=', $except_id)
+					->where('t_users.status', '=', $status_select)
+					->orderBy('t_users.updated_at', 'desc')
+					//->orderBy('t_role_user.updated_at', 'desc')			
+					->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);
+			} catch (\Throwable $th) {
+				return FALSE;
+			}
+		} else {
+			try {
+				return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
+					->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
+					->where('t_users.id', '!=', $except_id)
+					->orderBy('t_users.updated_at', 'desc')
+					//->orderBy('t_role_user.updated_at', 'desc')			
+					->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);
+			} catch (\Throwable $th) {
+				return FALSE;
+			}
+		}
+		/*return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
 			->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
-			->orderBy('t_role_user.updated_at', 'desc')
 			->orderBy('t_users.updated_at', 'desc')
-			->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);
+			//->orderBy('t_role_user.updated_at', 'desc')			
+			->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);*/
 	}
 
 	public static function getUser($id)
@@ -87,6 +147,7 @@ class User_Eloquent extends BaseModel
 		return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
 			->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
 			->where('t_users.id', '=', $id)
+			->where('t_users.user_type', '>', 1)
 			->select('t_users.*', 't_role_user.role_id', 't_roles.rolename')
 			->first();
 	}
@@ -119,22 +180,26 @@ class User_Eloquent extends BaseModel
 
 			$role = Role_Eloquent::findOrFail($request['role_id']);	//code...
 
-			if($model){
+			if ($model) {
 				$model->fill($data);
-				$model->save($data);	
+				$model->save($data);
 			}
-			
+
 			if ($role) {
 				$role_user = RoleUser_Eloquent::where('user_id',  $request['id'])->first();
 
 				if ($role_user !== null) {
 					$role_user->update(['role_id' => $request['role_id']]);
+					$model->updated_at = Carbon::now();
+					$model->save();
 					return $role_user;
 				} else {
 					$user = RoleUser_Eloquent::create([
 						'user_id' => $request['id'],
 						'role_id' => $request['role_id']
 					]);
+					$model->updated_at = Carbon::now();
+					$model->save();
 					return $user;
 				}
 			} else {
@@ -238,6 +303,35 @@ class User_Eloquent extends BaseModel
 				return $arrayLogin;
 			}
 			return;
+		}
+	}
+
+
+	public static function enableUser($request)
+	{
+		try {
+			$model = User_Eloquent::findOrFail($request['id']);
+			$model->status = 1;
+			$model->updated_at = Carbon::now();
+			$model->save();
+			return $model;
+		} catch (ModelNotFoundException $e) {
+			//throw $th;
+			return FALSE;
+		}
+	}
+
+	public static function disableUser($request)
+	{
+		try {
+			$model = User_Eloquent::findOrFail($request['id']);
+			$model->status = 0;
+			$model->updated_at = Carbon::now();
+			$model->save();
+			return $model;
+		} catch (ModelNotFoundException $e) {
+			//throw $th;
+			return FALSE;
 		}
 	}
 }

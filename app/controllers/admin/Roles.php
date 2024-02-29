@@ -15,7 +15,7 @@ class Roles extends MY_Controller{
 
     public function index(){
         $this->data['info'] = 'Bienvenido(a) '.$this->session->userdata('user_login');
-        $this->data['users'] = Role_eloquent::all();
+        $this->data['records'] = Role_eloquent::all();
         $this->render('admin/users/index');
 
     }

@@ -24,7 +24,8 @@ class MY_Controller extends CI_Controller
       $this->load->view($the_view, $this->data);
     } else {
       $this->data['content'] = (is_null($the_view)) ? '' : $this->load->view($the_view, $this->data, TRUE);
-      $this->load->view('templates/' . $template . '/index', $this->data);
+      //$this->load->view('templates/' . $template . '/index', $this->data);
+			$this->load->view('templates/main', $this->data);
     }
   }
 }

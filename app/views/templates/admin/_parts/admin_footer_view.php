@@ -31,6 +31,11 @@
 <!-- Dashboard init js-->
 <script src="<?= base_url('assets/js/pages/dashboard.init.js') ?>"></script>
 
+<!-- Toastr js -->
+<script src="<?= base_url('assets/libs/toastr/toastr.min.js')?>"></script>
+
+<script src="<?= base_url('assets/js/pages/toastr.init.js')?>"></script>
+
 <!-- Datatable plugin js -->
 <script src="<?= base_url('assets/libs/datatables/jquery.dataTables.min.js') ?>"></script>
 <script src="<?= base_url('assets/libs/datatables/dataTables.bootstrap4.min.js') ?>"></script>
@@ -50,6 +55,7 @@
 
 <script src="<?= base_url('assets/libs/datatables/dataTables.keyTable.min.js') ?>"></script>
 <script src="<?= base_url('assets/libs/datatables/dataTables.select.min.js') ?>"></script>
+
 <!-- Datatables init -->
 <!-- <script src="< ?= base_url('assets/js/pages/datatables.init.js') ?>"></script> -->
 
