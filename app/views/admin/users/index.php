@@ -52,7 +52,7 @@
 							<a class="btn btn-danger" href="<?= base_url('/admin/users') ?>">Limpiar filtro</a>
 
 							&nbsp;
-							<a class="btn waves-effect waves-light btn-success pull-right hidden-sm-down" data-toggle="tooltip" data-placement="bottom" title="Crear nuevo registro" href="<?= base_url('/admin/newconvocatoria') ?>">Nuevo usuario&nbsp;&nbsp;<i class="fa fa-plus"></i></a>
+							<a class="btn waves-effect waves-light btn-success pull-right hidden-sm-down" data-toggle="tooltip" data-placement="bottom" title="Crear nuevo registro" href="<?= base_url('/admin/users/newuser') ?>">Nuevo usuario&nbsp;&nbsp;<i class="fa fa-plus"></i></a>
 
 						</div>
 					</div>
@@ -150,7 +150,7 @@
 		})*/
 
 		$('#datatable-buttons').DataTable({
-			pageLength: 10,
+			pageLength: 5,
 			order: [],
 			//responsive: true,
 			//scrollX: true,

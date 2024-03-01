@@ -92,8 +92,8 @@
                     </li>
 
                     <li class="menu">
-                        <a href="#">
-                            <i class="mdi mdi-black-mesa"></i>Admin UI
+                        <a href="<?=site_url('admin/institutos')?>">
+                            <i class="mdi mdi-black-mesa"></i>Institutos
                         </a>
                     </li>
 

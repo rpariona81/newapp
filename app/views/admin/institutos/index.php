@@ -2,7 +2,7 @@
 <div class="container-fluid">
 
 	<!-- start page title -->
-	<div class="row">
+	<!-- <div class="row">
 		<div class="col-12">
 			<div class="page-title-box">
 				<div class="page-title-right">
@@ -15,16 +15,19 @@
 				<h4 class="page-title">Data Tables &nbsp; <?= $this->session->userdata('user_nickname') . ' ' . $this->session->userdata('user_role'); ?></h4>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<!-- end page title -->
 
 	<div class="row">
 		<div class="col-12">
+		<div class="card-header bg-light border mt-3">
+				<h4 class="page-title">Institutos Tecnológicos Públicos</h4>
+			</div>
 			<div class="card-box">
-				<h4 class="header-title">Buttons example</h4>
-				<p class="sub-header">
+				<!-- <h4 class="header-title">Buttons example</h4> -->
+				<!-- <p class="sub-header">
 					The Buttons extension for DataTables provides a common set of options, API methods and styling to display buttons on a page that will interact with a DataTable. The core library provides the based framework upon which plug-ins can built.
-				</p>
+				</p> -->
 				<div class="table-responsive p-0">
 					<table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 						<thead>
@@ -36,6 +39,7 @@
 								<th>Procedimiento </th>
 								<th>Fecha máx</th>
 								<th>Cant Programas</th>
+								<th>Google Drive</th>
 								<th>Última modif.</th>
 								<th>Opciones</th>
 							</tr>
@@ -49,8 +53,9 @@
 									<td><?= $item->instituto ?></td>
 									<td class="text-center"><?= $item->es_licenciado ?></td>
 									<td><?= $item->proceso_licenciamiento ?></td>
-									<td><?= $item->fecha_max_presentacion ?></td>
+									<td><?= $item->fecha_max_presentacion ?></td>									
 									<td class="text-center"><?= $item->cant_programs ?></td>
+									<td><a class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Carpeta" target="_blank" href="<?= $item->url_gdriveoptimizacion ?>"><i class="fa fa-cloud" aria-hidden="true"></i> &nbsp;Abrir</a></td>
 									<td><?= (($item->updated_at) ? $item->updated_at->diffForHumans() : NULL) ?></td>
 									<td>
 										<?php

@@ -63,6 +63,29 @@ class Users extends MY_Controller
 		//return redirect()->back()->with('error', 'User status update fail!');
 	}
 
+	public function newuser()
+	{
+		$this->data['user_level'] = $this->session->userdata('user_level');
+		$this->data['roles'] = Role_Eloquent::getRoleOpciones();
+		$this->render('admin/users/add');
+	}
+
+	public function create()
+	{
+		$request = $this->security->xss_clean($this->input->post());
+		$result = User_Eloquent::updateUser($request);
+		//redirect('/admin/users');
+		if ($result) {
+			$this->session->set_flashdata('message', 'Actualización exitosa.');
+			//return redirect()->back()->with('message', 'User status updated successfully!');
+			return redirect_back();
+		} else {
+			$this->session->set_flashdata('error', 'Error en actualización.');
+			return redirect_back();
+		}
+		//return redirect()->back()->with('error', 'User status update fail!');
+	}
+
 	public function activeUser()
 	{
 		$request = $this->security->xss_clean($this->input->post());
