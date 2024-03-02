@@ -24,10 +24,16 @@ class Users extends MY_Controller
 
 		$this->data['records'] = User_Eloquent::getUsersRoles($this->session->userdata('user_id'), $role_select, $status_select);
 
+		//$this->data['records'] = User_Eloquent::DDgetUsersRoles($this->session->userdata('user_id'), $role_select, $status_select);
+
+		
+
 		//$this->data['info'] = 'Bienvenido(a) ' . $this->session->userdata('user_login');
 		//$this->data['records'] = User_Eloquent::getUsersRoles($this->session->userdata('user_id'));
 		$this->data['roles'] = Role_Eloquent::getRoleOpciones();
 		$this->data['condiciones'] = User_Eloquent::getListStatusUsers();
+
+		//print_r(json_encode($this->data));
 		$this->render('admin/users/index');
 	}
 
@@ -92,7 +98,7 @@ class Users extends MY_Controller
 		$result = User_Eloquent::enableUser($request);
 		//redirect('/admin/users');
 		if ($result) {
-			$this->session->set_flashdata('success', 'Usuario activado.');
+			$this->session->set_flashdata('success', 'Usuario '.$result['username'].' activado.');
 			//return redirect()->back()->with('message', 'User status updated successfully!');
 			return redirect_back();
 		} else {
@@ -107,7 +113,7 @@ class Users extends MY_Controller
 		$result = User_Eloquent::disableUser($request);
 		//redirect('/admin/users');
 		if ($result) {
-			$this->session->set_flashdata('success', 'Usuario desactivado.');
+			$this->session->set_flashdata('success', 'Usuario '.$result['username'].' desactivado.');
 			//return redirect()->back()->with('message', 'User status updated successfully!');
 			return redirect_back();
 		} else {

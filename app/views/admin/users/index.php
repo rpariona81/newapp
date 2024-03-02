@@ -27,7 +27,7 @@
 
 	<div class="row">
 		<div class="col-12">
-		<div class="card-header bg-light border mt-3">
+			<div class="card-header bg-light border mt-3">
 				<h4 class="page-title">Control de usuarios</h4>
 			</div>
 			<div class="card-box">
@@ -36,7 +36,7 @@
 
 				<div class="col-md-9 col-lg-9 mx-auto">
 					<div class="mb-3">
-						<div class="input-group mb-3">
+						<div class="input-group mb-1">
 
 							<?= form_dropdown('role_select', $roles, $role_Value, 'class="form-control" id="role_select"'); ?>
 							&nbsp;
@@ -65,8 +65,13 @@
 					<table id="datatable-buttons" class="table table-hover table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 						<!--<thead class="bg-primary text-white">-->
 						<thead>
+							<tr>
+								<!--<th colspan="8" class="heading"><span style="float: right"></span></th>-->
+								<th colspan="8" class="heading"></th>
+							</tr>
 							<tr class="table-info">
-								<th class="font-weight-bold">Id</th>
+								<!--<th class="font-weight-bold">Id</th>-->
+								<th class="font-weight-bold">#</th>
 								<th class="font-weight-bold">Usuario</th>
 								<th class="font-weight-bold">Rol</th>
 								<th class="font-weight-bold">Celular</th>
@@ -80,7 +85,8 @@
 						<tbody>
 							<?php foreach ($records as $item) : ?>
 								<tr class="align-middle">
-									<td><?= str_pad($item->id, 5, '0', STR_PAD_LEFT); ?></td>
+									<!--<td>< ?= str_pad($item->id, 5, '0', STR_PAD_LEFT); ?></td>-->
+									<td><?= $item->row ?></td>
 									<td><?= $item->username ?></td>
 									<td><?= $item->rolename ?></td>
 									<td class="text-center"><?= $item->mobile ?></td>
@@ -90,9 +96,9 @@
 									<td>
 										<?php
 										if ($item->status) {
-											echo '<span class="text-white border badge bg-info">' . $item->flag . '</span>';
+											echo '<span class="text-white border badge bg-info">' . $item->userflag . '</span>';
 										} else {
-											echo '<span class="text-white border badge bg-danger">' . $item->flag . '</span>';
+											echo '<span class="text-white border badge bg-danger">' . $item->userflag . '</span>';
 										}
 										?>
 										<div class="btn-group" role="group" aria-label="Basic example">
@@ -108,17 +114,18 @@
 
 													echo form_open('admin/users/inactiveUser');
 													echo '<input type="hidden" id="id" name="id" value="' . $item->id . '">';
-													echo '<button type="submit" id="showtoast" name="submit" class="btn btn-outline-danger btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Desactivar"><i class="fa fa-eye-slash"></i></button>';
+													echo '<button type="submit" id="showtoast" name="submit" class="btn btn-outline-dark btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Desactivar"><i class="fa fa-eye-slash"></i></button>';
 													echo form_close();
+
+													echo '&nbsp;&nbsp;';
+													echo '<a class="btn btn-outline-warning btn-sm" data-toggle="tooltip" data-placement="bottom" title="Editar" href="' . base_url('/admin/users/show/' . $item->id) . '"><i class="fa fa-edit"></i></a>';
 												} else {
 													//echo '<a class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Activar" href="<?= $item->id>"><i class="fa fa-eye"></i></a>';
 													echo form_open('admin/users/activeUser');
 													echo '<input type="hidden" id="id" name="id" value="' . $item->id . '">';
-													echo '<button type="submit" id="showtoast" name="submit" class="btn btn-outline-primary btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Activar"><i class="fa fa-eye"></i></button>';
+													echo '<button type="submit" id="showtoast" name="submit" class="btn btn-outline-success btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Activar"><i class="fa fa-eye"></i></button>';
 													echo form_close();
 												}
-												echo '&nbsp;&nbsp;';
-												echo '<a class="btn btn-outline-warning btn-sm" data-toggle="tooltip" data-placement="bottom" title="Editar" href="' . base_url('/admin/users/show/' . $item->id) . '"><i class="fa fa-edit"></i></a>';
 											}
 											?>
 										</div>
@@ -136,7 +143,7 @@
 </div> <!-- end container-fluid -->
 
 
-<script>
+<!--<script>
 	$(document).ready(function() {
 		//$.noConflict();
 
@@ -179,7 +186,7 @@
 			]
 		});
 	});
-</script>
+</script>-->
 
 <!-- <script>
 	$(document).ready(function() {
@@ -219,19 +226,53 @@
 	});
 </script>
 
-<!--		// <?php if ($this->session->flashdata('success')) { ?>
-		// 	$('.toast').toast('show');
-		// 	console.log("<?= $this->session->flashdata('success') ?>");
-		// <?php } else if ($this->session->flashdata('error')) {  ?>
-		// 	$('.toast').toast('show');
-		// 	console.log("<?= $this->session->flashdata('error') ?>");
-		// <?php } else if ($this->session->flashdata('warning')) {  ?>
-		// 	$('.toast').toast('show');
-		// 	console.log('toastttt');
-		// <?php } else if ($this->session->flashdata('info')) {  ?>
-		// 	$('.toast').toast('show');
-		// 	console.log('toastttt');
-		// <?php } ?>
+<script>
+	//document.addEventListener("DOMContentLoaded", function() {
+	// Datatables Responsive
+	// https://datatables.net/reference/button/excelHtml5
+
+	//https://www.youtube.com/watch?v=j59H9xnyCBs
+	$(document).ready(function() {
+		/**https://datatables.net/forums/discussion/43723/how-can-i-remove-default-button-class-of-datatable-btn-default */
+		$.fn.dataTable.Buttons.defaults.dom.button.className = 'btn btn-md btn-dark border-0';
+		var mytable = $("#datatable-buttons").DataTable({
+			deferRender: true,
+			responsive: true,
+			pageLength: 5,
+			lengthMenu: [5, 10, 25, 50],
+			scrollH: true,
+			scrollX: true,
+			order: [],
+			//stateSave: true,
+			language: {
+				url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json',
+				paginate: {
+					previous: "<<",
+					next: ">>",
+					first: "<",
+					last: ">"
+				},
+			}
+		});
+
+		new $.fn.dataTable.Buttons(mytable, {
+			buttons: [
+				'copy', 'pdf',
+				{
+					extend: 'excelHtml5',
+					text: 'Excel',
+					customize: function(xlsx) {
+						var sheet = xlsx.xl.worksheets['sheet1.xml'];
+						//Para ver los estilos de formato https://datatables.net/reference/button/excelHtml5
+						$('row c[r^="B"]', sheet).attr('s', '57');
+						//Para que la columna se muestre como texto https://datatables.net/forums/discussion/73814/export-to-excel-with-format-text-for-column-b-c-and-d
+						$('row c[r^="C"]', sheet).attr('s', '50');
+					}
+				}
+			]
+		});
+
+		mytable.buttons().container().appendTo($('tr th.heading', mytable.table().container()));
+
 	});
 </script>
--->

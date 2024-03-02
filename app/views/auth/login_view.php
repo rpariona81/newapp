@@ -2,7 +2,7 @@
 	<li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
 	<li class="dropdown order-1">
 		<button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Login <span class="caret"></span></button>
-		<ul class="dropdown-menu dropdown-menu-right mt-1" style="min-width:180px;">
+		<ul class="dropdown-menu dropdown-menu-right mt-1" style="min-width:220px;">
 			<li class="px-3 pt-2">
 				<!--< ?= form_open('home/auth', array('id' => 'auth', 'name' => 'auth', 'role' => 'form')) ?>-->
 				<!--< ?= form_open('', array('id' => 'auth', 'name' => 'auth', 'role' => 'form', 'onsubmit' => 'window.location.reload()')) ?>-->

@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
 	<!-- start page title -->
-	<div class="row">
+	<!-- <div class="row">
 		<div class="col-12">
 			<div class="page-title-box">
 				<div class="page-title-right">
@@ -14,52 +14,90 @@
 				<h4 class="page-title">General Elements</h4>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<!-- end page title -->
+
+	<div class="card-header bg-info border mt-3">
+		<h4 class="page-title text-white">Nuevo usuario</h4>
+	</div>
 
 	<div class="row">
 		<div class="col-12">
 			<div class="card-box">
-
-				<h4 class="mb-4 header-title">Input Types</h4>
-
 				<div class="row">
-					<div class="col-xl-6">
-						<?= form_open('admin/users/create', array('id' => 'form_add')); ?>
 
-						<div class="form-group">
-							<label>Usuario</label>
-							<?= form_input(array('type' => 'text', 'name' => 'username', 'id' => 'username', 'maxlength' => '30', 'onkeyup' => 'this.value=this.value.toLowerCase()', 'size' => '100', 'value' => set_value('username'), 'class' => 'form-control')); ?>
+					<div class="card-body">
+						<?= form_open('admin/users/create', array('id' => 'FRM_DATOS', 'class' => 'needs-validation', 'onsubmit' => 'grabar.disabled = true; return true;')); ?>
+						<div class="breadcrumb"><strong>Datos de acceso </strong> </div>
+						<div class="row pt-1">
+							<div class="col-md-4">
+								<div class="mb-3">
+									<label for="title">Correo electrónico</label>
+									<?= form_input(array('type' => 'email', 'name' => 'email', 'id' => 'email', 'maxlength' => '100', 'onkeyup' => 'this.value=this.value.toLowerCase()', 'size' => '100', 'value' => set_value('email'), 'class' => 'form-control', 'required' => 'true')); ?>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="mb-3">
+									<label for="title">Usuario</label>
+									<?= form_input(array('type' => 'text', 'name' => 'username', 'id' => 'username', 'maxlength' => '30', 'onkeyup' => 'this.value=this.value.toLowerCase()', 'size' => '100', 'value' => set_value('username'), 'class' => 'form-control', 'required' => 'true')); ?>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="mb-3">
+									<label for="career_id">Rol</label>
+									<?= form_dropdown('role_id', $roles, set_value('role_id'), array('class' => 'form-control input-sm', 'id' => 'role_id')); ?>
+								</div>
+							</div>
 						</div>
 
-						<div class="form-group">
-							<label>Nombres</label>
-							<?= form_input(array('type' => 'text', 'name' => 'display_name', 'id' => 'display_name', 'maxlength' => '30', 'size' => '100', 'value' => set_value('display_name'), 'class' => 'form-control')); ?>
+						<div class="row pt-1 mb-3">
+							<div class="col-md-4">
+								<div class="mb-3">
+									<label for="password" class="form-label">Contraseña</label>
+									<!--<input type="password" id="txtPassword" class="form-control" name="password" placeholder="Contraseña" required>-->
+									<div class="input-group has-validation">
+										<?= form_input(array('type' => 'password', 'name' => 'password', 'id' => 'txtPassword', 'maxlength' => '30', 'onkeyup' => 'this.value=this.value.toLowerCase()', 'size' => '30', 'class' => 'form-control', 'placeholder' => 'Contraseña', 'required' => 'true')); ?>
+										<div class="input-group-append">
+											<button id="show_password" class="btn input-group-text d-block px-3" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon1"></span> </button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="mb-3">
+									<label for="repeatpassword" class="form-label">Repita contraseña</label>
+									<div class="input-group has-validation">
+										<input type="password" id="txtRepeatPassword" class="form-control" name="repeatpassword" placeholder="Repita contraseña" required>
+										<div class="input-group-append">
+											<button id="show_password" class="btn input-group-text d-block px-3" type="button" onclick="mostrarRepeatPassword()"> <span class="fa fa-eye-slash icon2"></span> </button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-
-						<div class="form-group">
-							<label for="exampleInputEmail1">Email address</label>
-							<input type="email" class="form-control" value="<?= set_value('email') ?>" name="email" id="email" placeholder="Enter email">
-							<small class="text-muted">We'll never share your email with anyone
-								else.
-							</small>
+						<div class="breadcrumb"><strong>Datos de entidad o grupo </strong> </div>
+						<div class="row pt-3">
+							<div class="col-md-4">
+								<div class="mb-3">
+									<label for="employer">Región</label>
+									<input type="text" class="form-control text-center" id="employer" name="employer" value="<?php echo set_value('region_id') ?>" required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="mb-3">
+									<label for="email_employer">Tipo entidad</label>
+									<input type="email" class="form-control text-center" id="email_employer" name="email_employer" value="<?php echo set_value('tipo_entidad') ?>" required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="mb-3">
+									<label for="email_employer">Entidad</label>
+									<input type="email" class="form-control text-center" id="email_employer" name="email_employer" value="<?php echo set_value('entidad_id') ?>" required>
+								</div>
+							</div>
 						</div>
-						<div class="form-group">
-							<label for="exampleInputPassword1">Telf. celular</label>
-							<input type="text" class="form-control" value="<?= set_value('mobile') ?>" name="mobile" id="mobile" placeholder="Enter mobile">
-						</div>
-						<div class="form-group">
-							<label for="clave_create" class="form-label">Clave Actual</label>
-							<input type="password" id="clave_create" class="form-control" name="clave_create" placeholder="Contraseña actual" required>
-						</div>
-						<div class="form-group">
-							<label for="clave_rep" class="form-label">Repita Nueva</label>
-							<input type="password" id="clave_rep" class="form-control" name="clave_rep" placeholder="Repita nueva contraseña" required>
-						</div>
-						<div class="form-group">
-							<label for="exampleSelect1">Rol</label>
-							<?= form_dropdown('role_id', $roles, set_value('role_id'), array('class' => 'form-control input-sm', 'id' => 'role_id')); ?>
-						</div>
+					
+						
 						<div class="form-group">
 							<?php if ($this->session->flashdata('error')) : ?>
 								<p class='alert alert-danger'> <?= $this->session->flashdata('error') ?> </p>
@@ -69,17 +107,39 @@
 							<?php endif ?>
 						</div>
 						<div class="mx-auto text-center col-12">
-							<button type="submit" class="btn btn-primary">Actualizar</button>
+							<button type="submit" class="btn btn-primary">Crear registro</button>
 							<a type="button" class="btn btn-warning" href="<?= base_url('admin/users') ?>"><i class="fa fa-undo" aria-hidden="true"></i>
 								Volver</a>
 						</div>
-
 						<?= form_close() ?>
-					</div><!-- end col -->
-
+					</div>
 				</div><!-- end row -->
 			</div>
 		</div><!-- end col -->
 	</div>
 	<!-- end row -->
 </div>
+<!--https://www.baulphp.com/3-formas-para-mostrar-y-ocultar-contrasenas/-->
+<script>
+	function mostrarPassword() {
+		var cambio1 = document.getElementById("txtPassword");
+		if (cambio1.type == "password") {
+			cambio1.type = "text";
+			$('.icon1').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+		} else {
+			cambio1.type = "password";
+			$('.icon1').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+		}
+	}
+
+	function mostrarRepeatPassword() {
+		var cambio2 = document.getElementById("txtRepeatPassword");
+		if (cambio2.type == "password") {
+			cambio2.type = "text";
+			$('.icon2').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+		} else {
+			cambio2.type = "password";
+			$('.icon2').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+		}
+	}
+</script>

@@ -40,7 +40,9 @@ class User_Eloquent extends BaseModel
 
 	protected $casts = [
 		'lock' => 'boolean',
-		'status' => 'boolean'
+		'status' => 'boolean',
+		'row' => 'integer',
+		'id' => 'integer'
 	];
 
 	protected $appends = ['userflag', 'lock'];
@@ -53,7 +55,7 @@ class User_Eloquent extends BaseModel
 		//return date_diff(date_create($this->date_vigency), date_create('now'))->d;
 		//https://blog.devgenius.io/how-to-find-the-number-of-days-between-two-dates-in-php-1404748b1e84
 		//return date_diff(date_create('now'),date_create($this->date_vigency))->format('%R%a days');return date_diff(date_create('now'),date_create($this->date_vigency))->format('%R%a days');
-		if ($this->status) {
+		if ($this->status > 0) {
 			return 'Activo';
 		} else {
 			return 'Suspendido';
@@ -66,7 +68,7 @@ class User_Eloquent extends BaseModel
 		$opcionesStatus[NULL] = 'Seleccione condición';
 		$opcionesStatus[1] = 'Activo';
 		$opcionesStatus[0] = 'Suspendido';
-		
+
 		return $opcionesStatus;
 	}
 
@@ -83,63 +85,122 @@ class User_Eloquent extends BaseModel
 	}
 
 	//protected $with = 'getRoles';
+	public static function DDgetUsersRoles($except_id = NULL, $role_select = NULL, $status_select = NULL)
+	{
+		//DB::statement('PRAGMA foreign_keys = OFF');
+		//DB::statement(DB::raw('set @row:=0'));
+		/*$data = DB::table('t_users')->selectRaw('*, ROW_NUMBER() OVER(ORDER BY updated_at) AS NoId')->get();
+		return $data;*/
+
+		return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
+			->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
+			->where('t_users.id', '!=', $except_id)
+			//->orderBy('t_users.updated_at', 'desc')
+			->selectRaw('t_users.*, t_role_user.role_id, t_roles.rolename, ROW_NUMBER() OVER(ORDER BY t_users.updated_at DESC) AS row')
+			->orderBy('row', 'asc')->get();
+
+		//return User_Eloquent::selectRaw('t_users.*, @row:=@row+1 as row')->get();
+		//->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);
+
+	}
 
 	public static function getUsersRoles($except_id = NULL, $role_select = NULL, $status_select = NULL)
 	{
+		//DB::statement(DB::raw('set @row:=0'));
 		if ($role_select != NULL && $status_select != NULL) {
 			try {
+				//DB::statement(DB::raw('set @row:=0'));
 				return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
 					->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
 					->where('t_users.id', '!=', $except_id)
 					->where('t_role_user.role_id', '=', $role_select)
 					->where('t_users.status', '=', $status_select)
+					->selectRaw('t_users.*, t_role_user.role_id, t_roles.rolename, ROW_NUMBER() OVER(ORDER BY t_users.updated_at DESC) AS row')
+					->orderBy('row', 'asc')->get();
+
+				/*->selectRaw('t_users.*, t_role_user.role_id,t_roles.rolename, @row:=@row+1 as row')
 					->orderBy('t_users.updated_at', 'desc')
-					//->orderBy('t_role_user.updated_at', 'desc')			
-					->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);
+					->get();*/
+
+				/*->selectRaw('*, @row:=@row+1 as row')
+					->orderBy('t_users.updated_at', 'desc')
+					->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);*/
 			} catch (\Throwable $th) {
 				return FALSE;
 			}
 		} else if ($role_select != NULL && $status_select == NULL) {
 			try {
+				//DB::statement(DB::raw('set @row:=0'));
 				return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
 					->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
 					->where('t_users.id', '!=', $except_id)
 					->where('t_role_user.role_id', '=', $role_select)
+					->selectRaw('t_users.*, t_role_user.role_id, t_roles.rolename, ROW_NUMBER() OVER(ORDER BY t_users.updated_at DESC) AS row')
+					->orderBy('row', 'asc')->get();
+				/*
+					->selectRaw('t_users.*, t_role_user.role_id,t_roles.rolename, @row:=@row+1 as row')
 					->orderBy('t_users.updated_at', 'desc')
-					//->orderBy('t_role_user.updated_at', 'desc')			
-					->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);
+					->get();*/
+
+				/*->selectRaw('*, @row:=@row+1 as row')
+					->orderBy('t_users.updated_at', 'desc')
+					->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);*/
 			} catch (\Throwable $th) {
 				return FALSE;
 			}
 		} else if ($role_select == NULL && $status_select != NULL) {
 			try {
+				//DB::statement(DB::raw('set @row:=0'));
 				return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
 					->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
 					->where('t_users.id', '!=', $except_id)
 					->where('t_users.status', '=', $status_select)
+					->selectRaw('t_users.*, t_role_user.role_id, t_roles.rolename, ROW_NUMBER() OVER(ORDER BY t_users.updated_at DESC) AS row')
+					->orderBy('row', 'asc')->get();
+				/*
+					->selectRaw('t_users.*, t_role_user.role_id,t_roles.rolename, @row:=@row+1 as row')
 					->orderBy('t_users.updated_at', 'desc')
-					//->orderBy('t_role_user.updated_at', 'desc')			
-					->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);
+					->get();*/
+
+				/*->selectRaw('*, @row:=@row+1 as row')
+					->orderBy('t_users.updated_at', 'desc')
+					->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);*/
 			} catch (\Throwable $th) {
 				return FALSE;
 			}
 		} else {
 			try {
+				//DB::statement(DB::raw('set @row:=0'));
 				return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
 					->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
 					->where('t_users.id', '!=', $except_id)
+					->selectRaw('t_users.*, t_role_user.role_id, t_roles.rolename, ROW_NUMBER() OVER(ORDER BY t_users.updated_at DESC) AS row')
+					->orderBy('row', 'asc')->get();
+				/*
+					->selectRaw('t_users.*, t_role_user.role_id,t_roles.rolename, @row:=@row+1 as row')
 					->orderBy('t_users.updated_at', 'desc')
-					//->orderBy('t_role_user.updated_at', 'desc')			
-					->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);
+					->get();*/
+
+				//->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);
 			} catch (\Throwable $th) {
 				return FALSE;
 			}
 		}
+
 		/*return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
 			->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
 			->orderBy('t_users.updated_at', 'desc')
 			//->orderBy('t_role_user.updated_at', 'desc')			
-			->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);*/
+			->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);
+			*/
+
+		/*DB::statement(DB::raw('set @row:=0'));
+			return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
+				->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
+				->where('t_users.id', '!=', $except_id)
+				->selectRaw('t_users.*, @row:=@row+1 as row')
+				->orderBy('t_users.updated_at', 'desc')
+				->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);*/
 	}
 
 	public static function getUser($id)
