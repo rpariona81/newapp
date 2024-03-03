@@ -44,8 +44,8 @@
 							</div>
 							<div class="col-md-4">
 								<div class="mb-3">
-									<label for="career_id">Rol</label>
-									<?= form_dropdown('role_id', $roles, set_value('role_id'), array('class' => 'form-control input-sm', 'id' => 'role_id')); ?>
+									<label for="display_name">Nombre a mostrar</label>
+									<?= form_input(array('type' => 'text', 'name' => 'display_name', 'id' => 'display_name', 'maxlength' => '30', 'size' => '100', 'value' => set_value('display_name'), 'class' => 'form-control', 'required' => 'true')); ?>
 								</div>
 							</div>
 						</div>
@@ -63,7 +63,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<!-- <div class="col-md-4">
 								<div class="mb-3">
 									<label for="repeatpassword" class="form-label">Repita contraseña</label>
 									<div class="input-group has-validation">
@@ -73,6 +73,18 @@
 										</div>
 									</div>
 								</div>
+							</div> -->
+							<div class="col-md-4">
+								<div class="mb-3">
+									<label for="display_name">Teléfono móvil</label>									
+									<?= form_input(array('type' => 'tel', 'pattern' => '[0-9]{3} [0-9]{3} [0-9]{3}', 'name' => 'mobile', 'id' => 'mobile', 'maxlength' => '12', 'value' => set_value('mobile'), 'class' => 'form-control', 'required' => 'true', 'placeholder' => '123 456 789')); ?>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="mb-3">
+									<label for="career_id">Rol</label>
+									<?= form_dropdown('role_id', $roles, set_value('role_id'), array('class' => 'form-control input-sm', 'id' => 'role_id')); ?>
+								</div>
 							</div>
 						</div>
 						<div class="breadcrumb"><strong>Datos de entidad o grupo </strong> </div>
@@ -80,19 +92,19 @@
 							<div class="col-md-4">
 								<div class="mb-3">
 									<label for="employer">Región</label>
-									<input type="text" class="form-control text-center" id="employer" name="employer" value="<?php echo set_value('region_id') ?>" required>
+									<input type="text" class="form-control text-center" id="employer" name="employer" value="<?php echo set_value('region_id') ?>">
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="mb-3">
 									<label for="email_employer">Tipo entidad</label>
-									<input type="email" class="form-control text-center" id="email_employer" name="email_employer" value="<?php echo set_value('tipo_entidad') ?>" required>
+									<input type="email" class="form-control text-center" id="email_employer" name="email_employer" value="<?php echo set_value('tipo_entidad') ?>">
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="mb-3">
 									<label for="email_employer">Entidad</label>
-									<input type="email" class="form-control text-center" id="email_employer" name="email_employer" value="<?php echo set_value('entidad_id') ?>" required>
+									<input type="email" class="form-control text-center" id="email_employer" name="email_employer" value="<?php echo set_value('entidad_id') ?>">
 								</div>
 							</div>
 						</div>

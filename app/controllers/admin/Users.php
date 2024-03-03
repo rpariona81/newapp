@@ -59,7 +59,7 @@ class Users extends MY_Controller
 		$result = User_Eloquent::updateUser($request);
 		//redirect('/admin/users');
 		if ($result) {
-			$this->session->set_flashdata('message', 'Actualización exitosa.');
+			$this->session->set_flashdata('message', 'Actualización de '.$result['username'].' exitosa.');
 			//return redirect()->back()->with('message', 'User status updated successfully!');
 			return redirect_back();
 		} else {
@@ -71,7 +71,6 @@ class Users extends MY_Controller
 
 	public function newuser()
 	{
-		$this->data['user_level'] = $this->session->userdata('user_level');
 		$this->data['roles'] = Role_Eloquent::getRoleOpciones();
 		$this->render('admin/users/add');
 	}
@@ -79,14 +78,16 @@ class Users extends MY_Controller
 	public function create()
 	{
 		$request = $this->security->xss_clean($this->input->post());
-		$result = User_Eloquent::updateUser($request);
-		//redirect('/admin/users');
+		$request['user_type'] = $this->session->userdata('user_level') + 1;
+		$request['created_by'] = $this->session->userdata('user_id');
+		//$result = User_Eloquent::create($request);
+		$result = User_Eloquent::createUser($request);
 		if ($result) {
-			$this->session->set_flashdata('message', 'Actualización exitosa.');
+			$this->session->set_flashdata('message', 'Nuevo usuario '.$result['username'].' registrado.');
 			//return redirect()->back()->with('message', 'User status updated successfully!');
 			return redirect_back();
 		} else {
-			$this->session->set_flashdata('error', 'Error en actualización.');
+			$this->session->set_flashdata('error', 'Error en registro.');
 			return redirect_back();
 		}
 		//return redirect()->back()->with('error', 'User status update fail!');

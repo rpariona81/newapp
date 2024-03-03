@@ -106,6 +106,8 @@ class User_Eloquent extends BaseModel
 
 	public static function getUsersRoles($except_id = NULL, $role_select = NULL, $status_select = NULL)
 	{
+		//Para crear row_numer en SQLITE https://stackoverflow.com/questions/16847574/how-to-use-row-number-in-sqlite
+		//Esta opción tambien funciona con MariaDB
 		//DB::statement(DB::raw('set @row:=0'));
 		if ($role_select != NULL && $status_select != NULL) {
 			try {
@@ -221,6 +223,57 @@ class User_Eloquent extends BaseModel
 			->select('t_users.*', 't_role_user.role_id', 't_roles.rolename')
 			->first();
 	}
+	public static function createUser($request)
+	{
+		$data = array(
+			'username' => $request['username'],
+			'email' => $request['email'],
+			'user_type' => $request['user_type'],
+			'display_name' => $request['display_name'],
+			'mobile' => $request['mobile'],
+			'email' => $request['email'],
+			'password' => $request['password'],
+			'password' => password_hash($request['password'], PASSWORD_BCRYPT),
+            'created_by' => $request['created_by']
+		);
+
+		try {
+			$model = new User_Eloquent();
+			
+			$role = Role_Eloquent::findOrFail($request['role_id']);	//code...
+
+			/*if ($model) {
+				$model->fill($data);
+				$model->save($data);
+			}*/
+
+			if ($role) {
+				$model->fill($data);
+				$model->save($data);
+				$role_user = RoleUser_Eloquent::where('user_id',  $model->id)->first();
+
+				if ($role_user !== null) {
+					$role_user->update(['role_id' => $request['role_id']]);
+					$model->updated_at = Carbon::now();
+					$model->save();
+					return $model;
+				} else {
+					$user = RoleUser_Eloquent::create([
+						'user_id' => $model->id,
+						'role_id' => $request['role_id']
+					]);
+					$model->updated_at = Carbon::now();
+					$model->save();
+					return $model;
+				}
+			} else {
+				return FALSE;
+			}
+		} catch (ModelNotFoundException $e) {
+			//throw $th;
+			return FALSE;
+		}
+	}
 
 	public static function updateUser($request)
 	{
@@ -253,7 +306,7 @@ class User_Eloquent extends BaseModel
 					$role_user->update(['role_id' => $request['role_id']]);
 					$model->updated_at = Carbon::now();
 					$model->save();
-					return $role_user;
+					return $model;
 				} else {
 					$user = RoleUser_Eloquent::create([
 						'user_id' => $request['id'],
@@ -261,7 +314,7 @@ class User_Eloquent extends BaseModel
 					]);
 					$model->updated_at = Carbon::now();
 					$model->save();
-					return $user;
+					return $model;
 				}
 			} else {
 				return FALSE;
