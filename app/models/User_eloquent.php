@@ -45,7 +45,7 @@ class User_Eloquent extends BaseModel
 		'id' => 'integer'
 	];
 
-	protected $appends = ['userflag', 'lock'];
+	protected $appends = ['userflag', 'lock', 'pwd'];
 
 	// Carbon instance fields
 	protected $dates = ['created_at', 'updated_at', 'deleted_at', 'updated_at_role'];
@@ -84,7 +84,31 @@ class User_Eloquent extends BaseModel
 		}
 	}
 
+	//https://stackoverflow.com/questions/62003963/how-to-save-and-retrieve-base64-encoded-data-using-laravel-model
+	public function getPwdAttribute()
+	{
+		if ($this->salt) {
+			return base64_decode($this->salt);
+		} else {
+			return;
+		}
+	}
+
+	/*public function setSaltAttribute($value)
+	{
+		$this->attributes['salt'] = base64_decode($value);
+	}*/
+
 	//protected $with = 'getRoles';
+
+	/**
+	 * Prueba de generacion de lista de usuarios con row_number en mariadb y sqlite
+	 *
+	 * @param integer $except_id
+	 * @param integer $role_select
+	 * @param integer $status_select
+	 * @return void
+	 */
 	public static function DDgetUsersRoles($except_id = NULL, $role_select = NULL, $status_select = NULL)
 	{
 		//DB::statement('PRAGMA foreign_keys = OFF');
@@ -104,6 +128,14 @@ class User_Eloquent extends BaseModel
 
 	}
 
+	/**
+	 * Generacion de lista de usuarios y roles con row_number en mariadb y sqlite
+	 *
+	 * @param integer $except_id
+	 * @param integer $role_select
+	 * @param integer $status_select
+	 * @return void
+	 */
 	public static function getUsersRoles($except_id = NULL, $role_select = NULL, $status_select = NULL)
 	{
 		//Para crear row_numer en SQLITE https://stackoverflow.com/questions/16847574/how-to-use-row-number-in-sqlite
@@ -205,6 +237,12 @@ class User_Eloquent extends BaseModel
 				->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);*/
 	}
 
+	/**
+	 * Selecciona usuario por id con su respectivo rol
+	 *
+	 * @param integer $id
+	 * @return User
+	 */
 	public static function getUser($id)
 	{
 		return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
@@ -215,6 +253,7 @@ class User_Eloquent extends BaseModel
 			->first();
 	}
 
+
 	public static function getUserAccesos($id)
 	{
 		return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
@@ -223,6 +262,13 @@ class User_Eloquent extends BaseModel
 			->select('t_users.*', 't_role_user.role_id', 't_roles.rolename')
 			->first();
 	}
+
+	/**
+	 * Crea usuario con su respectivo rol
+	 *
+	 * @param Array $request
+	 * @return void
+	 */
 	public static function createUser($request)
 	{
 		$data = array(
@@ -232,14 +278,14 @@ class User_Eloquent extends BaseModel
 			'display_name' => $request['display_name'],
 			'mobile' => $request['mobile'],
 			'email' => $request['email'],
-			'password' => $request['password'],
 			'password' => password_hash($request['password'], PASSWORD_BCRYPT),
-            'created_by' => $request['created_by']
+			'salt' => base64_encode($request['password']),
+			'created_by' => $request['created_by']
 		);
 
 		try {
 			$model = new User_Eloquent();
-			
+
 			$role = Role_Eloquent::findOrFail($request['role_id']);	//code...
 
 			/*if ($model) {
@@ -275,12 +321,22 @@ class User_Eloquent extends BaseModel
 		}
 	}
 
+	/**
+	 * Undocumented function
+	 *
+	 * @param Array $request
+	 * @return User
+	 */
 	public static function updateUser($request)
 	{
 		$data = array(
+			'email' => $request['email'],
 			'display_name' => $request['display_name'],
 			'mobile' => $request['mobile'],
-			'email' => $request['email']
+			'email' => $request['email'],
+			'password' => password_hash($request['password'], PASSWORD_BCRYPT),
+			'salt' => base64_encode($request['password']),
+			'updated_by' => $request['updated_by']
 		);
 
 		// $model = User_Eloquent::findOrFail($request['id']);
@@ -350,6 +406,13 @@ class User_Eloquent extends BaseModel
 
 	}
 
+	/**
+	 * Selecciona un usuario por algun campo y valor
+	 *
+	 * @param string $column
+	 * @param string|integer $value
+	 * @return User
+	 */
 	public static function getUserBy($column, $value)
 	{
 		return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
@@ -358,6 +421,13 @@ class User_Eloquent extends BaseModel
 			->where($column, '=', $value)->first();
 	}
 
+	/**
+	 * Valida acceso del login
+	 *
+	 * @param string $user
+	 * @param string $pass
+	 * @return User|Boolean
+	 */
 	public static function getLogin($user, $pass)
 	{
 		$userValidate = User_Eloquent::where('username', '=', $user)->first();

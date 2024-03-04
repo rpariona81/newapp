@@ -11,8 +11,8 @@ if (!function_exists('my_validation_errors')) {
     function my_validation_errors($errors) {
         $salida = '';
         if ($errors) {
-            $salida = '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
-            $salida = $salida .'<h5 class="alert-heading">Mensajes de validación</h5>';
+            $salida = '<div class="alert alert-danger alert-dismissible fade show p-3" role="alert">';
+            $salida = $salida .'<h6 class="alert-heading">Mensajes de validación</h6>';
             $salida = $salida . '<small>' . $errors . '</small>';
             $salida = $salida .'  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
         }

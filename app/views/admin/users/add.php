@@ -29,23 +29,35 @@
 					<div class="card-body">
 						<?= form_open('admin/users/create', array('id' => 'FRM_DATOS', 'class' => 'needs-validation', 'onsubmit' => 'grabar.disabled = true; return true;')); ?>
 						<div class="breadcrumb"><strong>Datos de acceso </strong> </div>
+						<?= my_validation_errors(validation_errors()); ?>
+
 						<div class="row pt-1">
 							<div class="col-md-4">
 								<div class="mb-3">
-									<label for="title">Correo electrónico</label>
-									<?= form_input(array('type' => 'email', 'name' => 'email', 'id' => 'email', 'maxlength' => '100', 'onkeyup' => 'this.value=this.value.toLowerCase()', 'size' => '100', 'value' => set_value('email'), 'class' => 'form-control', 'required' => 'true')); ?>
+									<label for="username">Usuario</label>
+									<!-- < ?php echo form_error('username'); ?> -->
+
+									<?= form_input(array('type' => 'text', 'name' => 'username', 'id' => 'username', 'maxlength' => '30', 'onkeyup' => 'this.value=this.value.toLowerCase()', 'size' => '100', 'value' => set_value('username'), 'class' => 'form-control', 'required' => 'true')); ?>
+									<small class="text-muted">Este campo no admite espacios ni caracteres especiales</small>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="mb-3">
-									<label for="title">Usuario</label>
-									<?= form_input(array('type' => 'text', 'name' => 'username', 'id' => 'username', 'maxlength' => '30', 'onkeyup' => 'this.value=this.value.toLowerCase()', 'size' => '100', 'value' => set_value('username'), 'class' => 'form-control', 'required' => 'true')); ?>
+								
+									<label for="email">Correo electrónico</label>
+									<!-- < ?php echo form_error('email'); ?> -->
+
+									<?= form_input(array('type' => 'email', 'name' => 'email', 'id' => 'email', 'maxlength' => '100', 'onkeyup' => 'this.value=this.value.toLowerCase()', 'size' => '100', 'value' => set_value('email'), 'class' => 'form-control', 'required' => 'true')); ?>
+									<small class="text-muted">Ingrese un email válido para verificar</small>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="mb-3">
 									<label for="display_name">Nombre a mostrar</label>
+									<!-- < ?php echo form_error('display_name'); ?> -->
+
 									<?= form_input(array('type' => 'text', 'name' => 'display_name', 'id' => 'display_name', 'maxlength' => '30', 'size' => '100', 'value' => set_value('display_name'), 'class' => 'form-control', 'required' => 'true')); ?>
+									<small class="text-muted">Este campo será su alias en el sistema</small>
 								</div>
 							</div>
 						</div>
@@ -54,13 +66,15 @@
 							<div class="col-md-4">
 								<div class="mb-3">
 									<label for="password" class="form-label">Contraseña</label>
+									<!-- < ?php echo form_error('password'); ?> -->
 									<!--<input type="password" id="txtPassword" class="form-control" name="password" placeholder="Contraseña" required>-->
 									<div class="input-group has-validation">
 										<?= form_input(array('type' => 'password', 'name' => 'password', 'id' => 'txtPassword', 'maxlength' => '30', 'onkeyup' => 'this.value=this.value.toLowerCase()', 'size' => '30', 'class' => 'form-control', 'placeholder' => 'Contraseña', 'required' => 'true')); ?>
 										<div class="input-group-append">
 											<button id="show_password" class="btn input-group-text d-block px-3" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon1"></span> </button>
 										</div>
-									</div>
+									</div> 
+									<small class="text-muted">Establezca una contraseña de al menos 8 caracteres</small>
 								</div>
 							</div>
 							<!-- <div class="col-md-4">
@@ -76,13 +90,15 @@
 							</div> -->
 							<div class="col-md-4">
 								<div class="mb-3">
-									<label for="display_name">Teléfono móvil</label>									
+									<label for="mobile">Teléfono móvil</label>
+									<!-- < ?php echo form_error('mobile'); ?> -->
 									<?= form_input(array('type' => 'tel', 'pattern' => '[0-9]{3} [0-9]{3} [0-9]{3}', 'name' => 'mobile', 'id' => 'mobile', 'maxlength' => '12', 'value' => set_value('mobile'), 'class' => 'form-control', 'required' => 'true', 'placeholder' => '123 456 789')); ?>
+									<small class="text-muted">Registre un #celular según el formato indicado</small>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="mb-3">
-									<label for="career_id">Rol</label>
+									<label for="role_id">Rol</label>
 									<?= form_dropdown('role_id', $roles, set_value('role_id'), array('class' => 'form-control input-sm', 'id' => 'role_id')); ?>
 								</div>
 							</div>
@@ -108,8 +124,8 @@
 								</div>
 							</div>
 						</div>
-					
-						
+
+
 						<div class="form-group">
 							<?php if ($this->session->flashdata('error')) : ?>
 								<p class='alert alert-danger'> <?= $this->session->flashdata('error') ?> </p>
@@ -144,14 +160,14 @@
 		}
 	}
 
-	function mostrarRepeatPassword() {
-		var cambio2 = document.getElementById("txtRepeatPassword");
-		if (cambio2.type == "password") {
-			cambio2.type = "text";
-			$('.icon2').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-		} else {
-			cambio2.type = "password";
-			$('.icon2').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-		}
-	}
+	// function mostrarRepeatPassword() {
+	// 	var cambio2 = document.getElementById("txtRepeatPassword");
+	// 	if (cambio2.type == "password") {
+	// 		cambio2.type = "text";
+	// 		$('.icon2').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+	// 	} else {
+	// 		cambio2.type = "password";
+	// 		$('.icon2').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+	// 	}
+	// }
 </script>
