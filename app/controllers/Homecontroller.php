@@ -15,12 +15,14 @@ class HomeController extends CI_Controller
 	public function index()
 	{
 		//$this->load->view('test');
-		$data['contenido'] = 'welcome';
-		$this->load->view('homeTemplate', $data);
 		//$datos[0]=$this->session->userdata('user_guard');
 		//$this->login();
 		//print_r($datos);
-
+		
+		/*$data['contenido'] = 'welcome';
+		$this->load->view('homeTemplate', $data);*/
+		$data['content'] = 'home';
+		$this->load->view('layouts/app', $data);
 	}
 
 	public function login()
@@ -53,7 +55,11 @@ class HomeController extends CI_Controller
 			$this->form_validation->set_rules('password', 'Clave', 'required');
 			//si el proceso falla mostramos errores
 			if ($this->form_validation->run() == FALSE) {
-				$this->index();
+				//$this->index();
+				//$this->session->set_flashdata('error', $checkUser['error']);
+				//$this->session->set_flashdata('error', 'Error de usuario o contraseña.');
+				//redirect_back();
+				$this->login();
 				//en otro caso procesamos los datos
 			} else {
 				//redirect('encuestacsc/index');
@@ -63,7 +69,8 @@ class HomeController extends CI_Controller
 		} else {
 			//redirect('home/acceso_denegado');
 			$this->session->set_flashdata('error', 'Ingrese su usuario y contraseña.');
-			$this->index();
+			//$this->index();
+			$this->login();
 		}
 	}
 
@@ -95,8 +102,11 @@ class HomeController extends CI_Controller
 
 	public function registroATR()
 	{
-		$data['contenido'] = 'registra_atr';
-		$this->load->view('homeTemplate', $data);
+		/*$data['contenido'] = 'registra_atr';
+		$this->load->view('homeTemplate', $data);*/
+
+		$data['content'] = 'registra_atr';
+		$this->load->view('layouts/app', $data);
 	}
 
 	public function loadentidades()

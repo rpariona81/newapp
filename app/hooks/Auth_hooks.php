@@ -53,7 +53,7 @@ class Auth_hooks
             return;
         } else {
             if (is_null($this->ci->session->userdata('user_guard'))) {
-                redirect('/');
+                redirect('/home');
                 exit;
             } else {
                 if ($this->ci->session->userdata('user_guard') != $guard_name) {

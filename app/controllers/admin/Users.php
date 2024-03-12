@@ -32,7 +32,7 @@ class Users extends MY_Controller
 
 		//$this->data['info'] = 'Bienvenido(a) ' . $this->session->userdata('user_login');
 		//$this->data['records'] = User_Eloquent::getUsersRoles($this->session->userdata('user_id'));
-		$this->data['roles'] = Role_Eloquent::getRoleOpciones();
+		$this->data['roles'] = Role_Eloquent::getRoleOpciones($this->session->userdata('user_role_id'));
 		$this->data['condiciones'] = User_Eloquent::getListStatusUsers();
 
 		//print_r(json_encode($this->data));
@@ -45,7 +45,7 @@ class Users extends MY_Controller
 		if ($model) {
 			try {
 				$this->data['user'] = User_Eloquent::getUser($id);
-				$this->data['roles'] = Role_Eloquent::getRoleOpciones();
+				$this->data['roles'] = Role_Eloquent::getRoleOpciones($this->session->userdata('user_role_id'));
 				$this->render('admin/users/edit');
 			} catch (\Throwable $th) {
 				redirect('admin/users/index');
@@ -76,7 +76,7 @@ class Users extends MY_Controller
 
 	public function newuser()
 	{
-		$this->data['roles'] = Role_Eloquent::getRoleOpciones();
+		$this->data['roles'] = Role_Eloquent::getRoleOpciones($this->session->userdata('user_role_id'));
 		$this->render('admin/users/add');
 	}
 
