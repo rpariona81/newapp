@@ -38,11 +38,11 @@
 				<ul class="navbar-nav ms-auto mb-lg-0">
 					<?php if ($this->session->userdata('user_role')) : ?>
 						<li class="nav-item">
-							<a href="<?=site_url('/home/logout')?>" class="nav-link">Salir</a>
+							<a href="<?=site_url('/logout')?>" class="nav-link">Salir</a>
 						</li>
 					<?php else : ?>
 						<li class="nav-item">
-							<a href="<?=site_url('/home/login')?>" class="nav-link">Ingreso</a>
+							<a href="<?=site_url('/login')?>" class="nav-link">Ingreso</a>
 						</li>
 					<?php endif; ?>
 				</ul>

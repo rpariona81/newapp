@@ -38,7 +38,7 @@ class Auth_hooks
             $url = $guard_name . "/" . $controller . "/" . $action;    # code...
         }
 
-        $libres = array('/', '/home', 'home/index', 'login', 'home/login', 'home/acerca_de', 'home/auth', 'home/logout','registroatr','/registroatr','/home/loadentidades','home/loadentidades');
+        $libres = array('/', 'home/index', 'login', 'home/login', 'home/acerca_de', 'home/auth', 'logout','registroatr','/registroatr','/home/loadentidades','home/loadentidades');
 
         //var_dump($url);
         //exit;
@@ -53,7 +53,7 @@ class Auth_hooks
             return;
         } else {
             if (is_null($this->ci->session->userdata('user_guard'))) {
-                redirect('/home');
+                redirect('/');
                 exit;
             } else {
                 if ($this->ci->session->userdata('user_guard') != $guard_name) {
@@ -65,7 +65,8 @@ class Auth_hooks
                         echo $this->ci->output->get_output();
                     } else {
                         //redirect(base_url() . $this->ci->session->userdata('user_guard') . '/index');
-						redirect()->back();
+						//redirect()->back();
+                        redirect_back();
 						exit;
                     }
                     return;
