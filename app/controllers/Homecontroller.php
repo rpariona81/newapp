@@ -22,7 +22,7 @@ class HomeController extends CI_Controller
 		/*$data['contenido'] = 'welcome';
 		$this->load->view('homeTemplate', $data);*/
 		$data['content'] = 'home';
-		$this->load->view('layouts/app', $data);
+		$this->load->view('templates/guest', $data);
 	}
 
 	public function login()
@@ -106,7 +106,7 @@ class HomeController extends CI_Controller
 		$this->load->view('homeTemplate', $data);*/
 
 		$data['content'] = 'registra_atr';
-		$this->load->view('layouts/app', $data);
+		$this->load->view('templates/guest', $data);
 	}
 
 	public function loadentidades()

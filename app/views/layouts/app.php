@@ -65,7 +65,7 @@
 	<!-- Page Content-->
 	<div class="wrapper">
 		<!-- Page Features-->
-		<?= $content ?>
+		<?= $this->load->view($content); ?>
 	</div>
 
 	<!-- Footer-->
