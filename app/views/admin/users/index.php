@@ -1,5 +1,3 @@
-<!-- Start Content-->
-<div class="container-fluid">
 
 	<!-- start page title -->
 	<!-- <div class="row">
@@ -140,8 +138,6 @@
 	</div>
 	<!-- end row -->
 
-</div> <!-- end container-fluid -->
-
 
 <!--<script>
 	$(document).ready(function() {
@@ -264,6 +260,7 @@
 					customize: function(xlsx) {
 						var sheet = xlsx.xl.worksheets['sheet1.xml'];
 						//Para ver los estilos de formato https://datatables.net/reference/button/excelHtml5
+						$('row c[r^="A"]', sheet).attr('n', '7');
 						$('row c[r^="B"]', sheet).attr('s', '57');
 						//Para que la columna se muestre como texto https://datatables.net/forums/discussion/73814/export-to-excel-with-format-text-for-column-b-c-and-d
 						$('row c[r^="C"]', sheet).attr('s', '50');

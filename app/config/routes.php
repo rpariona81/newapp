@@ -58,7 +58,7 @@ $route['login'] = 'homecontroller/login';
 
 $route['registroatr'] = 'homecontroller/registroATR';
 
-$route['home/auth'] = 'homecontroller/auth';
+$route['auth'] = 'homecontroller/auth';
 
 $route['home/acceso_denegado'] = 'homecontroller/acceso_denegado';
 

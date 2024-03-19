@@ -19,9 +19,9 @@
 
                 <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="../../assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
+                        <img src="<?=base_url('assets/images/users/avatar-1.jpg')?>" alt="user-image" class="rounded-circle">
                         <span class="d-none d-sm-inline-block ml-1 font-weight-medium"><?= $this->session->userdata('user_nickname').' ('.$this->session->userdata('user_role') . ')'  ?></span>
-                        <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i><!--<i class="fa fa-user fa-fw"></i>-->
+                        <!--<i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>--><!--<i class="fa fa-user fa-fw"></i>-->
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                         <!-- item-->
@@ -30,14 +30,14 @@
                             <span>Profile</span>
                         </a>
                         <!-- item-->
-                        <a href="<?= base_url('/user/credenciales') ?>" class="dropdown-item notify-item">
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <i class="mdi mdi-settings-outline"></i>
                             <span>Cambiar clave</span>
                         </a>
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="<?= base_url('/home/logout') ?>" class="dropdown-item notify-item">
+                        <a href="<?= base_url('/logout') ?>" class="dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
                             <span>Cerrar sesión</span>
                         </a>
@@ -86,14 +86,14 @@
                     </li>
 
                     <li class="menu">
-                        <a href="#">
-                            <i class="mdi mdi-format-underline"></i>User Interface
+                        <a href="<?=site_url('admin/users')?>">
+                            <i class="mdi mdi-format-underline"></i>Usuarios
                         </a>
                     </li>
 
                     <li class="menu">
-                        <a href="#">
-                            <i class="mdi mdi-black-mesa"></i>Admin UI
+                        <a href="<?=site_url('admin/institutos')?>">
+                            <i class="mdi mdi-black-mesa"></i>Institutos
                         </a>
                     </li>
 

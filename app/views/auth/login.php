@@ -128,7 +128,7 @@
             <div class="login-form">
                 <!--< ?= my_validation_errors(validation_errors()); ?>-->
 
-                <?= form_open('home/auth', array('id' => 'auth', 'name' => 'auth')) ?>
+                <?= form_open('auth', array('id' => 'auth', 'name' => 'auth')) ?>
                 <div class="form-group">
                     <!--<label>Usuario</label>-->
                     <?= form_label('Usuario', 'username', array('class' => 'control-label')); ?>

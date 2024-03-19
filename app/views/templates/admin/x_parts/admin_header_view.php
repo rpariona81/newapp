@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from coderthemes.com/uplon/layouts/horizontal/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 19 Dec 2023 03:26:31 GMT -->
+<!-- Mirrored from coderthemes.com/uplon/layouts/vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Dec 2023 05:38:22 GMT -->
 
 <head>
 	<meta charset="utf-8" />
@@ -11,18 +11,15 @@
 	<meta content="Coderthemes" name="author" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<!-- App favicon -->
-	<link rel="shortcut icon" href="<?= base_url('assets/images/favicon.png') ?>">
+	<link rel="shortcut icon" href="<?= base_url('assets/images/favicon.ico') ?>">
 
 	<!-- Notification css (Toastr) -->
-	<link href="<?= base_url('assets/libs/toastr/toastr.min.css') ?>" rel="stylesheet" type="text/css" />
-
+	<link href="<?= base_url('assets/libs/toastr/toastr.min.css')?>" rel="stylesheet" type="text/css" />
 	<!-- App css -->
 	<link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
-	<link href="<?= base_url('assets/css/bootstrap-united.min.css') ?>" rel="stylesheet" type="text/css" id="bootstrap-united-stylesheet" />
-
 	<link href="<?= base_url('assets/css/icons.min.css') ?>" rel="stylesheet" type="text/css" />
-	<link href="<?= base_url('assets/css/apphorizontal.min.css') ?>" rel="stylesheet" type="text/css" id="app-stylesheet" />
-	
+	<link href="<?= base_url('assets/css/app.min.css') ?>" rel="stylesheet" type="text/css" id="app-stylesheet" />
+
 	<!-- Table datatable css -->
 	<link href="<?= base_url('assets/libs/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet" type="text/css" />
 
