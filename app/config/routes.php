@@ -67,3 +67,4 @@ $route['logout'] = 'homecontroller/logout';
 
 
 $route['home/loadentidades'] = 'homecontroller/loadentidades';
+$route['home/guarda_asistencia'] = 'homecontroller/grabaAsistencia';

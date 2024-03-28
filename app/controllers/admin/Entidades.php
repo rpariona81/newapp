@@ -17,7 +17,8 @@ class Entidades extends MY_Controller
 	public function index()
 	{
 		$this->data['info'] = 'Bienvenido(a) ' . $this->session->userdata('user_login');
-		$this->data['records'] = Entidad_eloquent::all();
-		$this->render('admin/users/index');
+		//$this->data['records'] = Entidad_eloquent::all();
+		$this->data['records'] = Entidad_eloquent::getDirectorioEntidades();
+		$this->render('admin/entidades/index');
 	}
 }

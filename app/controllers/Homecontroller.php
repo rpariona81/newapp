@@ -8,6 +8,7 @@ class HomeController extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Entidad_eloquent');
+		$this->load->model('Registroasistentes_eloquent');
 		$this->form_validation->set_message('loginok', 'Usuario o clave incorrectos');
 		$this->form_validation->set_message('Clave', 'Ingrese contraseña');
 	}
@@ -18,7 +19,7 @@ class HomeController extends CI_Controller
 		//$datos[0]=$this->session->userdata('user_guard');
 		//$this->login();
 		//print_r($datos);
-		
+
 		/*$data['contenido'] = 'welcome';
 		$this->load->view('homeTemplate', $data);*/
 		$data['content'] = 'home';
@@ -118,13 +119,12 @@ class HomeController extends CI_Controller
 			/*$datos=[$region,$tipo];*/
 
 			/*$region = '0300';
-	$tipo = 3;*/
+				$tipo = 3;*/
 			$data['entidad'] = Entidad_eloquent::getEntidades($region, $tipo);
 			//print_r(json_encode($data));
-			/*
-	$data['entidad'] = Entidad_eloquent::getEntidades($region, $tipo);
-	dd($data);
-	exit;*/
+			/*	$data['entidad'] = Entidad_eloquent::getEntidades($region, $tipo);
+				dd($data);
+					exit;*/
 			$output = null;
 			foreach ($data['entidad'] as $row => $value) {
 				//here we build a dropdown item line for each query result  
@@ -132,6 +132,32 @@ class HomeController extends CI_Controller
 			}
 			echo $output;
 			//return $output;
+		}
+	}
+
+	public function grabaAsistencia()
+	{
+		$request = $this->security->xss_clean($this->input->post());
+		$this->form_validation->set_rules('REGION', 'Región', 'required');
+		$this->form_validation->set_rules('TIPO_ENTIDAD', 'Tipo de entidad', 'required');
+		$this->form_validation->set_rules('ENTIDAD', 'Entidad', 'required');
+		$this->form_validation->set_rules('NOMBRES', 'Nombres', 'trim|required');
+		$this->form_validation->set_rules('CARGO', 'Cargo', 'trim|required');
+		
+		//si el proceso falla mostramos errores
+		if ($this->form_validation->run() == FALSE) {
+			//return redirect_back();
+			$this->registroATR();
+		} else {
+			$result = Registroasistentes_eloquent::saveRecord($request);
+			if ($result) {
+				$this->session->set_flashdata('message', 'Estimado ' . $result['nombres'] . ' se grabó su registro.');
+				//return redirect()->back()->with('message', 'User status updated successfully!');
+				return redirect_back();
+			} else {
+				$this->session->set_flashdata('error', 'Error en registro.');
+				return redirect_back();
+			}
 		}
 	}
 

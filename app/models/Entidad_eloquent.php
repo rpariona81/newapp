@@ -51,5 +51,16 @@ class Entidad_Eloquent extends BaseModel
 		return $entidades;
 	}
 
-	
+	public static function getDirectorioEntidades($region_id = NULL)
+	{
+		/*$cantUsers = DB::table('t_marco_instituto')
+			->selectRaw('count(user_id) as cant_users, instituto_id')
+			->groupBy('instituto_id');
+		*/
+		$data = Entidad_Eloquent::leftjoin('t_regiones', 't_regiones.codregion', '=', 't_entidades.codregion')
+			->orderBy('t_entidades.codregion', 'asc')
+			->get(['t_entidades.*', 't_regiones.region']);
+
+		return $data;
+	}
 }

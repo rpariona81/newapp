@@ -1,10 +1,65 @@
 <script>
+	function preventFormSubmit() {
+		//var forms = document.querySelectorAll('form');
+		var forms = document.querySelectorAll('#FRM_DATOS');
+		for (var i = 0; i < forms.length; i++) {
+			forms[i].addEventListener('submit', function(event) {
+				event.preventDefault();
+			});
+		}
+	}
+	window.addEventListener('load', preventFormSubmit);
+	/* $("#FRM_DATOS").submit(function(e) {
+		e.preventDefault();
+	}); */
+</script>
+
+<!-- <script>
+	$(document).ready(function() {
+		$("#FRM_DATOS").submit(function() {
+			setTimeout(google.script.run.withSuccessHandler(daMensaje).addToSheet(this), 100);
+		});
+	})
+</script> -->
+
+<!-- <script type="text/javascript">
+	$(document).ready(function() {
+		$("#FRM_DATOS").submit(function()  {
+			/*dropdown post */ //  
+			var verRegion = $('#REGION').val();
+			var verTipo = $('#TIPO_ENTIDAD').val();
+			//$('#ENTIDAD').empty();
+			console.log(verRegion);
+			console.log(verTipo);
+			$.post("<?php echo base_url('home/guarda_asistencia') ?>", {
+				'cod_region': verRegion,
+				'cod_tipo_entidad': verTipo
+			}, function(data, statusText, jqXHR) {
+				//$("#ENTIDAD").empty().append(data);
+				//listaInstitutos(data)
+				console.log(jqXHR);
+			});
+		});
+	});
+</script> -->
+
+<script>
 	function activaGrabar() {
 		$(':input[type="submit"]').prop('disabled', false);
 		$("#thank_you").empty();
 	}
 </script>
 
+<script>
+	function daMensaje(data) {
+		var mensaje = new Array(2);
+		mensaje = data;
+		$("#thank_you").html(mensaje[0]);
+		if (mensaje[1] > 0) {
+			document.getElementById("FRM_DATOS").reset();
+		}
+	}
+</script>
 <script>
 	$(document).ready(function() {
 		$("#limpiar").click(function() {
@@ -15,7 +70,6 @@
 
 	})
 </script>
-
 <script>
 	$(function() {
 		var verEntidades = function() {
@@ -28,6 +82,21 @@
 		$('#REGION').change(verEntidades);
 	});
 </script>
+
+<!--<script>
+	$(function() {
+		var verEntidad = function() {
+			var verRegion = $('#REGION').val();
+			var verTipo = $('#TIPO_ENTIDAD').val();
+			console.log(verRegion);
+			console.log(verTipo);
+			$('#ENTIDAD').empty();
+			//limpiar();
+			google.script.run.withSuccessHandler(listaInstitutos).loadEntidades(verRegion, verTipo);
+		}
+		$('#TIPO_ENTIDAD').change(verEntidad);
+	});
+</script>-->
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -49,6 +118,21 @@
 		});
 	});
 </script>
+
+<!-- <script>
+	function listaInstitutos(data) {
+		console.log("lista" + data.length);
+		/*console.log("lista" + data);
+		$("#ENTIDAD").html(data[0]);*/
+		/*$('#CLAVE').prop('disabled', false);*/
+		$('#ENTIDAD').append($('<option>').val('0').text('Seleccione instituto o entidad que representa'));
+		for (i = 0; i < data.length; i++) {
+			$('#ENTIDAD').append($('<option>').val(data[i][]).text(data[i][1]));
+		}
+		$('#ENTIDAD').append($('<option>').val('GOBNAMINEDU').text('MINEDU'));
+		$('#ENTIDAD').append($('<option>').val('OTROS').text('OTRA INSTITUCIÓN'));
+	}
+</script> -->
 
 <script>
 	$(function() {
@@ -75,9 +159,12 @@
 			}
 		}
 		$('#CARGO').change(especificaCargo);
+		/*$('#CARGO').change(function(){
+		  alert($(this).val());   
+		});
+		especificaCargo();*/
 	});
 </script>
-
 <script>
 	$(document).ready(function() {
 		$("#DNI").keydown(function(e) {
@@ -158,12 +245,11 @@
 <div class="container-fluid">
 
 	<div class="card card-primary">
-		<div class="card-header bg-info text-white">REGISTRO VIRTUAL DE ASISTENTES: &nbsp; <div class="d-inline" id="fechaHoy"><?= date('d/m/Y'); ?></div>
+		<div class="card-header bg-danger text-white">REGISTRO VIRTUAL DE ASISTENTES: &nbsp; <div class="d-inline" id="fechaHoy"><?= date('d/m/Y'); ?></div>
 		</div>
 		<div class="card-body">
 
-			<!--<form action="< ?php echo base_url('home/guarda_asistencia') ?>" method="POST" id="FRM_DATOS" name="FRM_DATOS" class="form-horizontal" >-->
-			<?= form_open('home/guarda_asistencia', array('id' => 'FRM_DATOS', 'class' => 'needs-validation', 'onsubmit' => 'grabar.disabled = true; return true;')); ?>
+			<form action="<?php echo base_url('home/guarda_asistencia') ?>" method="POST" id="FRM_DATOS" name="FRM_DATOS" class="form-horizontal" >
 				<fieldset>
 
 					<div class="form-group row">
@@ -298,12 +384,11 @@
 							<button type="submit" id="grabar" class="btn btn-success form-control input-sm">Grabar</button>
 						</div>
 						<div class="col-md-3">
-							<button type="reset" id="limpiar" class="btn btn-primary form-control input-sm">Limpiar</button>
+							<button type="reset" id="limpiar" class="btn btn-warning form-control input-sm">Limpiar</button>
 						</div>
 					</div>
 				</fieldset>
-			<!--</form>-->
-			<?= form_close() ?>
+			</form>
 		</div>
 
 	</div>
