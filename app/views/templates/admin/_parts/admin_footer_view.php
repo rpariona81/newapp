@@ -20,7 +20,7 @@
 <script src="<?= base_url('assets/libs/raphael/raphael.min.js') ?>"></script>
 
 <!-- Dashboard init js-->
-<script src="<?= base_url('assets/js/pages/dashboard.init.js') ?>"></script>
+<!-- <script src="<?= base_url('assets/js/pages/dashboard.init.js') ?>"></script> -->
 
 <!-- Toastr js -->
 <script src="<?= base_url('assets/libs/toastr/toastr.min.js') ?>"></script>
