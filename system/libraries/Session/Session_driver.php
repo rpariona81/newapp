@@ -99,7 +99,8 @@ abstract class CI_Session_driver {
 	{
 		$this->_config =& $params;
 
-		if (is_php('7'))
+		//if (is_php('7'))
+		if (is_php('7')||is_php('8'))
 		{
 			$this->_success = TRUE;
 			$this->_failure = FALSE;

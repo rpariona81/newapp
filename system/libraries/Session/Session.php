@@ -134,6 +134,7 @@ class CI_Session {
 			unset($_COOKIE[$this->_config['cookie_name']]);
 		}
 
+		//https://www.youtube.com/watch?v=j6jBxlrhTY4 [SOLVED] Session lost after redirect in CodeIgniter
 		session_start();
 
 		// Is session ID auto-regeneration configured? (ignoring ajax requests)
@@ -300,7 +301,9 @@ class CI_Session {
 		}
 		else
 		{
-			ini_set('session.name', $params['cookie_name']);
+			//ini_set('session.name', $params['cookie_name']);
+			//https://youtu.be/Ez3HT4BRYaQ?si=PSjIO_Fhs1mFKgdX How to fix Codeigniter 3.1.11 session error - Session is missing after redirect page
+			ini_set('session.id', $params['cookie_name']);
 		}
 
 		isset($params['cookie_path']) OR $params['cookie_path'] = config_item('cookie_path');
@@ -362,10 +365,10 @@ class CI_Session {
 		$this->_config = $params;
 
 		// Security is king
-		ini_set('session.use_trans_sid', 0);
-		ini_set('session.use_strict_mode', 1);
-		ini_set('session.use_cookies', 1);
-		ini_set('session.use_only_cookies', 1);
+		// ini_set('session.use_trans_sid', 0);
+		// ini_set('session.use_strict_mode', 1);
+		// ini_set('session.use_cookies', 1);
+		// ini_set('session.use_only_cookies', 1);
 
 		$this->_configure_sid_length();
 	}

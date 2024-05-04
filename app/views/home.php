@@ -13,6 +13,7 @@
                         <div class="card-body">
                             <p class="card-text">
                                 {{ __('You are logged in!') }}
+								<?=$this->db->platform().'-'.$this->db->version()?>
                             </p>
                         </div>
                     </div>

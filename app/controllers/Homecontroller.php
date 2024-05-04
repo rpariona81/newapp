@@ -22,6 +22,7 @@ class HomeController extends CI_Controller
 
 		/*$data['contenido'] = 'welcome';
 		$this->load->view('homeTemplate', $data);*/
+		$data['versionDB'] = $this->db->version();
 		$data['content'] = 'home';
 		$this->load->view('templates/guest', $data);
 	}

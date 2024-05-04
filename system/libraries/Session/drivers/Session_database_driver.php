@@ -108,6 +108,10 @@ class CI_Session_database_driver extends CI_Session_driver implements CI_Session
 		{
 			$this->_platform = 'postgre';
 		}
+		elseif (strpos($db_driver, 'sqlsrv') !== FALSE)
+		{
+			$this->_platform = 'sqlsrv';
+		}
 
 		// Note: BC work-around for the old 'sess_table_name' setting, should be removed in the future.
 		if ( ! isset($this->_config['save_path']) && ($this->_config['save_path'] = config_item('sess_table_name')))

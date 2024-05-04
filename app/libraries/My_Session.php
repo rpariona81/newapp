@@ -1,99 +1,146 @@
 <?php
 
-class My_Session{
-    /**
-	 * Write
-	 *
-	 * Writes (create / update) session data
-	 *
-	 * @param	string	$session_id	Session ID
-	 * @param	string	$session_data	Serialized session data
-	 * @return	bool
+class My_Session
+{
+	//https://culttt.com/2013/02/04/how-to-save-php-sessions-to-a-database
+	/**
+	 * Db Object
 	 */
-	public function write($session_id, $session_data)
+	private $ci;
+	private $db;
+
+	public function __construct()
 	{
-		// Prevent previous QB calls from messing with our queries
-		$this->_db->reset_query();
+		// Instantiate new Database object
+		$this->ci = &get_instance(); // Esto para acceder a la instancia que carga la librería
+		$this->ci->load->model('Session_eloquent');
+		$this->ci->db;
 
-		// Was the ID regenerated?
-		if (isset($this->_session_id) && $session_id !== $this->_session_id)
-		{
-			if ( ! $this->_release_lock() OR ! $this->_get_lock($session_id))
-			{
-				return $this->_failure;
-			}
+		// Set handler to overide SESSION
+		session_set_save_handler(
+			[$this, "_open"],
+			[$this, "_close"],
+			[$this, "_read"],
+			[$this, "_write"],
+			[$this, "_destroy"],
+			[$this, "_gc"]
+		);
 
-			$this->_row_exists = FALSE;
-			$this->_session_id = $session_id;
-		}
-		elseif ($this->_lock === FALSE)
-		{
-			return $this->_failure;
-		}
-
-		if ($this->_row_exists === FALSE)
-		{
-			$insert_data = array(
-				'id' => $session_id,
-				'ip_address' => $_SERVER['REMOTE_ADDR'],
-				'timestamp' => time(),
-				'data' => ($this->_platform === 'postgre' ? base64_encode($session_data) : $session_data)
-			);
-
-			if ($this->_db->insert($this->_config['save_path'], $insert_data))
-			{
-				$this->_fingerprint = base64_encode($session_data);
-				$this->_row_exists = TRUE;
-				return $this->_success;
-			}
-
-			return $this->_failure;
-		}
-
-		$this->_db->where('id', $session_id);
-		if ($this->_config['match_ip'])
-		{
-			$this->_db->where('ip_address', $_SERVER['REMOTE_ADDR']);
-		}
-
-		$update_data = array('timestamp' => time());
-		if ($this->_fingerprint !== base64_encode($session_data))
-		{
-			$update_data['data'] = ($this->_platform === 'postgre')
-				? base64_encode($session_data)
-				: $session_data;
-		}
-
-		if ($this->_db->update($this->_config['save_path'], $update_data))
-		{
-			$this->_fingerprint = base64_encode($session_data);
-			return $this->_success;
-		}
-
-		return $this->_failure;
+		// Start the session
+		session_start();
 	}
 
-    /*public function write($session_id, $session_data)
-    {
-        $user_id = (auth()->check()) ? auth()->user()->id : null;
+	/**
+	 * Open
+	 */
+	public function _open()
+	{
+		// If successful
+		if ($this->ci->db) {
+			// Return True
+			Session_Eloquent::insertSession(session_id());
+			return true;
+		}
+		// Return False
+		return false;
+	}
 
-        if ($this->exists) {
-            $this->getQuery()->where('id', $sessionId)->update([
-                'payload' => base64_encode($data), 
-                'last_activity' => time(), 
-                'user_id' => $user_id,
-            ]);
-        } else {
-            $this->getQuery()->insert([
-                'id' => $sessionId, 
-                'payload' => base64_encode($data), 
-                'last_activity' => time(), 
-                'user_id' => $user_id,
-            ]);
-        }
+	/**
+	 * Close
+	 */
+	public function _close()
+	{
+		// Close the database connection
+		// If successful
+		if ($this->ci->db->close()) {
+			// Return True
+			return true;
+		}
+		// Return False
+		return false;
+	}
 
-        $this->exists = true;
-    }
-    */
-    
+	/**
+	 * Read
+	 */
+	public function _read($id)
+	{
+		// Set query
+		$result = Session_Eloquent::where('id', '=', $id)->first();
+		if ($result) {
+			return $result->data;
+		} else {
+			return '';
+		}
+	}
+
+	/**
+	 * Write
+	 */
+	public function _write($id, $data = NULL)
+	{
+		// Create time stamp
+		$access = time();
+
+		// Set query
+		$model = Session_Eloquent::where('id', '=', $id)->first();
+
+		// If successful
+		if ($model) {
+			$model->data = $_SESSION;
+			$model->timestamp = $access;
+			$model->save();
+			// Return True
+			return true;
+		}
+
+		// Return False
+		return false;
+	}
+
+	/**
+	 * Destroy
+	 */
+	public function _destroy($id)
+	{
+		// Set query
+		$this->db->query("DELETE FROM sessions WHERE id = :id");
+
+		// Bind data
+		$this->db->bind(":id", $id);
+
+		// Attempt execution
+		// If successful
+		if ($this->db->execute()) {
+			// Return True
+			return true;
+		}
+
+		// Return False
+		return false;
+	}
+
+	/**
+	 * Garbage Collection
+	 */
+	public function _gc($max)
+	{
+		// Calculate what is to be deemed old
+		$old = time() - $max;
+
+		// Set query
+		$this->db->query("DELETE * FROM sessions WHERE access < :old");
+
+		// Bind data
+		$this->db->bind(":old", $old);
+
+		// Attempt execution
+		if ($this->db->execute()) {
+			// Return True
+			return true;
+		}
+
+		// Return False
+		return false;
+	}
 }
