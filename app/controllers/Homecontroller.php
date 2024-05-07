@@ -27,8 +27,14 @@ class HomeController extends CI_Controller
 		$this->load->view('templates/guest', $data);
 	}
 
+	public function viewLogin()
+	{
+		$this->load->view('auth/login');
+	}
+
 	public function login()
 	{
+		//session_start();
 		if ($this->session->userdata('user_guard')) {
 			//print_r($datos);
 			//echo "si hay sesion";
@@ -36,7 +42,8 @@ class HomeController extends CI_Controller
 		} else {
 			//echo "no hay sesion";
 			//$this->login();
-			$this->load->view('auth/login');
+			//$this->load->view('auth/login');
+			$this->viewLogin();
 		}
 		//$this->load->view('auth/login');
 	}
@@ -62,6 +69,8 @@ class HomeController extends CI_Controller
 				//$this->session->set_flashdata('error', 'Error de usuario o contraseña.');
 				//redirect_back();
 				$this->login();
+				//redirect('/login');
+				//return redirect_back();
 				//en otro caso procesamos los datos
 			} else {
 				//redirect('encuestacsc/index');
