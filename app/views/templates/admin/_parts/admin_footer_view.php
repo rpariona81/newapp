@@ -47,6 +47,7 @@
 <script src="<?= base_url('assets/libs/datatables/dataTables.keyTable.min.js') ?>"></script>
 <script src="<?= base_url('assets/libs/datatables/dataTables.select.min.js') ?>"></script>
 
+
 <!-- Datatables init -->
 <!-- <script src="< ?= base_url('assets/js/pages/datatables.init.js') ?>"></script> -->
 

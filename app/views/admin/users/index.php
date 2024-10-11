@@ -241,7 +241,7 @@
 			order: [],
 			//stateSave: true,
 			language: {
-				url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json',
+				url: '<?=base_url('assets/libs/datatables/i18n/es-ES.json')?>',
 				paginate: {
 					previous: "<<",
 					next: ">>",
@@ -253,9 +253,9 @@
 
 		new $.fn.dataTable.Buttons(mytable, {
 			buttons: [
-				'copy', 'pdf',
+				'copy', 'pdf', 'print', 
 				{
-					extend: 'excelHtml5',
+					extend: 'excel',
 					text: 'Excel',
 					customize: function(xlsx) {
 						var sheet = xlsx.xl.worksheets['sheet1.xml'];

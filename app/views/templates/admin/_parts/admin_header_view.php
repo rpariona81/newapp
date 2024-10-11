@@ -20,16 +20,17 @@
 	<link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
 	<link href="<?= base_url('assets/css/bootstrap-united.min.css') ?>" rel="stylesheet" type="text/css" id="bootstrap-united-stylesheet" />
 
-	<link href="<?= base_url('assets/css/icons.min.css') ?>" rel="stylesheet" type="text/css" />
-	<link href="<?= base_url('assets/css/apphorizontal.min.css') ?>" rel="stylesheet" type="text/css" id="app-stylesheet" />
-	
 	<!-- Table datatable css -->
 	<link href="<?= base_url('assets/libs/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet" type="text/css" />
 
 	<link href="<?= base_url('assets/libs/datatables/buttons.bootstrap4.min.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?= base_url('assets/libs/datatables/responsive.bootstrap4.min.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?= base_url('assets/libs/datatables/select.bootstrap4.min.css') ?>" rel="stylesheet" type="text/css" />
-
+	
+	<link href="<?= base_url('assets/css/icons.min.css') ?>" rel="stylesheet" type="text/css" />
+	<link href="<?= base_url('assets/css/apphorizontal.min.css') ?>" rel="stylesheet" type="text/css" id="app-stylesheet" />
+	
+	
 	<script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
 
 </head>

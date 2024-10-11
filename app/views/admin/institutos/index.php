@@ -51,7 +51,7 @@
 									<td class="text-center"><?= $item->es_licenciado ?></td>
 									<td><?= $item->proceso_licenciamiento ?></td>
 									<td><?= $item->fecha_max_presentacion ?></td>									
-									<td class="text-center"><?= $item->cant_programs ?></td>
+									<td class="sorting_1"><?= $item->cant_programs ?></td>
 									<td><a class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Carpeta" target="_blank" href="<?= $item->url_gdriveoptimizacion ?>"><i class="fa fa-cloud" aria-hidden="true"></i> &nbsp;Abrir</a></td>
 									<td><?= (($item->updated_at) ? $item->updated_at->diffForHumans() : NULL) ?></td>
 									<td>
@@ -112,7 +112,7 @@
 			//responsive: true,
 			//scrollX: true,
 			language: {
-				"url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
+				url: '<?=base_url('assets/libs/datatables/i18n/es-ES.json')?>',
 				"paginate": {
 					"previous": "<<",
 					"next": ">>",

@@ -518,4 +518,100 @@ class User_Eloquent extends BaseModel
 			return FALSE;
 		}
 	}
+
+	public static function countRecords()
+	{
+		$model_count = User_Eloquent::count();
+		return $model_count;
+	}
+
+	public static function getUsersRolesPaginate($skip = NULL, $take = NULL, $except_id = NULL, $role_select = NULL, $status_select = NULL)
+	{
+		//Para crear row_numer en SQLITE https://stackoverflow.com/questions/16847574/how-to-use-row-number-in-sqlite
+		//Esta opción tambien funciona con MariaDB
+		//DB::statement(DB::raw('set @row:=0'));
+		if ($role_select != NULL && $status_select != NULL) {
+			try {
+				//DB::statement(DB::raw('set @row:=0'));
+				return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
+					->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
+					->where('t_users.id', '!=', $except_id)
+					->where('t_role_user.role_id', '=', $role_select)
+					->where('t_users.status', '=', $status_select)
+					->selectRaw('t_users.*, t_role_user.role_id, t_roles.rolename, ROW_NUMBER() OVER(ORDER BY t_users.updated_at DESC) AS row')
+					->orderBy('row', 'asc')
+					->skip($skip)->take($take)->get();
+
+				/*->selectRaw('t_users.*, t_role_user.role_id,t_roles.rolename, @row:=@row+1 as row')
+					->orderBy('t_users.updated_at', 'desc')
+					->get();*/
+
+				/*->selectRaw('*, @row:=@row+1 as row')
+					->orderBy('t_users.updated_at', 'desc')
+					->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);*/
+			} catch (\Throwable $th) {
+				return FALSE;
+			}
+		} else if ($role_select != NULL && $status_select == NULL) {
+			try {
+				//DB::statement(DB::raw('set @row:=0'));
+				return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
+					->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
+					->where('t_users.id', '!=', $except_id)
+					->where('t_role_user.role_id', '=', $role_select)
+					->selectRaw('t_users.*, t_role_user.role_id, t_roles.rolename, ROW_NUMBER() OVER(ORDER BY t_users.updated_at DESC) AS row')
+					->orderBy('row', 'asc')
+					->skip($skip)->take($take)->get();
+				/*
+					->selectRaw('t_users.*, t_role_user.role_id,t_roles.rolename, @row:=@row+1 as row')
+					->orderBy('t_users.updated_at', 'desc')
+					->get();*/
+
+				/*->selectRaw('*, @row:=@row+1 as row')
+					->orderBy('t_users.updated_at', 'desc')
+					->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);*/
+			} catch (\Throwable $th) {
+				return FALSE;
+			}
+		} else if ($role_select == NULL && $status_select != NULL) {
+			try {
+				//DB::statement(DB::raw('set @row:=0'));
+				return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
+					->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
+					->where('t_users.id', '!=', $except_id)
+					->where('t_users.status', '=', $status_select)
+					->selectRaw('t_users.*, t_role_user.role_id, t_roles.rolename, ROW_NUMBER() OVER(ORDER BY t_users.updated_at DESC) AS row')
+					->orderBy('row', 'asc')
+					->skip($skip)->take($take)->get();
+				/*
+					->selectRaw('t_users.*, t_role_user.role_id,t_roles.rolename, @row:=@row+1 as row')
+					->orderBy('t_users.updated_at', 'desc')
+					->get();*/
+
+				/*->selectRaw('*, @row:=@row+1 as row')
+					->orderBy('t_users.updated_at', 'desc')
+					->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);*/
+			} catch (\Throwable $th) {
+				return FALSE;
+			}
+		} else {
+			try {
+				//DB::statement(DB::raw('set @row:=0'));
+				return User_Eloquent::leftjoin('t_role_user', 't_role_user.user_id', '=', 't_users.id')
+					->leftjoin('t_roles', 't_role_user.role_id', '=', 't_roles.id')
+					->where('t_users.id', '!=', $except_id)
+					->selectRaw('t_users.*, t_role_user.role_id, t_roles.rolename, ROW_NUMBER() OVER(ORDER BY t_users.updated_at DESC) AS row')
+					->orderBy('row', 'asc')
+					->skip($skip)->take($take)->get();
+				/*
+					->selectRaw('t_users.*, t_role_user.role_id,t_roles.rolename, @row:=@row+1 as row')
+					->orderBy('t_users.updated_at', 'desc')
+					->get();*/
+
+				//->get(['t_users.*', 't_role_user.role_id', 't_roles.rolename', 't_role_user.updated_at as updated_at_role']);
+			} catch (\Throwable $th) {
+				return FALSE;
+			}
+		}
+	}
 }
