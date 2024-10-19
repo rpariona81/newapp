@@ -29,7 +29,7 @@ class Roles extends MY_Controller
 		$total_row = User_Eloquent::countRecords(); //total row
 		$config["total_rows"] = $total_row;
 
-		$config['per_page'] = 20;  //show record per halaman
+		$config['per_page'] = 2;  //show record per halaman
 
 		$config['uri_segment'] = 4;
 
@@ -68,6 +68,7 @@ class Roles extends MY_Controller
 		//$results = User_Eloquent::skip($this->uri->segment(4))->take($config['per_page'])->get();
 		//$this->data['records'] = User_Eloquent::skip($this->data['page'])->take($config['per_page'])->get();
 		$this->data['records'] = User_Eloquent::getUsersRolesPaginate($this->data['page'], $config['per_page']);
+		
 		/*foreach ($this->data['records'] as $row) {
 
 			echo $row['row'] . ' - ';
@@ -76,6 +77,7 @@ class Roles extends MY_Controller
 		}
 
 		echo $this->pagination->create_links();*/
+
 		$this->data['pagination'] = $this->pagination->create_links();
 		$this->render('admin/roles/table');
 	}

@@ -1,275 +1,313 @@
+<!--begin::Navbar-->
+<div class="card">
+    <div class="card-body pt-9 pb-0">
+        <!--begin::Details-->
+        <div class="d-flex flex-wrap flex-sm-nowrap mb-6">
+            <!--begin::Image-->
+            <div class="d-flex flex-center flex-shrink-0 bg-light rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4">
+                <img class="mw-50px mw-lg-75px" src="assets/media/svg/brand-logos/volicity-9.svg" alt="image" />
+            </div>
+            <!--end::Image-->
+            <!--begin::Wrapper-->
+            <div class="flex-grow-1">
+                <!--begin::Head-->
+                <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+                    <!--begin::Details-->
+                    <div class="d-flex flex-column">
+                        <!--begin::Status-->
+                        <div class="d-flex align-items-center mb-1">
+                            <a href="#" class="text-gray-800 text-hover-primary fs-2 fw-bolder me-3">CRM Dashboard</a>
+                            <span class="badge badge-light-success me-auto">In Progress</span>
+                        </div>
+                        <!--end::Status-->
+                        <!--begin::Description-->
+                        <div class="d-flex flex-wrap fw-bold mb-4 fs-5 text-gray-400">#1 Tool to get started with Web Apps any Kind &amp; size</div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Details-->
+                    <!--begin::Actions-->
+                    <div class="d-flex mb-4">
+                        <a href="#" class="btn btn-sm btn-bg-light btn-active-color-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">Add User</a>
+                        <a href="#" class="btn btn-sm btn-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_target">Add Target</a>
+                        <!--begin::Menu-->
+                        <div class="me-0">
+                            <button class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                <i class="bi bi-three-dots fs-3"></i>
+                            </button>
+                            <!--begin::Menu 3-->
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
+                                <!--begin::Heading-->
+                                <div class="menu-item px-3">
+                                    <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Payments</div>
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="#" class="menu-link px-3">Create Invoice</a>
+                                </div>
+                                <!--end::Menu item-->
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="#" class="menu-link flex-stack px-3">Create Payment
+                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a target name for future usage and reference"></i></a>
+                                </div>
+                                <!--end::Menu item-->
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="#" class="menu-link px-3">Generate Bill</a>
+                                </div>
+                                <!--end::Menu item-->
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-end">
+                                    <a href="#" class="menu-link px-3">
+                                        <span class="menu-title">Subscription</span>
+                                        <span class="menu-arrow"></span>
+                                    </a>
+                                    <!--begin::Menu sub-->
+                                    <div class="menu-sub menu-sub-dropdown w-175px py-4">
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                            <a href="#" class="menu-link px-3">Plans</a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                            <a href="#" class="menu-link px-3">Billing</a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                            <a href="#" class="menu-link px-3">Statements</a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                        <!--begin::Menu separator-->
+                                        <div class="separator my-2"></div>
+                                        <!--end::Menu separator-->
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                            <div class="menu-content px-3">
+                                                <!--begin::Switch-->
+                                                <label class="form-check form-switch form-check-custom form-check-solid">
+                                                    <!--begin::Input-->
+                                                    <input class="form-check-input w-30px h-20px" type="checkbox" value="1" checked="checked" name="notifications" />
+                                                    <!--end::Input-->
+                                                    <!--end::Label-->
+                                                    <span class="form-check-label text-muted fs-6">Recuring</span>
+                                                    <!--end::Label-->
+                                                </label>
+                                                <!--end::Switch-->
+                                            </div>
+                                        </div>
+                                        <!--end::Menu item-->
+                                    </div>
+                                    <!--end::Menu sub-->
+                                </div>
+                                <!--end::Menu item-->
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3 my-1">
+                                    <a href="#" class="menu-link px-3">Settings</a>
+                                </div>
+                                <!--end::Menu item-->
+                            </div>
+                            <!--end::Menu 3-->
+                        </div>
+                        <!--end::Menu-->
+                    </div>
+                    <!--end::Actions-->
+                </div>
+                <!--end::Head-->
+                <!--begin::Info-->
+                <div class="d-flex flex-wrap justify-content-start">
+                    <!--begin::Stats-->
+                    <div class="d-flex flex-wrap">
+                        <!--begin::Stat-->
+                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                            <!--begin::Number-->
+                            <div class="d-flex align-items-center">
+                                <div class="fs-4 fw-bolder">29 Jan, 2021</div>
+                            </div>
+                            <!--end::Number-->
+                            <!--begin::Label-->
+                            <div class="fw-bold fs-6 text-gray-400">Due Date</div>
+                            <!--end::Label-->
+                        </div>
+                        <!--end::Stat-->
+                        <!--begin::Stat-->
+                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                            <!--begin::Number-->
+                            <div class="d-flex align-items-center">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr065.svg-->
+                                <span class="svg-icon svg-icon-3 svg-icon-danger me-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="11" y="18" width="13" height="2" rx="1" transform="rotate(-90 11 18)" fill="black" />
+                                        <path d="M11.4343 15.4343L7.25 11.25C6.83579 10.8358 6.16421 10.8358 5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75L11.2929 18.2929C11.6834 18.6834 12.3166 18.6834 12.7071 18.2929L18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25C17.8358 10.8358 17.1642 10.8358 16.75 11.25L12.5657 15.4343C12.2533 15.7467 11.7467 15.7467 11.4343 15.4343Z" fill="black" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="75">0</div>
+                            </div>
+                            <!--end::Number-->
+                            <!--begin::Label-->
+                            <div class="fw-bold fs-6 text-gray-400">Open Tasks</div>
+                            <!--end::Label-->
+                        </div>
+                        <!--end::Stat-->
+                        <!--begin::Stat-->
+                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                            <!--begin::Number-->
+                            <div class="d-flex align-items-center">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+                                <span class="svg-icon svg-icon-3 svg-icon-success me-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
+                                        <path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="15000" data-kt-countup-prefix="$">0</div>
+                            </div>
+                            <!--end::Number-->
+                            <!--begin::Label-->
+                            <div class="fw-bold fs-6 text-gray-400">Budget Spent</div>
+                            <!--end::Label-->
+                        </div>
+                        <!--end::Stat-->
+                    </div>
+                    <!--end::Stats-->
+                    <!--begin::Users-->
+                    <div class="symbol-group symbol-hover mb-3">
+                        <!--begin::User-->
+                        <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="Alan Warden">
+                            <span class="symbol-label bg-warning text-inverse-warning fw-bolder">A</span>
+                        </div>
+                        <!--end::User-->
+                        <!--begin::User-->
+                        <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="Michael Eberon">
+                            <img alt="Pic" src="assets/media/avatars/150-12.jpg" />
+                        </div>
+                        <!--end::User-->
+                        <!--begin::User-->
+                        <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="Michelle Swanston">
+                            <img alt="Pic" src="assets/media/avatars/150-13.jpg" />
+                        </div>
+                        <!--end::User-->
+                        <!--begin::User-->
+                        <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="Francis Mitcham">
+                            <img alt="Pic" src="assets/media/avatars/150-5.jpg" />
+                        </div>
+                        <!--end::User-->
+                        <!--begin::User-->
+                        <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="Susan Redwood">
+                            <span class="symbol-label bg-primary text-inverse-primary fw-bolder">S</span>
+                        </div>
+                        <!--end::User-->
+                        <!--begin::User-->
+                        <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="Melody Macy">
+                            <img alt="Pic" src="assets/media/avatars/150-3.jpg" />
+                        </div>
+                        <!--end::User-->
+                        <!--begin::User-->
+                        <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="Perry Matthew">
+                            <span class="symbol-label bg-info text-inverse-info fw-bolder">P</span>
+                        </div>
+                        <!--end::User-->
+                        <!--begin::User-->
+                        <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="Barry Walter">
+                            <img alt="Pic" src="assets/media/avatars/150-7.jpg" />
+                        </div>
+                        <!--end::User-->
+                        <!--begin::All users-->
+                        <a href="#" class="symbol symbol-35px symbol-circle" data-bs-toggle="modal" data-bs-target="#kt_modal_view_users">
+                            <span class="symbol-label bg-dark text-inverse-dark fs-8 fw-bolder" data-bs-toggle="tooltip" data-bs-trigger="hover" title="View more users">+42</span>
+                        </a>
+                        <!--end::All users-->
+                    </div>
+                    <!--end::Users-->
+                </div>
+                <!--end::Info-->
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Details-->
+        <div class="separator"></div>
+        <?= form_close() ?>
 
-	<!-- start page title -->
-	<!-- <div class="row">
-		<div class="col-12">
-			<div class="page-title-box">
-				<div class="page-title-right">
-					<ol class="m-0 breadcrumb">
-						<li class="breadcrumb-item"><a href="javascript: void(0);">Uplon</a></li>
-						<li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-						<li class="breadcrumb-item active">Data Tables</li>
-					</ol>
-				</div>
-				<h4 class="page-title">Control de usuarios</h4>
-			</div>
-		</div>
-	</div> -->
-	<!-- <div class="row mt-3">
-		<div class="col-12">
-			<div class="card-header bg-light border">
-				<h4 class="page-title">Control de usuarios</h4>
-			</div>
-		</div>
-	</div> -->
-	<!-- end page title -->
 
-	<div class="row">
-		<div class="col-12">
-			<div class="card-header bg-light border mt-3">
-				<h4 class="page-title">Control de usuarios</h4>
-			</div>
-			<div class="card-box">
+        <div class="p-0 table-responsive">
+            <table id="datatable" class="table table-hover table-bordered dt-responsive nowrap"
+                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <!--<thead class="bg-primary text-white">-->
+                <thead>
+                    <tr>
+                        <!--<th colspan="8" class="heading"><span style="float: right"></span></th>-->
+                        <th colspan="8" class="heading"></th>
+                    </tr>
+                    <tr class="fw-bolder text-dark bg-warning">
+                        <!--<th class="font-weight-bold">Id</th>-->
+                        <th class="ps-4 font-weight-bold">#</th>
+                        <th class="font-weight-bold">Usuario</th>
+                        <th class="font-weight-bold">Rol</th>
+                        <th class="font-weight-bold">Celular</th>
+                        <th class="font-weight-bold">Condición</th>
+                        <th class="font-weight-bold">Email</th>
+                        <th class="font-weight-bold">Última modif.</th>
+                        <th class="font-weight-bold">Opciones</th>
+                    </tr>
+                </thead>
 
-				<?= form_open('', array('id' => 'FRM_DATOS', 'class' => 'form-horizontal', 'onsubmit' => 'window.location.reload()')); ?>
+                <tbody>
+                    <?php foreach ($records as $item) : ?>
+                        <tr class="align-middle">
+                            <!--<td>< ?= str_pad($item->id, 5, '0', STR_PAD_LEFT); ?></td>-->
+                            <td class="ps-4"><?= $item->row ?></td>
+                            <td><?= $item->username ?></td>
+                            <td><?= $item->rolename ?></td>
+                            <td class="text-center"><?= $item->mobile ?></td>
+                            <td><?= $item->userflag ?></td>
+                            <td class="text-center"><?= $item->email ?></td>
+                            <td><?= (($item->updated_at) ? $item->updated_at->diffForHumans() : (($item->updated_at_role) ? $item->updated_at_role->diffForHumans() : NULL)) ?></td>
+                            <td>
+                                <?php
+                                if ($item->status) {
+                                    echo '<span class="text-white border badge bg-info">' . $item->userflag . '</span>';
+                                } else {
+                                    echo '<span class="text-white border badge bg-danger">' . $item->userflag . '</span>';
+                                }
+                                ?>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <?php
+                                    if ($item->lock == 1) {
+                                    } else {
+                                        if ($item->status) {
+                                            echo form_open('admin/users/enviaPassword');
+                                            echo '<input type="hidden" id="id" name="id" value="' . $item->id . '">';
+                                            echo '<button type="submit" id="showtoast" name="submit" class="btn btn-outline-info btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Enviar contraseña"><i class="fa fa-envelope" style="color:red"></i></button>';
+                                            echo form_close();
+                                            echo "&nbsp;";
 
-				<div class="col-md-9 col-lg-9 mx-auto">
-					<div class="mb-3">
-						<div class="input-group mb-1">
+                                            echo form_open('admin/users/inactiveUser');
+                                            echo '<input type="hidden" id="id" name="id" value="' . $item->id . '">';
+                                            echo '<button type="submit" id="showtoast" name="submit" class="btn btn-outline-dark btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Desactivar"><i class="fa fa-eye-slash"></i></button>';
+                                            echo form_close();
 
-							<?= form_dropdown('role_select', $roles, $role_Value, 'class="form-control" id="role_select"'); ?>
-							&nbsp;
-							<?= form_dropdown('status_select', $condiciones, $status_Value, 'class="form-control" id="status_select"'); ?>
-							&nbsp;
-							<button class="btn btn-info pull-right font-weight-medium mb-0" type="submit">
-								<!--<i class="ti-search"></i>-->
-								<i class="fa fa-search"></i>&nbsp;Filtrar
-								<!--<i class="fa fa-filter"></i>-->
-							</button>
-
-							&nbsp;
-							<a class="btn btn-danger" href="<?= base_url('/admin/users') ?>">Limpiar filtro</a>
-
-							&nbsp;
-							<a class="btn waves-effect waves-light btn-success pull-right hidden-sm-down" data-toggle="tooltip" data-placement="bottom" title="Crear nuevo registro" href="<?= base_url('/admin/users/newuser') ?>">Nuevo usuario&nbsp;&nbsp;<i class="fa fa-plus"></i></a>
-
-						</div>
-					</div>
-				</div>
-
-				<?= form_close() ?>
-
-
-				<div class="p-0 table-responsive">
-					<table id="datatable-buttons" class="table table-hover table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-						<!--<thead class="bg-primary text-white">-->
-						<thead>
-							<tr>
-								<!--<th colspan="8" class="heading"><span style="float: right"></span></th>-->
-								<th colspan="8" class="heading"></th>
-							</tr>
-							<tr class="table-info">
-								<!--<th class="font-weight-bold">Id</th>-->
-								<th class="font-weight-bold">#</th>
-								<th class="font-weight-bold">Usuario</th>
-								<th class="font-weight-bold">Rol</th>
-								<th class="font-weight-bold">Celular</th>
-								<th class="font-weight-bold">Condición</th>
-								<th class="font-weight-bold">Email</th>
-								<th class="font-weight-bold">Última modif.</th>
-								<th class="font-weight-bold">Opciones</th>
-							</tr>
-						</thead>
-
-						<tbody>
-							<?php foreach ($records as $item) : ?>
-								<tr class="align-middle">
-									<!--<td>< ?= str_pad($item->id, 5, '0', STR_PAD_LEFT); ?></td>-->
-									<td><?= $item->row ?></td>
-									<td><?= $item->username ?></td>
-									<td><?= $item->rolename ?></td>
-									<td class="text-center"><?= $item->mobile ?></td>
-									<td><?= $item->userflag ?></td>
-									<td class="text-center"><?= $item->email ?></td>
-									<td><?= (($item->updated_at) ? $item->updated_at->diffForHumans() : (($item->updated_at_role) ? $item->updated_at_role->diffForHumans() : NULL)) ?></td>
-									<td>
-										<?php
-										if ($item->status) {
-											echo '<span class="text-white border badge bg-info">' . $item->userflag . '</span>';
-										} else {
-											echo '<span class="text-white border badge bg-danger">' . $item->userflag . '</span>';
-										}
-										?>
-										<div class="btn-group" role="group" aria-label="Basic example">
-											<?php
-											if ($item->lock == 1) {
-											} else {
-												if ($item->status) {
-													echo form_open('admin/users/enviaPassword');
-													echo '<input type="hidden" id="id" name="id" value="' . $item->id . '">';
-													echo '<button type="submit" id="showtoast" name="submit" class="btn btn-outline-info btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Enviar contraseña"><i class="fa fa-envelope" style="color:red"></i></button>';
-													echo form_close();
-													echo "&nbsp;";
-
-													echo form_open('admin/users/inactiveUser');
-													echo '<input type="hidden" id="id" name="id" value="' . $item->id . '">';
-													echo '<button type="submit" id="showtoast" name="submit" class="btn btn-outline-dark btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Desactivar"><i class="fa fa-eye-slash"></i></button>';
-													echo form_close();
-
-													echo '&nbsp;&nbsp;';
-													echo '<a class="btn btn-outline-warning btn-sm" data-toggle="tooltip" data-placement="bottom" title="Editar" href="' . base_url('/admin/users/show/' . $item->id) . '"><i class="fa fa-edit"></i></a>';
-												} else {
-													//echo '<a class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Activar" href="<?= $item->id>"><i class="fa fa-eye"></i></a>';
-													echo form_open('admin/users/activeUser');
-													echo '<input type="hidden" id="id" name="id" value="' . $item->id . '">';
-													echo '<button type="submit" id="showtoast" name="submit" class="btn btn-outline-success btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Activar"><i class="fa fa-eye"></i></button>';
-													echo form_close();
-												}
-											}
-											?>
-										</div>
-									</td>
-								</tr>
-							<?php endforeach; ?>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end row -->
-
-
-<!--<script>
-	$(document).ready(function() {
-		//$.noConflict();
-
-		/**https://datatables.net/forums/discussion/43723/how-can-i-remove-default-button-class-of-datatable-btn-default */
-		//$.fn.dataTable.Buttons.defaults.dom.button.className = 'btn btn-md btn-outline-dark border-0';
-		$.fn.dataTable.Buttons.defaults.dom.button.className = 'btn btn-md btn-dark border-0';
-		/**https://datatables.net/forums/discussion/61263/how-to-add-class-to-paginate-button*/
-		/*$.fn.dataTable.ext.classes.sLengthSelect = 'btn btn-flat btn-sm btn-dark border-0';
-		$.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, {
-			className: 'btn btn-md btn-dark border-0'
-		})*/
-
-		$('#datatable-buttons').DataTable({
-			pageLength: 5,
-			order: [],
-			//responsive: true,
-			//scrollX: true,
-			language: {
-				url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-				paginate: {
-					previous: '<i class="fa fa-chevron-right"></i>', // "<<",
-					next: '<i class="fa fa-chevron-right"></i>', // ">>",
-					first: "<",
-					last: ">"
-				},
-			},
-			dom: 'Bfrtip',
-			buttons: ['copy', 'pdf',
-				{
-					extend: 'excelHtml5',
-					text: 'Excel',
-					customize: function(xlsx) {
-						var sheet = xlsx.xl.worksheets['sheet1.xml'];
-						//Para ver los estilos de formato https://datatables.net/reference/button/excelHtml5
-						$('row c[r^="B"]', sheet).attr('s', '57');
-						//Para que la columna se muestre como texto https://datatables.net/forums/discussion/73814/export-to-excel-with-format-text-for-column-b-c-and-d
-						$('row c[r^="D"]', sheet).attr('s', '50');
-					}
-				}
-			]
-		});
-	});
-</script>-->
-
-<!-- <script>
-	$(document).ready(function() {
-		$("#btn-notification").click(function() {
-			$('.toast').toast('show');
-			console.log('toastttt');
-		});
-	});
-</script> -->
-
-<script>
-	$(document).ready(function() {
-		toastr.options = {
-			"closeButton": false,
-			"debug": false,
-			"newestOnTop": true,
-			"progressBar": false,
-			"positionClass": "toast-top-center",
-			"preventDuplicates": false,
-			"onclick": null,
-			"showDuration": "300",
-			"hideDuration": "1000",
-			"timeOut": "5000",
-			"extendedTimeOut": "1000",
-			"showEasing": "swing",
-			"hideEasing": "linear",
-			"showMethod": "fadeIn",
-			"hideMethod": "fadeOut"
-		};
-		<?php if ($this->session->flashdata('success')) { ?>
-			//$('.toast').toast('show');
-			toastr.success("<?= $this->session->flashdata('success') ?>");
-			//console.log("<?= $this->session->flashdata('success') ?>");
-		<?php } else if ($this->session->flashdata('error')) {  ?>
-			toastr.error("<?= $this->session->flashdata('error') ?>");
-		<?php } ?>
-	});
-</script>
-
-<script>
-	//document.addEventListener("DOMContentLoaded", function() {
-	// Datatables Responsive
-	// https://datatables.net/reference/button/excelHtml5
-
-	//https://www.youtube.com/watch?v=j59H9xnyCBs
-	$(document).ready(function() {
-		/**https://datatables.net/forums/discussion/43723/how-can-i-remove-default-button-class-of-datatable-btn-default */
-		$.fn.dataTable.Buttons.defaults.dom.button.className = 'btn btn-md btn-dark border-0';
-		var mytable = $("#datatable-buttons").DataTable({
-			deferRender: true,
-			responsive: true,
-			pageLength: 5,
-			lengthMenu: [5, 10, 25, 50],
-			scrollH: true,
-			scrollX: true,
-			order: [],
-			//stateSave: true,
-			language: {
-				url: '<?=base_url('assets/libs/datatables/i18n/es-ES.json')?>',
-				paginate: {
-					previous: "<<",
-					next: ">>",
-					first: "<",
-					last: ">"
-				},
-			}
-		});
-
-		new $.fn.dataTable.Buttons(mytable, {
-			buttons: [
-				'copy', 'pdf', 'print', 
-				{
-					extend: 'excel',
-					text: 'Excel',
-					customize: function(xlsx) {
-						var sheet = xlsx.xl.worksheets['sheet1.xml'];
-						//Para ver los estilos de formato https://datatables.net/reference/button/excelHtml5
-						$('row c[r^="A"]', sheet).attr('n', '7');
-						$('row c[r^="B"]', sheet).attr('s', '57');
-						//Para que la columna se muestre como texto https://datatables.net/forums/discussion/73814/export-to-excel-with-format-text-for-column-b-c-and-d
-						$('row c[r^="C"]', sheet).attr('s', '50');
-					}
-				}
-			]
-		});
-
-		mytable.buttons().container().appendTo($('tr th.heading', mytable.table().container()));
-
-	});
-</script>
+                                            echo '&nbsp;&nbsp;';
+                                            echo '<a class="btn btn-outline-warning btn-sm" data-toggle="tooltip" data-placement="bottom" title="Editar" href="' . base_url('/admin/users/show/' . $item->id) . '"><i class="fa fa-edit"></i></a>';
+                                        } else {
+                                            //echo '<a class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Activar" href="<?= $item->id>"><i class="fa fa-eye"></i></a>';
+                                            echo form_open('admin/users/activeUser');
+                                            echo '<input type="hidden" id="id" name="id" value="' . $item->id . '">';
+                                            echo '<button type="submit" id="showtoast" name="submit" class="btn btn-outline-success btn-sm display-inline" data-toggle="tooltip" data-placement="bottom" title="Activar"><i class="fa fa-eye"></i></button>';
+                                            echo form_close();
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--end::Nav wrapper-->
+</div>

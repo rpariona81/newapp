@@ -1,173 +1,247 @@
 <!DOCTYPE html>
+<!--
+Author: Keenthemes
+Product Name: MetronicProduct Version: 8.2.7
+Purchase: https://1.envato.market/Vm7VRE
+Website: http://www.keenthemes.com
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
+-->
 <html lang="en">
-
-<!-- Mirrored from coderthemes.com/uplon/layouts/vertical/tables-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Dec 2023 05:39:44 GMT -->
+<!--begin::Head-->
 
 <head>
+	<title>Bibliographic Resources</title>
 	<meta charset="utf-8" />
-	<title><?= (getenv('APP_NAME') !== null) ? getenv('APP_NAME') : 'Modo prueba' ?></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta content="Responsive bootstrap 4 admin template" name="description" />
-	<meta content="Coderthemes" name="author" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<!-- App favicon -->
-	<link rel="shortcut icon" href="<?= base_url('assets/images/favicon.ico') ?>">
+	<meta name="description" content="Recursos bibliográficos para educación superior" />
+	<meta name="keywords" content="Recursos bibliográficos, Educación superior" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta property="og:locale" content="es_ES" />
+	<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
 
-	<!-- App css -->
-	<link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
-	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/flatly/bootstrap.min.css" integrity="sha384-qF/QmIAj5ZaYFAeQcrQ6bfVMAh4zZlrGwTPY7T/M+iTTLJqJBJjwwnsE5Y0mV7QK" crossorigin="anonymous"> -->
-	<link href="<?= base_url('assets/css/icons.min.css') ?>" rel="stylesheet" type="text/css" />
-	<link href="<?= base_url('assets/css/apphorizontal.min.css') ?>" rel="stylesheet" type="text/css" id="app-stylesheet" />
-	<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/simplex/bootstrap.min.css"
-        integrity="sha384-FYrl2Nk72fpV6+l3Bymt1zZhnQFK75ipDqPXK0sOR0f/zeOSZ45/tKlsKucQyjSp" crossorigin="anonymous">-->
-	<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/flatly/bootstrap.min.css" integrity="sha384-qF/QmIAj5ZaYFAeQcrQ6bfVMAh4zZlrGwTPY7T/M+iTTLJqJBJjwwnsE5Y0mV7QK" crossorigin="anonymous">-->
-	<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cosmo/bootstrap.min.css" integrity="sha384-5QFXyVb+lrCzdN228VS3HmzpiE7ZVwLQtkt+0d9W43LQMzz4HBnnqvVxKg6O+04d" crossorigin="anonymous">-->
+	<!--begin::Fonts(mandatory for all pages)-->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" /> <!--end::Fonts-->
 
-	<!--<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>-->
 
-	<script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
-	
-	<style>
-		body {
-			font-family: "Lato", sans-serif;
+
+	<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+	<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+	<!--end::Global Stylesheets Bundle-->
+
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-52YZ3XGZJ6"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			dataLayer.push(arguments);
 		}
+		gtag('js', new Date());
 
-		.main-head {
-			height: 150px;
-			background: #FFF;
-
+		gtag('config', 'G-52YZ3XGZJ6');
+	</script>
+	<script>
+		// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking)
+		if (window.top != window.self) {
+			window.top.location.replace(window.self.location.href);
 		}
-
-		.sidenav {
-			height: 100%;
-			background-color: #1199EF;
-			/** #1199EF */
-			overflow-x: hidden;
-			padding-top: 20px;
-			text-align: right;
-		}
-
-
-		.main {
-			padding: 0px 10px;
-		}
-
-		@media screen and (max-height: 450px) {
-			.sidenav {
-				padding-top: 15px;
-			}
-		}
-
-		@media screen and (max-width: 450px) {
-			.login-form {
-				margin-top: 10%;
-			}
-
-			.register-form {
-				margin-top: 10%;
-			}
-		}
-
-		@media screen and (min-width: 768px) {
-			.main {
-				margin-left: 50%;
-			}
-
-			.sidenav {
-				width: 50%;
-				position: fixed;
-				z-index: 1;
-				top: 0;
-				left: 0;
-			}
-
-			.login-form {
-				margin-top: 40%;
-			}
-
-			.register-form {
-				margin-top: 10%;
-			}
-		}
-
-		.login-main-text {
-			margin-top: 4%;
-			padding: 60px;
-			color: #fff;
-		}
-
-		.login-main-text h2 {
-			font-weight: bolder;
-			color: #fff;
-		}
-
-		.btn-black {
-			background-color: #000 !important;
-			color: #fff;
-			font-weight: bolder;
-		}
-	</style>
-
-	<!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
-	<!------ Include the above in your HEAD tag ---------->
-
+	</script>
 </head>
+<!--end::Head-->
 
-<body>
+<!--begin::Body-->
 
-	<div class="sidenav mb-5 mt-0">
-		<div class="login-main-text">
-			<h1 class="text-white"><?= (getenv('APP_NAME') !== null) ? getenv('APP_NAME') : 'Modo prueba' ?><h1>
-					<hr>
-					<h4 class="text-white">PANEL DE ACCESO</h4>
-					<!-- <p>Ingrese o registrese desde aquí.</p> -->
-		</div>
-	</div>
-	<div class="main mt-3">
-		<div class="col-md-8 col-sm-12">
-			<div class="login-form">
-				<!--< ?= my_validation_errors(validation_errors()); ?>-->
+<body id="kt_body" class="app-blank">
+	<!--begin::Theme mode setup on page load-->
+	<script>
+		var defaultThemeMode = "light";
+		var themeMode;
 
-				<?= form_open('auth', array('id' => 'auth', 'name' => 'auth')) ?>
-				<div class="form-group">
-					<!--<label>Usuario</label>-->
-					<?= form_label('Usuario', 'username', array('class' => 'control-label')); ?>
+		if (document.documentElement) {
+			if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
+				themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
+			} else {
+				if (localStorage.getItem("data-bs-theme") !== null) {
+					themeMode = localStorage.getItem("data-bs-theme");
+				} else {
+					themeMode = defaultThemeMode;
+				}
+			}
 
-					<input type="text" name="username" id="username" class="form-control" placeholder="Usuario" required>
-					<!--< ?= form_error('username',"<div style='color:red'>","</div>");?>       	-->
+			if (themeMode === "system") {
+				themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+			}
 
+			document.documentElement.setAttribute("data-bs-theme", themeMode);
+		}
+	</script>
+	<!--end::Theme mode setup on page load-->
+
+	<!--begin::Root-->
+	<div class="d-flex flex-column flex-root" id="kt_app_root">
+
+		<!--begin::Authentication - Sign-in -->
+		<div class="d-flex flex-column flex-lg-row flex-column-fluid">
+			<!--begin::Body-->
+			<div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-1">
+				<!--begin::Form-->
+				<div class="d-flex flex-center flex-column flex-lg-row-fluid">
+					<!--begin::Wrapper-->
+					<!--<div class="w-lg-500px p-10">-->
+					<div class="w-lg-500px p-10 p-lg-15 mx-auto">
+
+						<?php
+						$username = array(
+							'name' => 'username',
+							'class' => 'form-control m-top-10',
+							'type' => 'text',
+							'id' => 'username',
+							'autocomplete' => 'off',
+							'placeholder' => 'Usuario',
+						);
+
+						$password = array(
+							'name' => 'password',
+							'class' => 'form-control m-top-10',
+							'type' => 'password',
+							'id' => 'password',
+							'autocomplete' => 'off',
+							'placeholder' => 'Contraseña',
+						);
+
+						$login_submit = array(
+							'name' => 'login_submit',
+							'class' => 'btn btn-primary m-top-10',
+							'value' => 'Ingresar',
+							'id' => 'kt_sign_in_submit'
+						);
+
+						echo form_open('auth', array('class' => 'form w-100', 'id' => 'kt_sign_in_form')); ?>
+						<!--begin::Heading-->
+						<div class="text-center mb-11">
+							<!--begin::Title-->
+							<h1 class="text-gray-900 fw-bolder mb-3">
+								Iniciar sesión
+							</h1>
+							<!--end::Title-->
+						</div>
+						<!--begin::Heading-->
+
+						<div class="fv-row mb-8">
+							<?php echo form_input($username);
+							echo '<div class="error">' . form_error('login_email') . '</div>'; ?>
+						</div>
+						<div class="fv-row mb-3">
+							<?php echo form_input($password);
+							echo '<div class="error">' . form_error('login_password') . '</div>'; ?>
+						</div>
+						<p><?= my_error($this->session->flashdata('error')) ?></p>
+						<!--begin::Wrapper-->
+						<div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
+							<div></div>
+							<!--begin::Link-->
+							<a href="#" class="link-primary">
+								Olvidó su contraseña?
+							</a>
+							<!--end::Link-->
+						</div>
+						<div class="d-grid mb-10">
+							<!--end::Wrapper-->
+							<?php echo form_submit($login_submit); ?>
+						</div>
+						<?php echo form_close();
+						?>
+						<!--begin::Sign up-->
+						<div class="text-gray-500 text-center fw-semibold fs-6">
+							No tiene cuenta?
+
+							<a href="#" class="link-primary">
+								Regístrese
+							</a>
+						</div>
+						<!--end::Sign up-->
+					</div>
+					<!--end::Wrapper-->
 				</div>
-				<div class="form-group">
-					<label>Contraseña</label>
-					<!--<input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" required>-->
-					<?= form_input(array('type' => 'password', 'name' => 'password', 'id' => 'password', 'class' => 'form-control', 'placeholder' => 'Contraseña', 'required')) ?>
-					<?= form_error('password', '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button><strong>', '</strong></div>'); ?>
+				<!--end::Form-->
 
+				<!--begin::Footer-->
+				<div class="w-lg-500px d-flex flex-stack px-10 mx-auto">
+					<div></div>
 
+					<!--begin::Links-->
+					<div class="d-flex fw-semibold text-primary fs-base gap-5">
+						<a href="#" target="_blank">Términos y condiciones</a>
+
+						<a href="#" target="_blank">Contáctanos</a>
+					</div>
+					<!--end::Links-->
 				</div>
-				<p><?= my_error($this->session->flashdata('error')) ?></p>
-				<button type="submit" class="btn btn-black btn-block"> <i class="mdi mdi-login-variant" style="font-size:1.4em; color: white;"></i>&nbsp;Ingresar</button>
-				<!--<button type="submit" class="btn btn-warning">Register</button>-->
-				<?= form_close() ?>
-				<br>
-				<a type="button" class="btn btn-warning btn-block" href="<?= base_url('/') ?>"><i class="fa fa-undo" aria-hidden="true"></i>
-					Volver</a>
-
+				<!--end::Footer-->
 			</div>
+			<!--end::Body-->
+
+			<!--begin::Aside-->
+			<div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2" style="background-image: url(/assets/media/books/library-488690_1280.jpg)">
+				<!--begin::Content-->
+				<div class="d-flex flex-column flex-center py-7 py-lg-15 px-5 px-md-15 w-100">
+					<!--begin::Logo-->
+					<!--<a href="#" class="mb-0 mb-lg-12">-->
+					<img alt="Logo" src="assets/media/logos/logo-2.svg" class="h-60px h-lg-75px" />
+					<!--</a>-->
+					<!--end::Logo-->
+
+					<!--begin::Image-->
+					<img class="d-none d-lg-block mx-auto w-275px w-md-50 w-xl-500px mb-10 mb-lg-20" src="assets/media/misc/auth-screens.png" alt="" />
+					<!--end::Image-->
+
+					<!--begin::Title-->
+					<h1 class="d-none d-lg-block text-white fs-2qx fw-bolder text-center mb-7">
+						Recursos bibliográficos
+					</h1>
+					<!--end::Title-->
+
+					<!--begin::Text-->
+					<!-- <div class="d-none d-lg-block text-white fs-base text-center">
+                In this kind of post, <a href="#" class="opacity-75-hover text-warning fw-bold me-1">the blogger</a> 
+
+                introduces a person they’ve interviewed <br/> and provides some background information about 
+                
+                <a href="#" class="opacity-75-hover text-warning fw-bold me-1">the interviewee</a> 
+                and their <br/> work following this is a transcript of the interview.  
+            </div> -->
+					<!--end::Text-->
+				</div>
+				<!--end::Content-->
+			</div>
+			<!--end::Aside-->
 		</div>
+		<!--end::Authentication - Sign-in-->
+
+
 
 	</div>
-	<!-- JQuery Validate js -->
-	<script src="<?= base_url('assets/libs/jquery-validation/jquery.validate.min.js') ?>"></script>
+	<!--end::Root-->
 
-	<!-- Vendor js -->
-	<script src="<?= base_url('assets/js/vendor.min.js') ?>"></script>
+	<!--begin::Javascript-->
+	<script>
+		var hostUrl = "assets/";
+	</script>
 
-	<!-- App js -->
-	<script src="<?= base_url('assets/js/app.min.js') ?>"></script>
+	<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+	<script src="assets/plugins/global/plugins.bundle.js"></script>
+	<script src="assets/js/scripts.bundle.js"></script>
+	<!--end::Global Javascript Bundle-->
 
+	<!--begin::Custom Javascript(used for this page only)-->
+	<!--<script src="assets/js/custom/authentication/sign-in/general.js"></script>-->
+	<!--end::Custom Javascript-->
+	<!--end::Javascript-->
 </body>
+<!--end::Body-->
 
 </html>
